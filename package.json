@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -34,10 +35,16 @@
     "prettier": "^2.8.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "build": "DISABLE_ESLINT_PLUGIN=true GENERATE_SOURCEMAP=false react-scripts build",
+    "postbuild": "rimraf build/static/**/*.map",
+    "test": "DISABLE_ESLINT_PLUGIN=true react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js,.jsx ./src",
+    "lint:fix": "eslint --fix --ext .js,.jsx ./src",
+    "clear-all": "rm -rf build node_modules",
+    "restart": "rm -rf build node_modules && yarn install && yarn start",
+    "rebuild": "rm -rf build node_modules && yarn install && yarn build"
   },
   "eslintConfig": {
     "extends": [
