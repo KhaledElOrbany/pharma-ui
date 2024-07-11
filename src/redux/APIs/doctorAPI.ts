@@ -15,11 +15,10 @@ const doctorAPI = createApi({
       query: (id: Number) => ({
         url: `/doctor/${id}`,
       }),
-      transformResponse: (result: any) => result.data,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then((result) => {
-            dispatch(setDoctorDetails({ payload: result.data }));
+          .then(({ data }) => {
+            dispatch(setDoctorDetails({ payload: data }));
           })
           .catch(() => {});
       },
@@ -30,11 +29,10 @@ const doctorAPI = createApi({
         url: '/doctor/list',
         method: 'GET',
       }),
-      transformResponse: (result: any) => result.data,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then((result) => {
-            dispatch(setDoctorsList({ payload: result.data }));
+          .then(({ data }) => {
+            dispatch(setDoctorsList({ payload: data }));
           })
           .catch(() => {});
       },

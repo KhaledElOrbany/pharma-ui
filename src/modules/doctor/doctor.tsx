@@ -1,7 +1,5 @@
-import { useFetchDoctorsQuery } from '../../redux/APIs/doctorAPI';
+import DoctorsList from './components/DoctorsList';
 
 export default function DoctorRoot() {
-  const { data } = useFetchDoctorsQuery({});
-
-  return <div>{data}</div>;
+  return <DoctorsList />;
 }
