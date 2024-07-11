@@ -1,6 +1,6 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 
-import DoctorRoot from './modules/doctor';
+import DoctorRoot from './modules/doctor/doctor';
 
 const Router = createBrowserRouter([
   {
