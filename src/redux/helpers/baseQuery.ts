@@ -3,7 +3,7 @@ import {
   FetchArgs,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
-import store from '../store';
+// import store from '../store';
 
 export const API_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -24,10 +24,10 @@ export const buildURLQueryParams = (queryParams: any) => {
 const baseQueryWithAuth = fetchBaseQuery({
   baseUrl: API_URL,
   prepareHeaders: (headers, _) => {
-    const token = store.getState().auth.token;
+    // const token = store.getState().auth.token;
     headers.set('Accept', `application/json`);
     headers.set('Content-Type', `application/json`);
-    headers.set('Authorization', `Bearer ${token}`);
+    // headers.set('Authorization', `Bearer ${token}`);
     headers.set('lang', localStorage?.getItem('language') ?? 'ar');
 
     return headers;
