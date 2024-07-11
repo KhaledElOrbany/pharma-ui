@@ -1,3 +1,7 @@
+import { useParams } from 'react-router-dom';
+
 export default function DoctorProfile() {
-  return <div>DoctorProfile</div>;
+  const { id } = useParams();
+
+  return <div>{id}</div>;
 }
