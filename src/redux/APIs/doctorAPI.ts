@@ -20,7 +20,9 @@ const doctorAPI = createApi({
           .then(({ data }) => {
             dispatch(setDoctorDetails({ payload: data }));
           })
-          .catch(() => {});
+          .catch(() => {
+            //TODO: Add error notification
+          });
       },
       providesTags: ['doctor'],
     }),
@@ -34,12 +36,70 @@ const doctorAPI = createApi({
           .then(({ data }) => {
             dispatch(setDoctorsList({ payload: data }));
           })
-          .catch(() => {});
+          .catch(() => {
+            //TODO: Add error notification
+          });
       },
       providesTags: ['doctor'],
+    }),
+    createDoctor: build.mutation({
+      query: (body) => ({
+        url: '/doctor',
+        method: 'POST',
+        body,
+      }),
+      async onQueryStarted(_, { queryFulfilled }) {
+        await queryFulfilled
+          .then(() => {
+            //TODO: Add success notification
+          })
+          .catch(() => {
+            //TODO: Add error notification
+          });
+      },
+      invalidatesTags: ['doctor'],
+    }),
+    updateDoctor: build.mutation({
+      query: (body) => ({
+        url: '/doctor',
+        method: 'PUT',
+        body,
+      }),
+      async onQueryStarted(_, { queryFulfilled }) {
+        await queryFulfilled
+          .then(() => {
+            //TODO: Add success notification
+          })
+          .catch(() => {
+            //TODO: Add error notification
+          });
+      },
+      invalidatesTags: ['doctor'],
+    }),
+    deleteDoctor: build.mutation({
+      query: (id) => ({
+        url: `/doctor/${id}`,
+        method: 'DELETE',
+      }),
+      async onQueryStarted(_, { queryFulfilled }) {
+        await queryFulfilled
+          .then(() => {
+            //TODO: Add success notification
+          })
+          .catch(() => {
+            //TODO: Add error notification
+          });
+      },
+      invalidatesTags: ['doctor'],
     }),
   }),
 });
 
-export const { useFetchDoctorQuery, useFetchDoctorsQuery } = doctorAPI;
+export const {
+  useFetchDoctorQuery,
+  useFetchDoctorsQuery,
+  useCreateDoctorMutation,
+  useUpdateDoctorMutation,
+  useDeleteDoctorMutation,
+} = doctorAPI;
 export default doctorAPI;
