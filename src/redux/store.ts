@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
-// Import All APIs
-import { doctorAPI } from './APIs/doctorAPI';
+// Import all APIs
+import doctorAPI from './APIs/doctorAPI';
 
 // Import all slices
-import { doctorSlice } from '../modules/doctor/state';
+import doctorSlice from '../modules/doctor/state/doctorState';
 
 // Import 401 handler middleware
 import { requestInterceptor } from './middlewares/requestInterceptor';
@@ -20,10 +20,7 @@ const store = configureStore({
       (acc, api) => ({ ...acc, [api.reducerPath]: api.reducer }),
       {}
     ),
-    ...slices.reduce(
-      (acc, slice) => ({ ...acc, [slice.name]: slice.reducer }),
-      {}
-    ),
+    ...slices.reduce((acc, slice) => ({ ...acc, [slice.name]: slice }), {}),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
