@@ -1,18 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type DoctorState = {
-  doctorDetails: Object;
-  doctorsList: Array<Object>;
-};
-
-const initialState = {
-  doctorDetails: {},
-  doctorsList: [],
-} satisfies DoctorState as DoctorState;
-
-export const doctorSlice = createSlice({
+const doctorSlice = createSlice({
   name: 'doctor',
-  initialState,
+  initialState: {
+    doctorDetails: {},
+    doctorsList: [],
+  },
   reducers: {
     setDoctorDetails: (state, action) => {
       state.doctorDetails = action.payload;
@@ -24,3 +17,4 @@ export const doctorSlice = createSlice({
 });
 
 export const { setDoctorDetails, setDoctorsList } = doctorSlice.actions;
+export default doctorSlice.reducer;
