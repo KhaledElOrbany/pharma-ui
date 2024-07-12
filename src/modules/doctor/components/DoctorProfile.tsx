@@ -1,7 +1,16 @@
 import { useParams } from 'react-router-dom';
 
-export default function DoctorProfile() {
-  const { id } = useParams();
+type params = {
+  id: string;
+};
 
-  return <div>{id}</div>;
+export default function DoctorProfile() {
+  const { id } = useParams<params>();
+  const numericId = id ? parseInt(id, 10) : NaN;
+
+  if (isNaN(numericId)) {
+    return <>Invalid ID</>;
+  }
+
+  return <div>{numericId}</div>;
 }
