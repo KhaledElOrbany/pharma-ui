@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useFetchDoctorsQuery } from '../redux/doctorAPI';
 import { doctorDetails } from '../types/doctor';
+import { lazy } from 'react';
+
+const Loader = lazy(() => import('../../../shared/components/loader/Loader'));
 
 export default function DoctorsList() {
   const { data: doctorsList, isLoading } = useFetchDoctorsQuery({});
 
   return isLoading ? (
-    <>Loading...</>
+    <Loader />
   ) : (
     <>
       {doctorsList?.map((doctor: doctorDetails) => (
