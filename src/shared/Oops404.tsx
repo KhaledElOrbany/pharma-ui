@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Oops404() {
   return (
     <div
@@ -14,6 +16,8 @@ export default function Oops404() {
           height: 260,
         }}
       />
+
+      <Link to='/'>Home Page</Link>
     </div>
   );
 }
