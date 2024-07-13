@@ -10,10 +10,11 @@ import { AuthRoutes } from './modules/auth/Auth';
 import { DoctorRoutes } from './modules/doctor/Doctor';
 
 const Oops404 = lazy(() => import('./shared/Oops404'));
+const CustomErrors = lazy(() => import('./shared/CustomErrors'));
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/'>
+    <Route path='/' errorElement={<CustomErrors />}>
       <Route index element={<Dashboard />} />
 
       {AuthRoutes}
