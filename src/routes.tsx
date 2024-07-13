@@ -6,13 +6,13 @@ import {
 } from 'react-router-dom';
 import AuthRoutes from './modules/auth/router/AuthRoutes';
 import DoctorRoutes from './modules/doctor/router/DoctorRoutes';
+import Dashboard from './modules/dashboard/Dashboard';
 
-const Dashboard = lazy(() => import('./modules/dashboard/dashboard'));
 const Oops404 = lazy(() => import('./shared/Oops404'));
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
+    <Route path='/'>
       <Route index element={<Dashboard />} />
 
       {AuthRoutes}
