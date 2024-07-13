@@ -1,9 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { customBaseQueryWithoutAuth } from '../helpers/baseQuery';
-import {
-  setDoctorDetails,
-  setDoctorsList,
-} from '../../modules/doctor/state/doctorState';
+import { customBaseQueryWithoutAuth } from '../../../redux/helpers/baseQuery';
+import { setDoctorDetails, setDoctorsList } from './doctorState';
 
 const doctorAPI = createApi({
   reducerPath: 'doctorAPI',
