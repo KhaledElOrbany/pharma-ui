@@ -9,7 +9,7 @@ export default function DoctorProfile() {
   const numericId = id ? parseInt(id, 10) : NaN;
 
   if (isNaN(numericId)) {
-    return <>Invalid ID</>;
+    throw Error('Parameter is not a number!');
   }
 
   return <div>{numericId}</div>;
