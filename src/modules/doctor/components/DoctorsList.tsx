@@ -1,4 +1,4 @@
-import { useFetchDoctorsQuery } from '../../../redux/APIs/doctorAPI';
+import { useFetchDoctorsQuery } from '../redux/doctorAPI';
 import { doctorDetails } from '../types/doctor';
 
 export default function DoctorsList() {
