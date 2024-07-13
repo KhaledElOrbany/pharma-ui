@@ -1,10 +1,10 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
-import CustomErrors from '../../../shared/CustomErrors';
 
-const DoctorRoot = lazy(() => import('../doctor'));
-const DoctorsList = lazy(() => import('../components/DoctorsList'));
-const DoctorProfile = lazy(() => import('../components/DoctorProfile'));
+const DoctorRoot = lazy(() => import('../Doctor'));
+const DoctorsList = lazy(() => import('../views/DoctorsList'));
+const DoctorProfile = lazy(() => import('../views/DoctorProfile'));
+const CustomErrors = lazy(() => import('../../../shared/CustomErrors'));
 
 const DoctorRoutes = [
   <Route
