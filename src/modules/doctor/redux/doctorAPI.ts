@@ -15,7 +15,7 @@ const doctorAPI = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
-            dispatch(setDoctorDetails({ payload: data }));
+            dispatch(setDoctorDetails(data));
           })
           .catch(() => {
             //TODO: Add error notification
@@ -31,7 +31,7 @@ const doctorAPI = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
-            dispatch(setDoctorsList({ payload: data }));
+            dispatch(setDoctorsList(data));
           })
           .catch(() => {
             //TODO: Add error notification

@@ -4,9 +4,10 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import AuthRoutes from './modules/auth/router/AuthRoutes';
-import DoctorRoutes from './modules/doctor/router/DoctorRoutes';
+
 import Dashboard from './modules/dashboard/Dashboard';
+import { AuthRoutes } from './modules/auth/Auth';
+import { DoctorRoutes } from './modules/doctor/Doctor';
 
 const Oops404 = lazy(() => import('./shared/Oops404'));
 
