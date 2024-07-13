@@ -1,9 +1,7 @@
-import { lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Outlet, Route } from 'react-router-dom';
-
-const DoctorsList = lazy(() => import('./views/DoctorsList'));
-const DoctorProfile = lazy(() => import('./views/DoctorProfile'));
+import DoctorProfile from './pages/DoctorProfile';
+import DoctorsList from './pages/DoctorsList';
 
 export const DoctorRoutes = [
   <Route key='doctor-routes' path='doctor' element={<Doctor />}>
