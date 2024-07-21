@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import store from './redux/Store';
 import App from './modules/home/App';
+import ThemeProvider from './theme';
 import './i18n';
 
 const root = ReactDOM.createRoot(
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <HelmetProvider>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </HelmetProvider>
   </Provider>
 );
