@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Icon } from '@iconify/react';
 import { Box } from '@mui/material';
-import Colors from '../../../theme/colors';
+import Colors from '../../../theme/Colors';
 
 type IconifyProps = {
   icon: string;

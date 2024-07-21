@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, IconButton, Link } from '@mui/material';
-import Colors from '../../../theme/colors';
+import Colors from '../../../theme/Colors';
 import Iconify from '../iconify';
 import useResponsive from '../../../helpers/hooks/useResponsive';
 

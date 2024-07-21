@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import LoginForm from '../components/LoginForm';
 import { useTranslation } from 'react-i18next';
-import Colors from '../../../theme/colors';
+import Colors from '../../../theme/Colors';
 import Logo from '../../../shared/components/logo';
 
 const StyledRoot = styled('div')(({ theme }) => ({
@@ -62,12 +62,12 @@ export default function Login() {
               <CardHeader
                 title={
                   <Typography align='center' variant='h4' gutterBottom>
-                    {t('thefurnhub')}
+                    {t('hi')}
                   </Typography>
                 }
                 subheader={
                   <Typography align='center' variant='h5' gutterBottom>
-                    {t('welcomBack')}
+                    {t('welcome')}
                   </Typography>
                 }
               />
