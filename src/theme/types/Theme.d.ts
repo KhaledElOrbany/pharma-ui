@@ -4,4 +4,32 @@ type ThemeProviderProps = {
   children: React.ReactNode;
 };
 
-export { ThemeProviderProps };
+type Shadows = [
+  'none',
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+];
+
+export { ThemeProviderProps, Shadows };
