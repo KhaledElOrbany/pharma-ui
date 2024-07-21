@@ -7,6 +7,7 @@ import {
 import { ThemeProviderProps } from './types/Theme';
 import GlobalStyles from './GlobalStyles';
 import theme from './Theme';
+import ComponentsOverrides from './overrides';
 
 export const ColorModecontext = createContext({
   toggleColorMode: () => {},
@@ -32,6 +33,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
   theme.direction = localStorage.getItem('language') === 'ar' ? 'rtl' : 'ltr';
 
   const _theme = useMemo(() => theme, []);
+  _theme.components = ComponentsOverrides(theme);
 
   return (
     <StyledEngineProvider injectFirst>
