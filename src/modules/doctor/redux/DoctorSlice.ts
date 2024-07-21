@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { doctorDetails } from '../types/doctor';
 
-const doctorSlice = createSlice({
+const DoctorSlice = createSlice({
   name: 'doctor',
   initialState: {
     doctorDetails: {} as doctorDetails,
@@ -35,5 +35,5 @@ export const {
   setDoctorsList,
   updateDoctorList,
   removeDoctorFromList,
-} = doctorSlice.actions;
-export default doctorSlice.reducer;
+} = DoctorSlice.actions;
+export default DoctorSlice;

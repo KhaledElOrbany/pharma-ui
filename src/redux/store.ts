@@ -12,7 +12,10 @@ const Store = configureStore({
       (acc, api) => ({ ...acc, [api.reducerPath]: api.reducer }),
       {}
     ),
-    ...Slices.reduce((acc, slice) => ({ ...acc, [slice.name]: slice }), {}),
+    ...Slices.reduce(
+      (acc, slice) => ({ ...acc, [slice.name]: slice.reducer }),
+      {}
+    ),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
