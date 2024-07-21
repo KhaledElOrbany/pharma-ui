@@ -1,12 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { customBaseQueryWithoutAuth } from '../../../redux/helpers/baseQuery';
+import { customBaseQueryWithAuth } from '../../../redux/baseQuery';
 import { setDoctorDetails, setDoctorsList } from './DoctorSlice';
 
 const doctorAPI = createApi({
   reducerPath: 'doctorAPI',
   refetchOnReconnect: true,
   tagTypes: ['doctor'],
-  baseQuery: customBaseQueryWithoutAuth,
+  baseQuery: customBaseQueryWithAuth,
   endpoints: (build) => ({
     fetchDoctor: build.query({
       query: (id: Number) => ({

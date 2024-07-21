@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { customBaseQueryWithoutAuth } from '../../../redux/helpers/baseQuery';
+import { customBaseQueryWithoutAuth } from '../../../redux/baseQuery';
 import { login } from './AuthSlice';
 
 export const AuthAPI = createApi({
