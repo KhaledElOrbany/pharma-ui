@@ -14,10 +14,11 @@ export const AuthAPI = createApi({
         method: 'POST',
         body,
       }),
+      transformResponse: (result) => result,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled
-          .then(({ result }: any) => {
-            dispatch(login({ token: result }));
+          .then(({ data }: any) => {
+            dispatch(login({ token: data.token }));
           })
           .catch(() => {
             //TODO: Add error notification
