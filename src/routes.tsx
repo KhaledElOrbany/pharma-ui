@@ -6,10 +6,13 @@ import {
 } from 'react-router-dom';
 
 import Dashboard from './modules/dashboard/Dashboard';
-import { AuthRoutes } from './modules/auth/Auth';
-import { DoctorRoutes } from './modules/doctor/Doctor';
+import Auth from './modules/auth/Auth';
+import Doctor from './modules/doctor/Doctor';
+import DoctorsList from './modules/doctor/pages/DoctorsList';
+import DoctorProfile from './modules/doctor/pages/DoctorProfile';
 
 const Oops404 = lazy(() => import('./shared/Oops404'));
+const LoginPage = lazy(() => import('./modules/auth/views/Login'));
 const CustomErrors = lazy(() => import('./shared/CustomErrors'));
 
 const Router = createBrowserRouter(
@@ -17,8 +20,14 @@ const Router = createBrowserRouter(
     <Route path='/' errorElement={<CustomErrors />}>
       <Route index element={<Dashboard />} />
 
-      {AuthRoutes}
-      {DoctorRoutes}
+      <Route path='auth' element={<Auth />} errorElement={<CustomErrors />}>
+        <Route index element={<LoginPage />} />
+      </Route>
+
+      <Route path='doctor' element={<Doctor />} errorElement={<CustomErrors />}>
+        <Route index element={<DoctorsList />} />
+        <Route path=':id' element={<DoctorProfile />} />
+      </Route>
 
       <Route path='*' element={<Oops404 />} />
     </Route>
