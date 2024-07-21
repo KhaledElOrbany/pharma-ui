@@ -13,13 +13,13 @@ export default function LoginForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [login, { isLoading, isError, error }] = useLoginMutation();
-  const [email, setPhoneNumber] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const hendleLogin = async () => {
-    if (!email || !password) {
+    if (!username || !password) {
       dispatch(
         toggleSnackbar({
           open: true,
@@ -28,10 +28,7 @@ export default function LoginForm() {
         })
       );
     } else {
-      let data = {
-        username: email,
-        password,
-      };
+      let data = { username, password };
 
       try {
         await login(data);
@@ -64,10 +61,10 @@ export default function LoginForm() {
       <Stack spacing={3}>
         <TextField
           required
-          name='email'
-          label={t('email')}
-          value={email}
-          onChange={({ target }) => setPhoneNumber(target.value)}
+          name='username'
+          label={t('username')}
+          value={username}
+          onChange={({ target }) => setUsername(target.value)}
           sx={{
             ...(isRTL && {
               '& label': {
@@ -133,7 +130,7 @@ export default function LoginForm() {
           color: 'white',
         }}
       >
-        {t('login')}
+        {t('signIn')}
       </LoadingButton>
     </>
   );

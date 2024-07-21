@@ -84,14 +84,6 @@ export default function Login() {
               <CardContent sx={{ pt: 2 }}>
                 <LoginForm />
               </CardContent>
-
-              <Divider
-                sx={{
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  width: '90%',
-                }}
-              />
             </Card>
           </StyledContent>
         </Container>
