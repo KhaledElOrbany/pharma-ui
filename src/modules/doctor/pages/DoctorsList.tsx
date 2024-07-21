@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useFetchDoctorsQuery } from '../redux/doctorAPI';
+import { useFetchDoctorsQuery } from '../redux/DoctorAPI';
 import { doctorDetails } from '../types/doctor';
 import { lazy } from 'react';
 

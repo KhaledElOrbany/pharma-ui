@@ -1,4 +1,4 @@
-import doctorAPI from '../../modules/doctor/redux/doctorAPI';
+import doctorAPI from '../../modules/doctor/redux/DoctorAPI';
 
 const APIs = [doctorAPI];
 

@@ -11,16 +11,16 @@ import Doctor from './modules/doctor/Doctor';
 import DoctorsList from './modules/doctor/pages/DoctorsList';
 import DoctorProfile from './modules/doctor/pages/DoctorProfile';
 
-const Oops404 = lazy(() => import('./shared/Oops404'));
+const Oops404 = lazy(() => import('./shared/pages/Oops404'));
 const LoginPage = lazy(() => import('./modules/auth/views/Login'));
-const CustomErrors = lazy(() => import('./shared/CustomErrors'));
+const CustomErrors = lazy(() => import('./shared/pages/CustomErrors'));
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' errorElement={<CustomErrors />}>
       <Route index element={<Dashboard />} />
 
-      <Route path='auth' element={<Auth />} errorElement={<CustomErrors />}>
+      <Route path='login' element={<Auth />} errorElement={<CustomErrors />}>
         <Route index element={<LoginPage />} />
       </Route>
 
