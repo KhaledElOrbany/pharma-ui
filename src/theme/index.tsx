@@ -4,19 +4,16 @@ import {
   ThemeProvider as MUIThemeProvider,
   StyledEngineProvider,
 } from '@mui/material/styles';
-import { ThemeProviderProps } from './types/Theme';
-import GlobalStyles from './GlobalStyles';
 import theme from './Theme';
+import GlobalStyles from './GlobalStyles';
 import ComponentsOverrides from './overrides';
+import { ThemeProviderProps } from './types/Theme';
 
 export const ColorModecontext = createContext({
   toggleColorMode: () => {},
 });
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
-  if (!localStorage.getItem('themeMode')) {
-    localStorage.setItem('themeMode', 'light');
-  }
   const [mode, setMode] = useState<PaletteMode>(
     (localStorage.getItem('themeMode') as PaletteMode) ?? 'light'
   );
@@ -32,8 +29,8 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
   theme.palette.mode = mode;
   theme.direction = localStorage.getItem('language') === 'ar' ? 'rtl' : 'ltr';
 
+  theme.components = ComponentsOverrides(theme);
   const _theme = useMemo(() => theme, []);
-  _theme.components = ComponentsOverrides(theme);
 
   return (
     <StyledEngineProvider injectFirst>
