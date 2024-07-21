@@ -1,13 +1,18 @@
 import { createContext, useMemo, useState } from 'react';
 import { CssBaseline, PaletteMode } from '@mui/material';
 import {
+  createTheme,
   ThemeProvider as MUIThemeProvider,
+  responsiveFontSizes,
   StyledEngineProvider,
 } from '@mui/material/styles';
-import theme from './Theme';
 import GlobalStyles from './GlobalStyles';
 import ComponentsOverrides from './overrides';
-import { ThemeProviderProps } from './types/Theme';
+import { ExtendedTheme, ThemeProviderProps } from './types/Theme';
+import getPalette from './Palette';
+import typography from './Typography';
+import Shadows from './Shadows';
+import CustomShadows from './CustomShadows';
 
 export const ColorModecontext = createContext({
   toggleColorMode: () => {},
@@ -26,11 +31,18 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     []
   );
 
+  const theme = createTheme({
+    palette: getPalette(mode),
+    typography,
+    shape: { borderRadius: 6 },
+    shadows: Shadows(),
+    customShadows: CustomShadows(),
+  } as ExtendedTheme);
   theme.palette.mode = mode;
   theme.direction = localStorage.getItem('language') === 'ar' ? 'rtl' : 'ltr';
 
   theme.components = ComponentsOverrides(theme);
-  const _theme = useMemo(() => theme, []);
+  const _theme = useMemo(() => responsiveFontSizes(theme), []);
 
   return (
     <StyledEngineProvider injectFirst>

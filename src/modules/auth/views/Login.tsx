@@ -14,7 +14,7 @@ import Colors from '../../../theme/Colors';
 import Logo from '../../../shared/components/logo';
 
 const StyledRoot = styled('div')(({ theme }) => ({
-  backgroundColor: Colors.backgroundColor,
+  backgroundColor: theme.palette.background.default,
   [theme.breakpoints.up('md')]: {
     display: 'flex',
   },

@@ -60,7 +60,8 @@ const ERROR = {
 };
 
 const Colors = {
-  backgroundColor: '#ffffff',
+  lightBackgroundColor: '#ffffff',
+  darkBackgroundColor: '#ffffff',
   transparent: 'transparent',
   white: '#ffffff',
   black: '#000000',
