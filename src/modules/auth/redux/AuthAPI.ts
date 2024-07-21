@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithoutAuth } from '../../../redux/helpers/baseQuery';
 import { login } from './AuthSlice';
 
-export const authAPI = createApi({
+export const AuthAPI = createApi({
   reducerPath: 'authAPI',
   refetchOnReconnect: true,
   tagTypes: ['auth'],
@@ -28,4 +28,5 @@ export const authAPI = createApi({
   }),
 });
 
-export const { useLoginMutation } = authAPI;
+export const { useLoginMutation } = AuthAPI;
+export default AuthAPI;

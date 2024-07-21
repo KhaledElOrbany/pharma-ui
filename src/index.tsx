@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
-import store from './redux/store';
+import store from './redux/Store';
 import App from './modules/home/App';
 
 const root = ReactDOM.createRoot(

@@ -1,23 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
-import APIs from './APIs/APIs';
+import APIs from './APIs';
+import Slices from './Slices';
 
-// Import all slices
-import DoctorSlice from '../modules/doctor/redux/DoctorSlice';
-
-// Import 401 handler middleware
 import RequestInterceptor from './middlewares/RequestInterceptor';
 
-const slices = [DoctorSlice];
-
-const store = configureStore({
+const Store = configureStore({
   reducer: {
     ...APIs.reduce(
       (acc, api) => ({ ...acc, [api.reducerPath]: api.reducer }),
       {}
     ),
-    ...slices.reduce((acc, slice) => ({ ...acc, [slice.name]: slice }), {}),
+    ...Slices.reduce((acc, slice) => ({ ...acc, [slice.name]: slice }), {}),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -25,6 +20,9 @@ const store = configureStore({
       .concat(RequestInterceptor),
 });
 
-setupListeners(store.dispatch);
+setupListeners(Store.dispatch);
 
-export default store;
+export type RootState = ReturnType<typeof Store.getState>;
+export type AppDispatch = typeof Store.dispatch;
+
+export default Store;
