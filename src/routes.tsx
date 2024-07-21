@@ -14,22 +14,25 @@ import DoctorProfile from './modules/doctor/pages/DoctorProfile';
 const Oops404 = lazy(() => import('./shared/pages/Oops404'));
 const LoginPage = lazy(() => import('./modules/auth/views/Login'));
 const CustomErrors = lazy(() => import('./shared/pages/CustomErrors'));
+const PrivateRoute = lazy(() => import('./helpers/components/PrivateRoute'));
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' errorElement={<CustomErrors />}>
-      <Route index element={<Dashboard />} />
+      <Route element={<PrivateRoute />}>
+        <Route path='/' element={<Dashboard />} />
 
-      <Route path='login' element={<Auth />} errorElement={<CustomErrors />}>
-        <Route index element={<LoginPage />} />
+        <Route path='doctor' element={<Doctor />}>
+          <Route index element={<DoctorsList />} />
+          <Route path=':id' element={<DoctorProfile />} />
+        </Route>
+
+        <Route path='*' element={<Oops404 />} />
       </Route>
 
-      <Route path='doctor' element={<Doctor />} errorElement={<CustomErrors />}>
-        <Route index element={<DoctorsList />} />
-        <Route path=':id' element={<DoctorProfile />} />
+      <Route element={<Auth />}>
+        <Route path='login' element={<LoginPage />} />
       </Route>
-
-      <Route path='*' element={<Oops404 />} />
     </Route>
   )
 );
