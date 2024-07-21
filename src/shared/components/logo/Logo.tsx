@@ -1,20 +1,19 @@
 import { forwardRef } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Box, IconButton, Link } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Box } from '@mui/material';
 import Colors from '../../../theme/Colors';
 import Iconify from '../iconify';
 import useResponsive from '../../../helpers/hooks/useResponsive';
 
 type LogoProps = {
   sx?: object;
-  disabledLink?: boolean;
 };
 
-const Logo = forwardRef(
-  ({ disabledLink = false, sx, ...other }: LogoProps, ref) => {
-    const isMobile = useResponsive('down', 'sm');
+const Logo = forwardRef(({ sx, ...other }: LogoProps, ref) => {
+  const isMobile = useResponsive('down', 'sm');
 
-    const logo = (
+  return (
+    <Link to='/'>
       <Box
         ref={ref}
         component='div'
@@ -26,33 +25,15 @@ const Logo = forwardRef(
         }}
         {...other}
       >
-        <IconButton
-          aria-label='logo'
-          sx={{
-            m: 1,
-            color: Colors.primary,
-          }}
-        >
-          <Iconify
-            color={Colors.offWhite}
-            icon='carbon:home'
-            width={isMobile ? 28 : 40}
-          />
-        </IconButton>
+        <Iconify
+          color={Colors.grey[700]}
+          icon='carbon:home'
+          width={isMobile ? 28 : 40}
+        />
       </Box>
-    );
-
-    if (disabledLink) {
-      return <>{logo}</>;
-    }
-
-    return (
-      <Link to='/' component={RouterLink} sx={{ display: 'contents' }}>
-        {logo}
-      </Link>
-    );
-  }
-);
+    </Link>
+  );
+});
 
 Logo.displayName = 'Logo';
 export default Logo;
