@@ -1,7 +1,7 @@
-import { Theme } from '@mui/material';
 import { alpha } from '@mui/material/styles';
+import { ExtendedTheme } from '../types/Theme';
 
-export default function Button(theme: Theme) {
+export default function Button(theme: ExtendedTheme) {
   const isRTL = theme.direction === 'rtl';
 
   return {
@@ -19,16 +19,16 @@ export default function Button(theme: Theme) {
         },
         containedInherit: {
           color: theme.palette.grey[800],
-          // boxShadow: theme.customShadows.z8,
+          boxShadow: theme.customShadows?.z8,
           '&:hover': {
             backgroundColor: theme.palette.grey[400],
           },
         },
         containedPrimary: {
-          // boxShadow: theme.customShadows.primary,
+          boxShadow: theme.customShadows?.primary,
         },
         containedSecondary: {
-          // boxShadow: theme.customShadows.secondary,
+          boxShadow: theme.customShadows?.secondary,
         },
         outlinedInherit: {
           border: `1px solid ${alpha(theme.palette.grey[500], 0.32)}`,

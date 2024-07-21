@@ -1,11 +1,11 @@
-import { Theme } from '@mui/material';
+import { ExtendedTheme } from '../types/Theme';
 
-export default function Autocomplete(theme: Theme) {
+export default function Autocomplete(theme: ExtendedTheme) {
   return {
     MuiAutocomplete: {
       styleOverrides: {
         paper: {
-          // boxShadow: theme.customShadows.z20,
+          boxShadow: theme.customShadows?.z20,
         },
         root: {
           '.Mui-disabled': {

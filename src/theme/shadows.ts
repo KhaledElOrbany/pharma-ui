@@ -1,8 +1,8 @@
 import { alpha } from '@mui/material/styles';
-import { Shadows } from './types/Theme';
+import { Shadows as ShadowsType } from './types/Theme';
 import Colors from './Colors';
 
-export default function shadows(): Shadows {
+export default function Shadows(): ShadowsType {
   const transparent1 = alpha(Colors.grey[500], 0.2);
   const transparent2 = alpha(Colors.grey[500], 0.14);
   const transparent3 = alpha(Colors.grey[500], 0.12);

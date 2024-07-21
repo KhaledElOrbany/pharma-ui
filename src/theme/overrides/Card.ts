@@ -1,11 +1,11 @@
-import { Theme } from '@mui/material';
+import { ExtendedTheme } from '../types/Theme';
 
-export default function Card(theme: Theme) {
+export default function Card(theme: ExtendedTheme) {
   return {
     MuiCard: {
       styleOverrides: {
         root: {
-          // boxShadow: theme.customShadows.card,
+          boxShadow: theme.customShadows?.card,
           borderRadius: Number(theme.shape.borderRadius) * 2,
           position: 'relative',
           zIndex: 0,
