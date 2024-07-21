@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -10,6 +10,7 @@ import Auth from './modules/auth/Auth';
 import Doctor from './modules/doctor/Doctor';
 import DoctorsList from './modules/doctor/pages/DoctorsList';
 import DoctorProfile from './modules/doctor/pages/DoctorProfile';
+import { Loader } from './shared/components/loader';
 
 const Oops404 = lazy(() => import('./shared/pages/Oops404'));
 const LoginPage = lazy(() => import('./modules/auth/views/Login'));
@@ -19,7 +20,13 @@ const PrivateRoute = lazy(() => import('./helpers/components/PrivateRoute'));
 const Router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' errorElement={<CustomErrors />}>
-      <Route element={<PrivateRoute />}>
+      <Route
+        element={
+          <Suspense fallback={<Loader />}>
+            <PrivateRoute />
+          </Suspense>
+        }
+      >
         <Route path='/' element={<Dashboard />} />
 
         <Route path='doctor' element={<Doctor />}>
@@ -27,11 +34,25 @@ const Router = createBrowserRouter(
           <Route path=':id' element={<DoctorProfile />} />
         </Route>
 
-        <Route path='*' element={<Oops404 />} />
+        <Route
+          path='*'
+          element={
+            <Suspense fallback={<Loader />}>
+              <Oops404 />
+            </Suspense>
+          }
+        />
       </Route>
 
       <Route element={<Auth />}>
-        <Route path='login' element={<LoginPage />} />
+        <Route
+          path='login'
+          element={
+            <Suspense fallback={<Loader />}>
+              <LoginPage />
+            </Suspense>
+          }
+        />
       </Route>
     </Route>
   )
