@@ -21,7 +21,7 @@
 //     }
 //   };
 
-export const requestInterceptor = () => (next: any) => (action: any) => {
+const RequestInterceptor = () => (next: any) => (action: any) => {
   if (action.payload?.status === 500) {
     // window.location.href = '/500';
   } else if (action.payload?.status === 401 && localStorage.getItem('token')) {
@@ -34,3 +34,5 @@ export const requestInterceptor = () => (next: any) => (action: any) => {
     next(action);
   }
 };
+
+export default RequestInterceptor;
