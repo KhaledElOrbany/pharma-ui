@@ -14,6 +14,7 @@ export const AuthAPI = createApi({
         method: 'POST',
         body,
       }),
+      transformResponse: (result: { data: {}; meta?: {} }) => result.data,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled
           .then(({ data }: any) => {

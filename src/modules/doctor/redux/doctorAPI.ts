@@ -12,6 +12,7 @@ const doctorAPI = createApi({
       query: (id: Number) => ({
         url: `/doctor/${id}`,
       }),
+      transformResponse: (result: { data: {}; meta?: {} }) => result.data,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
@@ -28,6 +29,7 @@ const doctorAPI = createApi({
         url: '/doctor/list',
         method: 'GET',
       }),
+      transformResponse: (result: { data: []; meta?: {} }) => result.data,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
