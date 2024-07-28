@@ -5,11 +5,17 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Dashboard from './modules/dashboard/Dashboard';
 import Auth from './modules/auth/Auth';
+import Dashboard from './modules/dashboard/Dashboard';
+
+import User from './modules/user/User';
+import UsersList from './modules/user/pages/UsersList';
+import UserProfile from './modules/user/pages/UserProfile';
+
 import Doctor from './modules/doctor/Doctor';
 import DoctorsList from './modules/doctor/pages/DoctorsList';
 import DoctorProfile from './modules/doctor/pages/DoctorProfile';
+
 import { Loader } from './shared/components/loader';
 
 const Oops404 = lazy(() => import('./shared/pages/Oops404'));
@@ -28,6 +34,11 @@ const Router = createBrowserRouter(
         }
       >
         <Route path='/' element={<Dashboard />} />
+
+        <Route path='user' element={<User />}>
+          <Route index element={<UsersList />} />
+          <Route path=':id' element={<UserProfile />} />
+        </Route>
 
         <Route path='doctor' element={<Doctor />}>
           <Route index element={<DoctorsList />} />
