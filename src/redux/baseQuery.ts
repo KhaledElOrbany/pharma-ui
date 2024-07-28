@@ -44,9 +44,9 @@ const baseQuery = (auth: boolean) =>
     baseUrl: API_URL,
     prepareHeaders: (_, __) => (auth ? prepareAuthHeaders() : prepareHeaders()),
     paramsSerializer: buildURLQueryParams,
+    credentials: 'include',
   });
 
-// Define custom base queries
 export const customBaseQueryWithAuth = async (
   args: string | FetchArgs,
   api: BaseQueryApi
