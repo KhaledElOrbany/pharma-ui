@@ -5,7 +5,7 @@ export default function index() {
   return (
     <>
       <Helmet>
-        <title>Doctor</title>
+        <title>User</title>
       </Helmet>
 
       <Outlet />

@@ -12,5 +12,5 @@ export default function UserProfile() {
     throw new Error('Parameter is not a number!');
   }
 
-  return <div>{numericId}</div>;
+  return <div>User: {numericId}</div>;
 }

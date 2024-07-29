@@ -15,7 +15,7 @@ export default function UsersList() {
       {doctorsList?.map((user: userDetails) => (
         <div key={user.id}>
           <h1>
-            <Link to={`${user.id}`}>
+            <Link to={`/user/${user.id}`}>
               {user.firstName} {user.lastName}
             </Link>
           </h1>

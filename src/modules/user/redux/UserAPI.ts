@@ -12,14 +12,17 @@ const UserAPI = createApi({
       query: (id: Number) => ({
         url: `/user/${id}`,
       }),
-      transformResponse: (result: { data: {}; meta?: {} }) => result.data,
+      transformResponse: (response: { data: {}; meta?: {} }) => response.data,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(({ data }) => {
+          .then(({ data, meta }) => {
+            if (meta?.response?.headers) {
+              // handle resetting token
+            }
             dispatch(setUserDetails(data));
           })
           .catch(() => {
-            //TODO: Add error notification
+            // Handle error
           });
       },
       providesTags: ['user'],
@@ -29,14 +32,17 @@ const UserAPI = createApi({
         url: '/user/list',
         method: 'GET',
       }),
-      transformResponse: (result: { data: []; meta?: {} }) => result.data,
+      transformResponse: (response: { data: []; meta?: {} }) => response.data,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(({ data }) => {
+          .then(({ data, meta }) => {
+            if (meta?.response?.headers) {
+              // handle resetting token
+            }
             dispatch(setUsersList(data));
           })
           .catch(() => {
-            //TODO: Add error notification
+            // Handle error
           });
       },
       providesTags: ['user'],
