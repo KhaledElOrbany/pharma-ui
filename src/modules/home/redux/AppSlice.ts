@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppState } from '../types/App';
+import { RootState } from '../../../redux/Store';
 
 const initialState: AppState = {
   snackbar: {
@@ -22,4 +23,5 @@ const AppSlice = createSlice({
 });
 
 export const { toggleSnackbar } = AppSlice.actions;
+export const authSelector = (state: RootState) => state.auth;
 export default AppSlice;

@@ -1,9 +1,9 @@
 import { RouterProvider } from 'react-router-dom';
 import Router from '../../routes';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/Store';
+import { authSelector } from './redux/AppSlice';
 
 export default function App() {
-  const { token } = useSelector((state: RootState) => state.auth);
+  const { token } = useSelector(authSelector);
   return <RouterProvider router={Router} />;
 }
