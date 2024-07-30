@@ -1,6 +1,7 @@
 const ar = {
   hi: 'مرحبا',
   home: 'الرئيسية',
+  logout: 'تسجيل خروج',
   month: 'الشهر',
   monthNames_1: 'يناير',
   monthNames_2: 'فبراير',

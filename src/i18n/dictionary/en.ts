@@ -1,6 +1,7 @@
 const en = {
   hi: 'Hi,',
   home: 'Home',
+  logout: 'Logout',
   month: 'Month',
   monthNames_1: 'January',
   monthNames_2: 'February',
