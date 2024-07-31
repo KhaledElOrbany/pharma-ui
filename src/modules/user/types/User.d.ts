@@ -11,6 +11,13 @@ type userDetails = {
   lastName: string;
   address: string;
   phone: string;
+  email: string;
+  isDelete: boolean;
+  role: {
+    id: number;
+    name: string;
+    description: string;
+  };
 };
 
 export { userDetails, userCreationDetails };

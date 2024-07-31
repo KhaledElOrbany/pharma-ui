@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '../../../redux/baseQuery';
 import { setUserDetails, setUsersList } from './UserSlice';
+import { userDetails } from '../types/User';
 
 const UserAPI = createApi({
   reducerPath: 'userAPI',
@@ -32,7 +33,9 @@ const UserAPI = createApi({
         url: '/user/list',
         method: 'GET',
       }),
-      transformResponse: (response: { data: []; meta?: {} }) => response.data,
+      transformResponse: (response: { data: userDetails[]; meta?: {} }) => {
+        return response;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data, meta }) => {
