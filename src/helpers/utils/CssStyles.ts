@@ -1,6 +1,13 @@
 import { alpha } from '@mui/material/styles';
 
-export function bgBlur(props: any) {
+type props = {
+  color?: string;
+  blur?: number;
+  opacity?: number;
+  imgUrl?: string;
+};
+
+export function bgBlur(props: props) {
   const color = props?.color || '#000000';
   const blur = props?.blur || 6;
   const opacity = props?.opacity || 0.8;
