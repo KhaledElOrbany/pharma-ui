@@ -33,7 +33,7 @@ export default function Nav({
   onCloseNav: () => void;
 }) {
   const { pathname } = useLocation();
-  const currentUser = { name: '', phone_number: '' };
+  const currentUser = { name: 'Khaled', phone_number: '01554103081' };
   const isLoading = false;
   const isRTL = localStorage.getItem('language') === 'ar';
   const isDesktop = useResponsive('up', 'lg');

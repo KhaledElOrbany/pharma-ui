@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { alpha } from '@mui/material/styles';
 import { Box, MenuItem, Stack, IconButton, Popover } from '@mui/material';
-// import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Iconify from '../../components/iconify';
 
@@ -9,12 +8,12 @@ const LANGS = [
   {
     value: 'ar',
     label: 'arabic',
-    icon: '/icons/ic_flag_eg.svg',
+    icon: '/assets/icons/ic_flag_eg.svg',
   },
   {
     value: 'en',
     label: 'english',
-    icon: '/icons/ic_flag_en.svg',
+    icon: '/assets/icons/ic_flag_en.svg',
   },
 ];
 
