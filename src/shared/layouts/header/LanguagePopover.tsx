@@ -33,7 +33,9 @@ export default function LanguagePopover() {
 
   const handleLanguageChange = (val: string) => {
     localStorage.setItem('language', val);
+    document.dir = val === 'en' ? 'ltr' : 'rtl';
     setOpen(null);
+    window.location.reload();
   };
 
   return (

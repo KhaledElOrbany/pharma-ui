@@ -2,6 +2,7 @@ const en = {
   address: 'Address',
   arabic: 'Arabic',
   dashboard: 'Dashboard',
+  delete: 'Delete',
   email: 'Email',
   english: 'English',
   hi: 'Hi,',

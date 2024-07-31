@@ -2,6 +2,7 @@ const ar = {
   address: 'العنوان',
   arabic: 'العربية',
   dashboard: 'لوحة التحكم',
+  delete: 'حذف',
   email: 'البريد الإلكتروني',
   english: 'الإنجليزية',
   hi: 'مرحبا',
