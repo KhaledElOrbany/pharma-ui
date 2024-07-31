@@ -23,5 +23,5 @@ const AppSlice = createSlice({
 });
 
 export const { toggleSnackbar } = AppSlice.actions;
-export const authSelector = (state: RootState) => state.auth;
+export const appSelector = (state: RootState) => state.app;
 export default AppSlice;

@@ -2,7 +2,7 @@ import { alpha } from '@mui/material/styles';
 import { ExtendedTheme } from '../types/Theme';
 
 export default function Button(theme: ExtendedTheme) {
-  const isRTL = theme.direction === 'rtl';
+  const isRTL = localStorage.getItem('language') === 'ar';
 
   return {
     MuiButton: {

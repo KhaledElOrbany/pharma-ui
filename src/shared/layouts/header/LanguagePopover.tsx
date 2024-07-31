@@ -22,7 +22,7 @@ export default function LanguagePopover() {
   const { t } = useTranslation('app');
   const language = localStorage.getItem('language');
   const [open, setOpen] = useState(null);
-  const isRTL = document.documentElement.dir === 'rtl';
+  const isRTL = localStorage.getItem('language') === 'ar';
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);

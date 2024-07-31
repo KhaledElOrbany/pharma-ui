@@ -1,9 +1,24 @@
 import { RouterProvider } from 'react-router-dom';
 import Router from '../../routes';
-import { useSelector } from 'react-redux';
-import { authSelector } from './redux/AppSlice';
+import { useEffect } from 'react';
+import i18n from '../../i18n';
+import { Snackbar } from '../../shared/components/snackbar';
 
 export default function App() {
-  const { token } = useSelector(authSelector);
-  return <RouterProvider router={Router} />;
+  useEffect(() => {
+    const dir = i18n.dir(i18n.language);
+    document.documentElement.dir = dir;
+
+    const lang = localStorage.getItem('language');
+    if (!lang) {
+      localStorage.setItem('language', i18n.language);
+    }
+  }, []);
+
+  return (
+    <>
+      <Snackbar />
+      <RouterProvider router={Router} />
+    </>
+  );
 }

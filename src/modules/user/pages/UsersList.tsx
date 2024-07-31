@@ -7,7 +7,7 @@ import { DataGrid } from '../../../shared/components/data-grid';
 
 export default function UsersList() {
   const { t } = useTranslation();
-  const isRTL = document.documentElement.dir === 'rtl';
+  const isRTL = localStorage.getItem('language') === 'ar';
 
   const [filtersList, setFiltersList] = useState([
     { id: 'per_page', value: 5 },

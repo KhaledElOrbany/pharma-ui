@@ -35,7 +35,7 @@ export default function Nav({
   const { pathname } = useLocation();
   const currentUser = { name: '', phone_number: '' };
   const isLoading = false;
-  const isRTL = document.documentElement.dir === 'rtl';
+  const isRTL = localStorage.getItem('language') === 'ar';
   const isDesktop = useResponsive('up', 'lg');
 
   useEffect(() => {
