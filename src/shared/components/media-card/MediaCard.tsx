@@ -1,5 +1,4 @@
 import { CardMedia } from '@mui/material';
-import 'react-medium-image-zoom/dist/styles.css';
 import { API_URL } from '../../../redux/baseQuery';
 
 type MediaCardProps = {
