@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import { CssBaseline, PaletteMode } from '@mui/material';
 import {
   createTheme,
@@ -19,6 +19,9 @@ export const ColorModecontext = createContext({
 });
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
+  if (!localStorage.getItem('themeMode')) {
+    localStorage.setItem('themeMode', 'light');
+  }
   const [mode, setMode] = useState<PaletteMode>(
     (localStorage.getItem('themeMode') as PaletteMode) ?? 'light'
   );
@@ -31,6 +34,10 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     []
   );
 
+  useEffect(() => {
+    localStorage.setItem('themeMode', mode);
+  }, [mode]);
+
   const theme = createTheme({
     palette: getPalette(mode),
     typography,
@@ -42,7 +49,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
   theme.direction = localStorage.getItem('language') === 'ar' ? 'rtl' : 'ltr';
 
   theme.components = ComponentsOverrides(theme);
-  const _theme = useMemo(() => responsiveFontSizes(theme), []);
+  const _theme = useMemo(() => responsiveFontSizes(theme), [mode]);
 
   return (
     <StyledEngineProvider injectFirst>

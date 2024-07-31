@@ -1,8 +1,6 @@
 import { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
-import Colors from '../../../theme/Colors';
-import Iconify from '../iconify';
 import useResponsive from '../../../helpers/hooks/useResponsive';
 
 type LogoProps = {
@@ -25,10 +23,13 @@ const Logo = forwardRef(({ sx, ...other }: LogoProps, ref) => {
         }}
         {...other}
       >
-        <Iconify
-          color={Colors.grey[700]}
-          icon='carbon:home'
-          width={isMobile ? 28 : 40}
+        <img
+          loading='lazy'
+          src='/assets/logo.svg'
+          alt='empty-cart'
+          style={{
+            margin: 'auto',
+          }}
         />
       </Box>
     </Link>
