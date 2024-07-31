@@ -10,7 +10,7 @@ export default function Oops404() {
       }}
     >
       <img
-        src='/illustrations/404.svg'
+        src='/assets/illustrations/404.svg'
         alt='404'
         style={{
           height: 260,
