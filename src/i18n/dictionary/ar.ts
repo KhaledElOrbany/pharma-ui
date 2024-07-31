@@ -18,6 +18,7 @@ const ar = {
   password: 'كلمة السر',
   passwordsNotMatch: 'كلمة السر غير متطابقة',
   phone: 'رقم الهاتف',
+  rowsPerPage: 'صف لكل صفحة',
   signIn: 'تسجيل الدخول',
   username: 'اسم المستخدم',
   welcome: 'أهلا بك',
