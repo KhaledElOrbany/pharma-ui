@@ -33,7 +33,7 @@ export default function Footer({
       onRowsPerPageChange={handleChangeRowsPerPage}
       page={pagination.current_page ? pagination.current_page - 1 : page}
       rowsPerPage={rowsPerPage}
-      rowsPerPageOptions={[10, 25, 50, 100]}
+      rowsPerPageOptions={[5, 10, 25, 50, 100]}
       showFirstButton
       showLastButton
       sx={{
