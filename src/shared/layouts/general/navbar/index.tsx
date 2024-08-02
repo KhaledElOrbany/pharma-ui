@@ -12,8 +12,8 @@ import { useLocation } from 'react-router-dom';
 import useResponsive from '@/helpers/hooks/useResponsive';
 import Scrollbar from '@/shared/components/scrollbar';
 import Logo from '@/shared/components/logo';
-import NavSection from '@/shared/layouts/navbar/nav-section';
 import items from './items';
+import NavSection from './nav-section';
 
 const NAV_WIDTH = 280;
 
