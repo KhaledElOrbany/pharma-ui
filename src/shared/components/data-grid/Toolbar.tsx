@@ -102,8 +102,8 @@ export default function Toolbar({
           />
           <StyledOptions>
             <Iconify
-              color={palette.text.secondary}
-              icon={'ant-design:file-excel'}
+              color={palette.text.primary}
+              icon={'bi:file-earmark-excel'}
               width={42}
               onClick={handleExportExcel}
               sx={{ cursor: 'pointer' }}
@@ -113,17 +113,14 @@ export default function Toolbar({
               onClick={() => refresh()}
               sx={{
                 margin: '0.5rem',
-                border: `1px solid ${palette.text.secondary}`,
+                border: `1px solid ${palette.text.primary}`,
                 borderRadius: '8px',
-                '&:hover': {
-                  backgroundColor: palette.text.secondary,
-                },
               }}
             >
               <Iconify
                 icon={'material-symbols:refresh'}
                 width={24}
-                sx={{ color: palette.text.secondary }}
+                sx={{ color: palette.text.primary }}
               />
             </IconButton>
           </StyledOptions>
