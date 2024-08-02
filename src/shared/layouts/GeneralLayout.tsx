@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Header from './header';
-import Nav from './nav';
+import Navbar from './navbar';
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -34,7 +34,7 @@ export default function GeneralLayout() {
     <StyledRoot>
       <Header onOpenNav={() => setOpen(true)} />
 
-      <Nav openNav={open} onCloseNav={() => setOpen(false)} />
+      <Navbar openNav={open} onCloseNav={() => setOpen(false)} />
 
       <Main>
         <Outlet />

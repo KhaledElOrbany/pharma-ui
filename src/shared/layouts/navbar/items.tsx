@@ -4,7 +4,7 @@ const icon = (name: string) => (
   <SvgColor src={`/assets/icons/${name}.svg`} sx={{ width: 1, height: 1 }} />
 );
 
-const navConfig = [
+const items = [
   {
     title: 'dashboard',
     path: '/dashboard',
@@ -19,4 +19,4 @@ const navConfig = [
   },
 ];
 
-export default navConfig;
+export default items;

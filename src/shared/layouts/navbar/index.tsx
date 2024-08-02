@@ -12,8 +12,8 @@ import { useLocation } from 'react-router-dom';
 import useResponsive from '@/helpers/hooks/useResponsive';
 import Scrollbar from '@/shared/components/scrollbar';
 import Logo from '@/shared/components/logo';
-import NavSection from '@/shared/components/nav-section';
-import navConfig from './config';
+import NavSection from '@/shared/layouts/navbar/nav-section';
+import items from './items';
 
 const NAV_WIDTH = 280;
 
@@ -25,7 +25,7 @@ const StyledAccount = styled('div')(({ theme }) => ({
   backgroundColor: alpha(theme.palette.grey[500], 0.12),
 }));
 
-export default function Nav({
+export default function Navbar({
   openNav,
   onCloseNav,
 }: {
@@ -98,7 +98,7 @@ export default function Nav({
         </StyledAccount>
       </Box>
 
-      <NavSection data={navConfig} />
+      <NavSection items={items} />
 
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>

@@ -9,19 +9,19 @@ import {
 } from '@mui/material';
 import { StyledNavItemIcon } from './styles';
 import { useTranslation } from 'react-i18next';
-import Iconify from '../iconify';
 import { useState } from 'react';
+import Iconify from '@/shared/components/iconify';
 
 type NavSectionProps = {
-  data: any[];
+  items: any[];
   sx?: object;
 };
 
-export default function NavSection({ data = [], ...other }: NavSectionProps) {
+export default function NavSection({ items = [], ...other }: NavSectionProps) {
   return (
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
-        {data
+        {items
           .filter((item) => item.isActive)
           .map((item) => (
             <NavItem key={item.title} item={item} />
@@ -109,7 +109,7 @@ function NavItem({ item }: NavItemProps) {
 
       {isOpen && subItems && (
         <NavSection
-          data={subItems.filter((subItem) => subItem.isActive)}
+          items={subItems.filter((subItem) => subItem.isActive)}
           sx={{ ...(isRTL ? { pr: 3 } : { pl: 3 }) }}
         />
       )}
