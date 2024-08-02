@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '@/redux/baseQuery';
-import { setUserDetails, setUsersList } from './UserSlice';
+import { setCurrentUser, setUserDetails, setUsersList } from './UserSlice';
 import { userDetails } from '../types/User';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 
@@ -10,9 +10,31 @@ const UserAPI = createApi({
   tagTypes: ['user'],
   baseQuery: customBaseQueryWithAuth,
   endpoints: (build) => ({
+    fetchCurrentUser: build.query<userDetails, void>({
+      query: () => ({
+        url: `/user/current`,
+        method: 'GET',
+      }),
+      transformResponse: (response: { data: userDetails; meta?: {} }) =>
+        response.data,
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled
+          .then(({ data, meta }) => {
+            if (meta?.response?.headers) {
+              // handle resetting token
+            }
+            dispatch(setCurrentUser(data));
+          })
+          .catch(() => {
+            // Handle error
+          });
+      },
+      providesTags: ['user'],
+    }),
     fetchUser: build.query({
       query: (id: Number) => ({
         url: `/user/${id}`,
+        method: 'GET',
       }),
       transformResponse: (response: { data: userDetails; meta?: {} }) =>
         response.data,
@@ -108,6 +130,7 @@ const UserAPI = createApi({
 });
 
 export const {
+  useLazyFetchCurrentUserQuery,
   useFetchUserQuery,
   useFetchUsersQuery,
   useCreateUserMutation,
