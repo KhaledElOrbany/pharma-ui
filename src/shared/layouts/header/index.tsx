@@ -3,8 +3,8 @@ import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 import AccountPopover from './AccountPopover';
 import { useContext } from 'react';
 import LanguagePopover from './LanguagePopover';
-import { ColorModecontext } from '../../../theme/Theme';
-import Iconify from '../../components/iconify';
+import { ColorModecontext } from '@/theme/Theme';
+import Iconify from '@/shared/components/iconify';
 
 const NAV_WIDTH = 280;
 const HEADER_MOBILE = 64;

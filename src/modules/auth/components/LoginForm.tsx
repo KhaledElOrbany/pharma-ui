@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import { Stack, IconButton, InputAdornment, TextField } from '@mui/material';
-import Iconify from '../../../shared/components/iconify';
+import Iconify from '@/shared/components/iconify';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';

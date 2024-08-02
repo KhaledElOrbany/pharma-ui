@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import LoginForm from '../components/LoginForm';
 import { useTranslation } from 'react-i18next';
-import Colors from '../../../theme/Colors';
-import Logo from '../../../shared/components/logo';
+import Colors from '@/theme/Colors';
+import Logo from '@/shared/components/logo';
 
 const StyledRoot = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,

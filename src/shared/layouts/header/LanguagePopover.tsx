@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { alpha } from '@mui/material/styles';
 import { Box, MenuItem, Stack, IconButton, Popover } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import Iconify from '../../components/iconify';
+import Iconify from '@/shared/components/iconify';
 
 const LANGS = [
   {

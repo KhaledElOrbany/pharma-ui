@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
-import useResponsive from '../../../helpers/hooks/useResponsive';
+import useResponsive from '@/helpers/hooks/useResponsive';
 
 type LogoProps = {
   sx?: object;

@@ -3,7 +3,7 @@ import { useFetchDoctorsQuery } from '../redux/DoctorAPI';
 import { doctorDetails } from '../types/Doctor';
 import { lazy } from 'react';
 
-const Loader = lazy(() => import('../../../shared/components/loader/Loader'));
+const Loader = lazy(() => import('@/shared/components/loader/Loader'));
 
 export default function DoctorsList() {
   const { data: doctorsList, isLoading } = useFetchDoctorsQuery({});

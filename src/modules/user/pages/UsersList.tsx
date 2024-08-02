@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useFetchUsersQuery } from '../redux/UserAPI';
 import { useTranslation } from 'react-i18next';
 import { Button, Container, Stack, Typography } from '@mui/material';
-import Iconify from '@shared/components/iconify';
-import DataGrid from '@shared/components/data-grid';
+import Iconify from '@/shared/components/iconify';
+import DataGrid from '@/shared/components/data-grid';
 
 export default function UsersList() {
   const { t } = useTranslation();

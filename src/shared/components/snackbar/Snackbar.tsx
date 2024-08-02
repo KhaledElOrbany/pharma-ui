@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
-import { Alert, Snackbar as MuiSnackbar, styled } from '@mui/material';
 import { SnackbarAnchorProps } from './Snackbar.d';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  appSelector,
-  toggleSnackbar,
-} from '../../../modules/home/redux/AppSlice';
+import { Alert, Snackbar as MuiSnackbar, styled } from '@mui/material';
+import { appSelector, toggleSnackbar } from '@/modules/home/redux/AppSlice';
 
 const StyledSnackbarWrapper = styled('div')(() => {
   const isRTL = localStorage.getItem('language') === 'ar';

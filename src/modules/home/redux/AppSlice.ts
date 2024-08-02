@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppState } from '../types/App';
-import { RootState } from '../../../redux/Store';
+import { RootState } from '@/redux/Store';
 
 const initialState: AppState = {
   snackbar: {

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   alpha,
   Avatar,
@@ -8,11 +9,10 @@ import {
   Typography,
 } from '@mui/material';
 import { useLocation } from 'react-router-dom';
-import useResponsive from '../../../helpers/hooks/useResponsive';
-import { useEffect } from 'react';
-import Scrollbar from '../../components/scrollbar';
-import Logo from '../../components/logo';
-import NavSection from '../../components/nav-section';
+import useResponsive from '@/helpers/hooks/useResponsive';
+import Scrollbar from '@/shared/components/scrollbar';
+import Logo from '@/shared/components/logo';
+import NavSection from '@/shared/components/nav-section';
 import navConfig from './config';
 
 const NAV_WIDTH = 280;

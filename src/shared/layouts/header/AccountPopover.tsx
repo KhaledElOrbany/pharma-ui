@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { logout } from '../../../modules/auth/redux/AuthSlice';
+import { logout } from '@/modules/auth/redux/AuthSlice';
 
 export default function AccountPopover() {
   const { t } = useTranslation('app');

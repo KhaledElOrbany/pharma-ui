@@ -1,5 +1,5 @@
+import { doctorDetails } from '@/modules/doctor/types/Doctor';
 import { createSlice } from '@reduxjs/toolkit';
-import { doctorDetails } from '../../doctor/types/Doctor';
 
 const UserSlice = createSlice({
   name: 'user',

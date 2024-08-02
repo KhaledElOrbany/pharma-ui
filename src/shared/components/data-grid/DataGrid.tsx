@@ -27,8 +27,8 @@ import Head from './Head';
 import Toolbar from './Toolbar';
 import { useTranslation } from 'react-i18next';
 import Footer from './Footer';
-import MediaCard from '../media-card/MediaCard';
-import { fDateTime } from '../../../helpers/utils/TimeUtil';
+import MediaCard from '@/shared/components/media-card/MediaCard';
+import { fDateTime } from '@/helpers/utils/TimeUtil';
 import { DataGridProps } from './DataGrid.d';
 
 function descendingComparator(a: any, b: any, orderBy: any) {

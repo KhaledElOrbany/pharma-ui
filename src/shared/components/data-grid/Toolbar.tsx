@@ -10,8 +10,8 @@ import {
 import Iconify from '../iconify';
 import * as XLSX from 'xlsx';
 import { useTranslation } from 'react-i18next';
-import Colors from '../../../theme/Colors';
-import { fDateTime } from '../../../helpers/utils/TimeUtil';
+import Colors from '@/theme/Colors';
+import { fDateTime } from '@/helpers/utils/TimeUtil';
 import { ToolbarProps } from './DataGrid.d';
 
 const StyledRoot = styled(MuiToolbar)(({ theme }) => ({

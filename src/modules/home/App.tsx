@@ -1,8 +1,8 @@
-import { RouterProvider } from 'react-router-dom';
-import Router from '../../routes';
 import { useEffect } from 'react';
-import i18n from '../../i18n';
-import { Snackbar } from '../../shared/components/snackbar';
+import { RouterProvider } from 'react-router-dom';
+import Router from '@/routes';
+import i18n from '@/i18n/index';
+import { Snackbar } from '@/shared/components/snackbar';
 
 export default function App() {
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { customBaseQueryWithAuth } from '../../../redux/baseQuery';
+import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { setUserDetails, setUsersList } from './UserSlice';
 import { userDetails } from '../types/User';
 

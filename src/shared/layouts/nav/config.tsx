@@ -1,4 +1,4 @@
-import SvgColor from '../../components/svg-color';
+import SvgColor from '@/shared/components/svg-color';
 
 const icon = (name: string) => (
   <SvgColor src={`/assets/icons/${name}.svg`} sx={{ width: 1, height: 1 }} />

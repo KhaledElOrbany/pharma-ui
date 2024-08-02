@@ -8,7 +8,7 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "@shared/*": ["shared/*"]
+      "@/*": ["*"],
     },
     "allowJs": true,
     "skipLibCheck": true,

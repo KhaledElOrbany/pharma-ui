@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthState } from '../types/Auth';
-import { RootState } from '../../../redux/Store';
+import { RootState } from '@/redux/Store';
 
 const initialState: AuthState = {
   token: localStorage.getItem('token') ?? null,

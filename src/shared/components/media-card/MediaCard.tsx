@@ -1,5 +1,5 @@
 import { CardMedia } from '@mui/material';
-import { API_URL } from '../../../redux/baseQuery';
+import { API_URL } from '@/redux/baseQuery';
 
 type MediaCardProps = {
   withZoom?: boolean;
