@@ -170,14 +170,14 @@ export default function DataGrid({
   const handleChangeRowsPerPage = (event: any) => {
     setPage(0);
     const newFilters = [...filtersList];
-    const index = newFilters.findIndex((item) => item.id === 'per_page');
+    const index = newFilters.findIndex((item) => item.id === 'size');
 
     if (index > -1) {
       newFilters.splice(index, 1);
     }
 
     newFilters.push({
-      id: 'per_page',
+      id: 'size',
       value: parseInt(event.target.value, 10),
     });
     setFiltersList(newFilters);

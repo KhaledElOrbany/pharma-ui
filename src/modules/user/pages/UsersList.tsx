@@ -9,11 +9,15 @@ export default function UsersList() {
   const { t } = useTranslation();
   const isRTL = localStorage.getItem('language') === 'ar';
 
-  const [filtersList, setFiltersList] = useState([
-    { id: 'per_page', value: 5 },
-  ]);
+  const [filtersList, setFiltersList] = useState([{ id: 'size', value: 5 }]);
 
-  const { data: doctorsList, isFetching, refetch } = useFetchUsersQuery({});
+  const {
+    data: usersList,
+    isFetching,
+    refetch,
+  } = useFetchUsersQuery({
+    filters: filtersList,
+  });
 
   const tableHeads = [
     { id: 'name', label: t('name') },
@@ -28,7 +32,7 @@ export default function UsersList() {
 
   const processedData: Object[] = [];
   if (!isFetching) {
-    (doctorsList?.data || []).forEach((row) => {
+    (usersList?.data || []).forEach((row) => {
       processedData.push({
         id: {
           value: row.id,
@@ -106,7 +110,6 @@ export default function UsersList() {
           {t('usersList')}
         </Typography>
         <Button
-          disabled
           variant='contained'
           endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
           startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
@@ -120,12 +123,10 @@ export default function UsersList() {
         filtersList={filtersList}
         isFetching={isFetching}
         module='users-list'
-        pagination={doctorsList?.meta ?? {}}
+        pagination={usersList?.meta ?? {}}
         processedData={processedData}
         refetch={refetch}
-        rowsPerPage={
-          filtersList.find((item) => item.id === 'per_page')?.value || 5
-        }
+        rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
         tableHeads={tableHeads}
       />

@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { setUserDetails, setUsersList } from './UserSlice';
 import { userDetails } from '../types/User';
+import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 
 const UserAPI = createApi({
   reducerPath: 'userAPI',
@@ -13,7 +14,8 @@ const UserAPI = createApi({
       query: (id: Number) => ({
         url: `/user/${id}`,
       }),
-      transformResponse: (response: { data: {}; meta?: {} }) => response.data,
+      transformResponse: (response: { data: userDetails; meta?: {} }) =>
+        response.data,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data, meta }) => {
@@ -29,8 +31,10 @@ const UserAPI = createApi({
       providesTags: ['user'],
     }),
     fetchUsers: build.query({
-      query: () => ({
-        url: '/user/list',
+      query: (params) => ({
+        url: `/user/list?${
+          params.filters ? generateUrlParams([...params.filters]) : ''
+        }`,
         method: 'GET',
       }),
       transformResponse: (response: { data: userDetails[]; meta?: {} }) => {

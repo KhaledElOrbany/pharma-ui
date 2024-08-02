@@ -1,6 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { setDoctorDetails, setDoctorsList } from './DoctorSlice';
+import { doctorDetails } from '../types/Doctor';
+import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 
 const doctorAPI = createApi({
   reducerPath: 'doctorAPI',
@@ -12,24 +14,33 @@ const doctorAPI = createApi({
       query: (id: Number) => ({
         url: `/doctor/${id}`,
       }),
-      transformResponse: (result: { data: {}; meta?: {} }) => result.data,
+      transformResponse: (response: { data: doctorDetails; meta?: {} }) => {
+        return response;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(({ data }) => {
+          .then(({ data, meta }) => {
+            if (meta?.response?.headers) {
+              // handle resetting token
+            }
             dispatch(setDoctorDetails(data));
           })
           .catch(() => {
-            //TODO: Add error notification
+            // Handle error
           });
       },
       providesTags: ['doctor'],
     }),
     fetchDoctors: build.query({
-      query: () => ({
-        url: '/doctor/list',
+      query: (params) => ({
+        url: `/doctor/list?${
+          params.filters ? generateUrlParams([...params.filters]) : ''
+        }`,
         method: 'GET',
       }),
-      transformResponse: (result: { data: []; meta?: {} }) => result.data,
+      transformResponse: (response: { data: doctorDetails[]; meta?: {} }) => {
+        return response;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
