@@ -19,6 +19,7 @@ export default function UsersList() {
     { id: 'name', label: t('name') },
     { id: 'phone', label: t('phone') },
     { id: 'address', label: t('address') },
+    { id: 'city', label: t('city') },
     { id: 'email', label: t('email') },
     { id: 'role', label: t('role') },
     { id: 'isDelete', label: t('isDelete') },
@@ -49,6 +50,12 @@ export default function UsersList() {
         },
         address: {
           value: row.address,
+          type: 'string',
+          link: false,
+          linkTo: '',
+        },
+        city: {
+          value: isRTL ? row.city.nameAr : row.city.nameEn,
           type: 'string',
           link: false,
           linkTo: '',

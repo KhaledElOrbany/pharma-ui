@@ -13,6 +13,11 @@ type userDetails = {
   phone: string;
   email: string;
   isDelete: boolean;
+  city: {
+    id: number;
+    nameAr: string;
+    nameEn: string;
+  };
   role: {
     id: number;
     name: string;
