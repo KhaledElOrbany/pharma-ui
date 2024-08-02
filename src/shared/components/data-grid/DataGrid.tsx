@@ -449,7 +449,7 @@ export default function DataGrid({
           {actions.map((action) => (
             <MenuItem
               key={action.name}
-              sx={action.sx}
+              sx={{ ...action.sx, color: action.color }}
               disabled={
                 checkIsDisabled(selectedRow, action.disablingElement) ||
                 action.isDisabled
@@ -459,7 +459,13 @@ export default function DataGrid({
                 action.foo(selectedRow);
               }}
             >
-              <Iconify icon={action.icon} sx={isRTL ? { ml: 2 } : { mr: 2 }} />
+              <Iconify
+                icon={action.icon}
+                sx={{
+                  color: action.color,
+                  ...(isRTL ? { ml: 2 } : { mr: 2 }),
+                }}
+              />
               {action.name}
             </MenuItem>
           ))}
