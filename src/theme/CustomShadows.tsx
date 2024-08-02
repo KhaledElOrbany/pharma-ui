@@ -1,8 +1,9 @@
-import { alpha } from '@mui/material/styles';
+import { alpha, useTheme } from '@mui/material/styles';
 import { CustomShadows as CustomShadowsType } from './types/Theme';
 import Colors from './Colors';
 
 export default function CustomShadows(): CustomShadowsType {
+  const { palette } = useTheme();
   const color = Colors.grey[500];
   const transparent = alpha(color, 0.16);
 
@@ -15,12 +16,12 @@ export default function CustomShadows(): CustomShadowsType {
     z20: `0 20px 40px -4px ${transparent}`,
     z24: `0 24px 48px 0 ${transparent}`,
     //
-    primary: `0 8px 16px 0 ${alpha(Colors.primary.main, 0.24)}`,
-    info: `0 8px 16px 0 ${alpha(Colors.info.main, 0.24)}`,
-    secondary: `0 8px 16px 0 ${alpha(Colors.secondary.main, 0.24)}`,
-    success: `0 8px 16px 0 ${alpha(Colors.success.main, 0.24)}`,
-    warning: `0 8px 16px 0 ${alpha(Colors.warning.main, 0.24)}`,
-    error: `0 8px 16px 0 ${alpha(Colors.error.main, 0.24)}`,
+    primary: `0 8px 16px 0 ${alpha(palette.primary.main, 0.24)}`,
+    info: `0 8px 16px 0 ${alpha(palette.info.main, 0.24)}`,
+    secondary: `0 8px 16px 0 ${alpha(palette.secondary.main, 0.24)}`,
+    success: `0 8px 16px 0 ${alpha(palette.success.main, 0.24)}`,
+    warning: `0 8px 16px 0 ${alpha(palette.warning.main, 0.24)}`,
+    error: `0 8px 16px 0 ${alpha(palette.error.main, 0.24)}`,
     //
     card: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
     dialog: `-40px 40px 80px -8px ${alpha(color, 0.24)}`,

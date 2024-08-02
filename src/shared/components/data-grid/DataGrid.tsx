@@ -28,7 +28,6 @@ import Toolbar from './Toolbar';
 import { useTranslation } from 'react-i18next';
 import Footer from './Footer';
 import MediaCard from '../media-card/MediaCard';
-import Colors from '../../../theme/Colors';
 import { fDateTime } from '../../../helpers/utils/TimeUtil';
 
 function descendingComparator(a: any, b: any, orderBy: any) {
@@ -353,7 +352,9 @@ export default function DataGrid({
                                 <Tooltip title={row[key].value}>
                                   <Typography variant='subtitle2' noWrap>
                                     <Link
-                                      style={{ color: Colors.primary.main }}
+                                      style={{
+                                        color: theme.palette.primary.main,
+                                      }}
                                       to={row[key].linkTo}
                                     >
                                       {typeof row[key].value === 'string'
