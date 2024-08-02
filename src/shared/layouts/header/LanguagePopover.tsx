@@ -18,10 +18,10 @@ const LANGS = [
 ];
 
 export default function LanguagePopover() {
-  const { t } = useTranslation('app');
+  const { t } = useTranslation();
   const language = localStorage.getItem('language');
+  const isRTL = language === 'ar';
   const [open, setOpen] = useState(null);
-  const isRTL = localStorage.getItem('language') === 'ar';
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
@@ -33,7 +33,6 @@ export default function LanguagePopover() {
 
   const handleLanguageChange = (val: string) => {
     localStorage.setItem('language', val);
-    document.dir = val === 'en' ? 'ltr' : 'rtl';
     setOpen(null);
     window.location.reload();
   };
