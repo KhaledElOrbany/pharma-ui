@@ -1,5 +1,4 @@
-import React from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha, useTheme } from '@mui/material/styles';
 import {
   Toolbar as MuiToolbar,
   IconButton,
@@ -13,6 +12,7 @@ import * as XLSX from 'xlsx';
 import { useTranslation } from 'react-i18next';
 import Colors from '../../../theme/Colors';
 import { fDateTime } from '../../../helpers/utils/TimeUtil';
+import { ToolbarProps } from './DataGrid.d';
 
 const StyledRoot = styled(MuiToolbar)(({ theme }) => ({
   height: 110,
@@ -43,16 +43,6 @@ const StyledOptions = styled(ButtonGroup)(({ theme }) => ({
   padding: theme.spacing(0, 1, 0, 1),
 }));
 
-type ToolbarProps = {
-  data: any[];
-  filterName: string;
-  module: string;
-  numSelected: number;
-  onFilterName: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  refresh: () => void;
-  tableHeads: any[];
-};
-
 export default function Toolbar({
   data,
   filterName,
@@ -63,6 +53,7 @@ export default function Toolbar({
   tableHeads,
 }: ToolbarProps) {
   const { t } = useTranslation();
+  const { palette } = useTheme();
 
   const handleExportExcel = () => {
     const workbook = XLSX.utils.book_new();
@@ -85,8 +76,8 @@ export default function Toolbar({
       sx={{
         ...(numSelected > 0 && {
           color: 'primary.main',
-          bgcolor: (theme) =>
-            theme.palette.mode === 'dark' ? 'primary.light' : 'primary.lighter',
+          bgcolor:
+            palette.mode === 'dark' ? 'primary.light' : 'primary.lighter',
         }),
       }}
     >
@@ -111,7 +102,7 @@ export default function Toolbar({
           />
           <StyledOptions>
             <Iconify
-              color={'#4b553a'}
+              color={palette.text.secondary}
               icon={'ant-design:file-excel'}
               width={42}
               onClick={handleExportExcel}
@@ -122,15 +113,18 @@ export default function Toolbar({
               onClick={() => refresh()}
               sx={{
                 margin: '0.5rem',
-                border: '1px solid #4b553a',
+                border: `1px solid ${palette.text.secondary}`,
                 borderRadius: '8px',
                 '&:hover': {
-                  color: '#f7f8fa',
-                  backgroundColor: '#4b553a',
+                  backgroundColor: palette.text.secondary,
                 },
               }}
             >
-              <Iconify icon={'material-symbols:refresh'} width={24} />
+              <Iconify
+                icon={'material-symbols:refresh'}
+                width={24}
+                sx={{ color: palette.text.secondary }}
+              />
             </IconButton>
           </StyledOptions>
         </>

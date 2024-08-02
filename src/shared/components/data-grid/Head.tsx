@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Checkbox,
@@ -18,18 +18,7 @@ import Iconify from '../iconify';
 import { useTranslation } from 'react-i18next';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-
-type HeadProps = {
-  filtersList: any[];
-  headLabel: any[];
-  numSelected: number;
-  onRequestSort: (property: string) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  order: 'asc' | 'desc';
-  orderBy: string;
-  rowCount: number;
-  setFiltersList: (filters: any[]) => void;
-};
+import { HeadProps } from './DataGrid.d';
 
 export default function Head({
   filtersList,

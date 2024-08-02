@@ -29,6 +29,7 @@ import { useTranslation } from 'react-i18next';
 import Footer from './Footer';
 import MediaCard from '../media-card/MediaCard';
 import { fDateTime } from '../../../helpers/utils/TimeUtil';
+import { DataGridProps } from './DataGrid.d';
 
 function descendingComparator(a: any, b: any, orderBy: any) {
   if (b[orderBy].value < a[orderBy].value) {
@@ -78,19 +79,6 @@ function applySortFilter(
 
   return stabilizedThis.map((el: any) => el[0]);
 }
-
-type DataGridProps = {
-  actions: any[];
-  filtersList?: any[];
-  isFetching: boolean;
-  module?: string;
-  pagination?: any;
-  processedData: any;
-  refetch: () => void;
-  rowsPerPage: number;
-  setFiltersList: (filters: any) => void;
-  tableHeads: any[];
-};
 
 export default function DataGrid({
   actions,

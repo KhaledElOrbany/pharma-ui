@@ -1,16 +1,6 @@
-import React from 'react';
 import { TablePagination } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-
-type FooterProps = {
-  t: any;
-  page: number;
-  pagination: any;
-  rowsPerPage: number;
-  processedData: any;
-  handleChangePage: (event: unknown, newPage: number) => void;
-  handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import { FooterProps } from './DataGrid.d';
 
 export default function Footer({
   t,
