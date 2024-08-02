@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFetchUsersQuery } from '../redux/UserAPI';
 import { useTranslation } from 'react-i18next';
-import { Button, Stack, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import Iconify from '../../../shared/components/iconify';
 import { DataGrid } from '../../../shared/components/data-grid';
 
@@ -87,7 +87,7 @@ export default function UsersList() {
   ];
 
   return (
-    <>
+    <Container maxWidth={'lg'}>
       <Stack
         direction='row'
         alignItems='center'
@@ -121,6 +121,6 @@ export default function UsersList() {
         setFiltersList={setFiltersList}
         tableHeads={tableHeads}
       />
-    </>
+    </Container>
   );
 }
