@@ -11,9 +11,10 @@ import { StyledNavItemIcon } from './styles';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import Iconify from '@/shared/components/iconify';
+import { itemProps } from '../items';
 
 type NavSectionProps = {
-  items: any[];
+  items: itemProps[];
   sx?: object;
 };
 
@@ -31,16 +32,7 @@ export default function NavSection({ items = [], ...other }: NavSectionProps) {
   );
 }
 
-type NavItemProps = {
-  item: {
-    title: string;
-    path: string;
-    icon: any;
-    subItems: any[];
-  };
-};
-
-function NavItem({ item }: NavItemProps) {
+function NavItem({ item }: { item: itemProps }) {
   const theme = useTheme();
   const { t } = useTranslation();
   const { title, path, icon, subItems } = item;
