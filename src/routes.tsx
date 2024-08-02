@@ -17,7 +17,8 @@ import DoctorsList from './modules/doctor/pages/DoctorsList';
 import DoctorProfile from './modules/doctor/pages/DoctorProfile';
 
 import { Loader } from './shared/components/loader';
-import GeneralLayout from './shared/layouts/GeneralLayout';
+import GeneralLayout from './shared/layouts/general/GeneralLayout';
+import SimpleLayout from './shared/layouts/simple/SimpleLayout';
 
 const Oops404 = lazy(() => import('./shared/pages/Oops404'));
 const LoginPage = lazy(() => import('./modules/auth/views/Login'));
@@ -26,48 +27,56 @@ const PrivateRoute = lazy(() => import('./helpers/components/PrivateRoute'));
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<GeneralLayout />} errorElement={<CustomErrors />}>
+    <>
       <Route
-        element={
-          <Suspense fallback={<Loader />}>
-            <PrivateRoute />
-          </Suspense>
-        }
+        path='/'
+        element={<GeneralLayout />}
+        errorElement={<CustomErrors />}
       >
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-
-        <Route path='users' element={<User />}>
-          <Route index element={<UsersList />} />
-          <Route path=':id' element={<UserProfile />} />
-        </Route>
-
-        <Route path='doctors' element={<Doctor />}>
-          <Route index element={<DoctorsList />} />
-          <Route path=':id' element={<DoctorProfile />} />
-        </Route>
-
         <Route
-          path='*'
           element={
             <Suspense fallback={<Loader />}>
-              <Oops404 />
+              <PrivateRoute />
             </Suspense>
           }
-        />
+        >
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+
+          <Route path='users' element={<User />}>
+            <Route index element={<UsersList />} />
+            <Route path=':id' element={<UserProfile />} />
+          </Route>
+
+          <Route path='doctors' element={<Doctor />}>
+            <Route index element={<DoctorsList />} />
+            <Route path=':id' element={<DoctorProfile />} />
+          </Route>
+
+          <Route
+            path='*'
+            element={
+              <Suspense fallback={<Loader />}>
+                <Oops404 />
+              </Suspense>
+            }
+          />
+        </Route>
       </Route>
 
-      <Route element={<Auth />}>
-        <Route
-          path='login'
-          element={
-            <Suspense fallback={<Loader />}>
-              <LoginPage />
-            </Suspense>
-          }
-        />
+      <Route element={<SimpleLayout />}>
+        <Route element={<Auth />}>
+          <Route
+            path='login'
+            element={
+              <Suspense fallback={<Loader />}>
+                <LoginPage />
+              </Suspense>
+            }
+          />
+        </Route>
       </Route>
-    </Route>
+    </>
   )
 );
 
