@@ -1,6 +1,8 @@
 const en = {
   address: 'Address',
   arabic: 'Arabic',
+  cancel: 'Cancel',
+  city: 'City',
   dashboard: 'Dashboard',
   delete: 'Delete',
   email: 'Email',

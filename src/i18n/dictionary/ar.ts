@@ -1,6 +1,8 @@
 const ar = {
   address: 'العنوان',
   arabic: 'العربية',
+  cancel: 'إلغاء',
+  city: 'المدينة',
   dashboard: 'لوحة التحكم',
   delete: 'حذف',
   email: 'البريد الإلكتروني',
