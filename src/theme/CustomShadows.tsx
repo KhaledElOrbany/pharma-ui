@@ -4,7 +4,7 @@ import Colors from './Colors';
 
 export default function CustomShadows(): CustomShadowsType {
   const { palette } = useTheme();
-  const color = Colors.grey[500];
+  const color = palette.mode === 'light' ? Colors.grey[600] : Colors.grey.A100;
   const transparent = alpha(color, 0.16);
 
   return {
@@ -23,7 +23,7 @@ export default function CustomShadows(): CustomShadowsType {
     warning: `0 8px 16px 0 ${alpha(palette.warning.main, 0.24)}`,
     error: `0 8px 16px 0 ${alpha(palette.error.main, 0.24)}`,
     //
-    card: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+    card: `0 4px 8px 2px ${alpha(color, 0.24)}`,
     dialog: `-40px 40px 80px -8px ${alpha(color, 0.24)}`,
     dropdown: `0 0 2px 0 ${alpha(color, 0.24)}, -20px 20px 40px -4px ${alpha(
       color,
