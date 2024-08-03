@@ -15,6 +15,10 @@ import Doctor from './modules/doctor/Doctor';
 import DoctorsList from './modules/doctor/pages/DoctorsList';
 import DoctorProfile from './modules/doctor/pages/DoctorProfile';
 
+import DoctorClass from './modules/doctorClass/DoctorClass';
+import Pharmacy from './modules/pharmacy/Pharmacy';
+import Medicine from './modules/medicine/Medicine';
+
 import { Loader } from './shared/components/loader';
 
 const Layout = lazy(() => import('./shared/layouts/general/GeneralLayout'));
@@ -50,6 +54,10 @@ const Router = createBrowserRouter(
             <Route index element={<DoctorsList />} />
             <Route path=':id' element={<DoctorProfile />} />
           </Route>
+
+          <Route path='doctorClasses' element={<DoctorClass />} />
+          <Route path='pharmacies' element={<Pharmacy />} />
+          <Route path='medicines' element={<Medicine />} />
         </Route>
       </Route>
 
