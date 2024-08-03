@@ -37,6 +37,13 @@ const items: itemProps[] = [
     allowedRoles: ['SUPER_ADMIN', 'ADMIN'],
   },
   {
+    title: 'pharmacies',
+    path: '/pharmacy',
+    icon: icon('ic_pharmacy'),
+    isActive: true,
+    allowedRoles: ['SUPER_ADMIN', 'ADMIN'],
+  },
+  {
     title: 'medicines',
     path: '/medicine',
     icon: icon('ic_medicine'),

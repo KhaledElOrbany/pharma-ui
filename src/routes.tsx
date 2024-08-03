@@ -5,7 +5,6 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Auth from './modules/auth/Auth';
 import Dashboard from './modules/dashboard/Dashboard';
 
 import User from './modules/user/User';
@@ -17,8 +16,9 @@ import DoctorsList from './modules/doctor/pages/DoctorsList';
 import DoctorProfile from './modules/doctor/pages/DoctorProfile';
 
 import { Loader } from './shared/components/loader';
-import GeneralLayout from './shared/layouts/general/GeneralLayout';
-import SimpleLayout from './shared/layouts/simple/SimpleLayout';
+
+const Layout = lazy(() => import('./shared/layouts/general/GeneralLayout'));
+const SimpleLayout = lazy(() => import('./shared/layouts/simple/SimpleLayout'));
 
 const Oops404 = lazy(() => import('./shared/pages/Oops404'));
 const LoginPage = lazy(() => import('./modules/auth/views/Login'));
@@ -30,16 +30,14 @@ const Router = createBrowserRouter(
     <>
       <Route
         path='/'
-        element={<GeneralLayout />}
+        element={
+          <Suspense fallback={<Loader />}>
+            <Layout />
+          </Suspense>
+        }
         errorElement={<CustomErrors />}
       >
-        <Route
-          element={
-            <Suspense fallback={<Loader />}>
-              <PrivateRoute />
-            </Suspense>
-          }
-        >
+        <Route element={<PrivateRoute />}>
           <Route path='/' element={<Dashboard />} />
           <Route path='/dashboard' element={<Dashboard />} />
 
@@ -52,29 +50,18 @@ const Router = createBrowserRouter(
             <Route index element={<DoctorsList />} />
             <Route path=':id' element={<DoctorProfile />} />
           </Route>
-
-          <Route
-            path='*'
-            element={
-              <Suspense fallback={<Loader />}>
-                <Oops404 />
-              </Suspense>
-            }
-          />
         </Route>
       </Route>
 
-      <Route element={<SimpleLayout />}>
-        <Route element={<Auth />}>
-          <Route
-            path='login'
-            element={
-              <Suspense fallback={<Loader />}>
-                <LoginPage />
-              </Suspense>
-            }
-          />
-        </Route>
+      <Route
+        element={
+          <Suspense fallback={<Loader />}>
+            <SimpleLayout />
+          </Suspense>
+        }
+      >
+        <Route path='login' element={<LoginPage />} />
+        <Route path='*' element={<Oops404 />} />
       </Route>
     </>
   )

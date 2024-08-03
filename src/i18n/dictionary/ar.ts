@@ -37,6 +37,8 @@ const ar = {
   newUser: 'مستخدم جديد',
   password: 'كلمة السر',
   passwordsNotMatch: 'كلمة السر غير متطابقة',
+  pharmacy: 'الصيدلية',
+  pharmacies: 'الصيدليات',
   phone: 'رقم الهاتف',
   role: 'الدور',
   rowsPerPage: 'صف لكل صفحة',
