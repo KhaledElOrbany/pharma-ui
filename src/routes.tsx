@@ -16,7 +16,10 @@ import DoctorsList from './modules/doctor/pages/DoctorsList';
 import DoctorProfile from './modules/doctor/pages/DoctorProfile';
 
 import DoctorClass from './modules/doctorClass/DoctorClass';
+import DoctorsClassList from './modules/doctorClass/pages/DoctorClassList';
+
 import Pharmacy from './modules/pharmacy/Pharmacy';
+
 import Medicine from './modules/medicine/Medicine';
 
 import { Loader } from './shared/components/loader';
@@ -55,8 +58,13 @@ const Router = createBrowserRouter(
             <Route path=':id' element={<DoctorProfile />} />
           </Route>
 
-          <Route path='doctorClasses' element={<DoctorClass />} />
+          <Route path='doctorClasses' element={<DoctorClass />}>
+            <Route index element={<DoctorsClassList />} />
+            {/* <Route path=':id' element={<DoctorClassProfile />} /> */}
+          </Route>
+
           <Route path='pharmacies' element={<Pharmacy />} />
+
           <Route path='medicines' element={<Medicine />} />
         </Route>
       </Route>

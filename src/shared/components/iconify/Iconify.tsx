@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { Icon } from '@iconify/react';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import Colors from '@/theme/Colors';
 
 type IconifyProps = {
@@ -13,18 +13,23 @@ type IconifyProps = {
 };
 
 const Iconify = forwardRef<HTMLDivElement, IconifyProps>(
-  ({ icon, width = 20, color = Colors.grey[700], sx, ...other }, ref) => (
-    <Box
-      id={other.id}
-      ref={ref}
-      component={Icon}
-      icon={icon}
-      color={color}
-      sx={{ width, height: width, ...sx }}
-      onClick={other.onClick}
-      {...other}
-    />
-  )
+  ({ icon, width = 20, color, sx, ...other }, ref) => {
+    const { palette } = useTheme();
+    return (
+      <Box
+        id={other.id}
+        ref={ref}
+        component={Icon}
+        icon={icon}
+        color={
+          palette.mode === 'dark' ? Colors.grey[400] : color || Colors.grey[800]
+        }
+        sx={{ width, height: width, ...sx }}
+        onClick={other.onClick}
+        {...other}
+      />
+    );
+  }
 );
 
 Iconify.displayName = 'Iconify';
