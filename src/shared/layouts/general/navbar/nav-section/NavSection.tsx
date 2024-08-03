@@ -12,6 +12,8 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import Iconify from '@/shared/components/iconify';
 import { itemProps } from '../items';
+import { useSelector } from 'react-redux';
+import { userSelector } from '@/modules/user/redux/UserSlice';
 
 type NavSectionProps = {
   items: itemProps[];
@@ -19,11 +21,17 @@ type NavSectionProps = {
 };
 
 export default function NavSection({ items = [], ...other }: NavSectionProps) {
+  const { currentUser } = useSelector(userSelector);
+
   return (
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
         {items
-          .filter((item) => item.isActive)
+          .filter(
+            (item) =>
+              item.isActive &&
+              item.allowedRoles.includes(currentUser.role?.name)
+          )
           .map((item) => (
             <NavItem key={item.title} item={item} />
           ))}
