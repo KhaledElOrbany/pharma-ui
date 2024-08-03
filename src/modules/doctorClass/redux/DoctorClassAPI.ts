@@ -6,6 +6,7 @@ import {
   setDoctorClassDetails,
   setDoctorClassesList,
 } from './DoctorClassSlice';
+import { errorHandler } from '@/helpers/components/ErrorHandler';
 
 const doctorClassAPI = createApi({
   reducerPath: 'doctorClassAPI',
@@ -55,8 +56,8 @@ const doctorClassAPI = createApi({
           .then(({ data }) => {
             dispatch(setDoctorClassesList(data));
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       providesTags: ['doctorClass'],
@@ -67,13 +68,13 @@ const doctorClassAPI = createApi({
         method: 'POST',
         body,
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['doctorClass'],
@@ -84,13 +85,13 @@ const doctorClassAPI = createApi({
         method: 'PUT',
         body,
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['doctorClass'],
@@ -100,13 +101,13 @@ const doctorClassAPI = createApi({
         url: `/doctorClass/${id}`,
         method: 'DELETE',
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['doctorClass'],

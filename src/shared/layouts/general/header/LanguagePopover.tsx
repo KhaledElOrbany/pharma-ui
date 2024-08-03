@@ -4,7 +4,7 @@ import { Box, MenuItem, Stack, IconButton, Popover } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import Iconify from '@/shared/components/iconify';
 
-const LANGS = [
+const languages = [
   {
     value: 'ar',
     label: 'arabic',
@@ -80,7 +80,7 @@ export default function LanguagePopover() {
         }}
       >
         <Stack spacing={0.75}>
-          {LANGS.map((option) => (
+          {languages.map((option) => (
             <MenuItem
               key={option.value}
               selected={option.value === language}

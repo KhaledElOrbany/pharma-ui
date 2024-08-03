@@ -3,6 +3,7 @@ import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { setCurrentUser, setUserDetails, setUsersList } from './UserSlice';
 import { userDetails } from '../types/User';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
+import { errorHandler } from '@/helpers/components/ErrorHandler';
 
 const UserAPI = createApi({
   reducerPath: 'userAPI',
@@ -82,13 +83,13 @@ const UserAPI = createApi({
         method: 'POST',
         body,
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['user'],
@@ -99,13 +100,13 @@ const UserAPI = createApi({
         method: 'PUT',
         body,
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['user'],
@@ -115,13 +116,13 @@ const UserAPI = createApi({
         url: `/user/${id}`,
         method: 'DELETE',
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['user'],

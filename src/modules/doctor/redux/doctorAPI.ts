@@ -3,6 +3,7 @@ import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { setDoctorDetails, setDoctorsList } from './DoctorSlice';
 import { doctorDetails } from '../types/Doctor';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
+import { errorHandler } from '@/helpers/components/ErrorHandler';
 
 const doctorAPI = createApi({
   reducerPath: 'doctorAPI',
@@ -46,8 +47,8 @@ const doctorAPI = createApi({
           .then(({ data }) => {
             dispatch(setDoctorsList(data));
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       providesTags: ['doctor'],
@@ -58,13 +59,13 @@ const doctorAPI = createApi({
         method: 'POST',
         body,
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['doctor'],
@@ -75,13 +76,13 @@ const doctorAPI = createApi({
         method: 'PUT',
         body,
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['doctor'],
@@ -91,13 +92,13 @@ const doctorAPI = createApi({
         url: `/doctor/${id}`,
         method: 'DELETE',
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {
             //TODO: Add success notification
           })
-          .catch(() => {
-            //TODO: Add error notification
+          .catch(({ error }) => {
+            errorHandler(dispatch, error);
           });
       },
       invalidatesTags: ['doctor'],
