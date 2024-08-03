@@ -1,9 +1,10 @@
 import { alpha, useTheme } from '@mui/material/styles';
 import { GlobalStyles } from '@mui/material';
-import { bgBlur } from '../../../utils/cssStyles';
+import { bgBlur } from '@/helpers/utils/CssStyles';
+import { ExtendedTheme } from '@/theme/types/Theme';
 
 export default function StyledChart() {
-  const theme = useTheme();
+  const theme = useTheme() as ExtendedTheme;
 
   const inputGlobalStyles = (
     <GlobalStyles
@@ -14,7 +15,7 @@ export default function StyledChart() {
             ...bgBlur({ color: theme.palette.background.default }),
             border: 0,
             color: theme.palette.text.primary,
-            boxShadow: theme.customShadows.dropdown,
+            boxShadow: theme.customShadows?.dropdown,
             borderRadius: Number(theme.shape.borderRadius) * 1.5,
             '&:before': { borderBottomColor: 'transparent' },
             '&:after': {
@@ -24,7 +25,7 @@ export default function StyledChart() {
           '.apexcharts-tooltip.apexcharts-theme-light': {
             ...bgBlur({ color: theme.palette.background.default }),
             border: 0,
-            boxShadow: theme.customShadows.dropdown,
+            boxShadow: theme.customShadows?.dropdown,
             borderRadius: Number(theme.shape.borderRadius) * 1.5,
             '.apexcharts-tooltip-title': {
               border: 0,
