@@ -35,6 +35,7 @@ const ar = {
   name: 'الاسم',
   newDoctor: 'طبيب جديد',
   newUser: 'مستخدم جديد',
+  noRecords: 'لا توجد معلومات',
   password: 'كلمة السر',
   passwordsNotMatch: 'كلمة السر غير متطابقة',
   pharmacy: 'الصيدلية',

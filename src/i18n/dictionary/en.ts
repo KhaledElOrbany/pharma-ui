@@ -35,6 +35,7 @@ const en = {
   name: 'Name',
   newDoctor: 'New Doctor',
   newUser: 'New User',
+  noRecords: 'No records',
   password: 'Password',
   passwordsNotMatch: 'Passwords do not match',
   phone: 'Phone number',
