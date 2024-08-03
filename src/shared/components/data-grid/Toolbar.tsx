@@ -102,7 +102,6 @@ export default function Toolbar({
           />
           <StyledOptions>
             <Iconify
-              color={palette.text.primary}
               icon={'bi:file-earmark-excel'}
               width={42}
               onClick={handleExportExcel}
