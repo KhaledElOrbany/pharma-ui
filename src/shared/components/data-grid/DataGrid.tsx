@@ -101,6 +101,8 @@ export default function DataGrid({
   const [orderBy, setOrderBy] = useState('');
   const [filterName, setFilterName] = useState('');
   const [selectedRow, setSelectedRow] = useState(0);
+
+  const rowsCount = (processedData || [])?.length;
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const handleOpenMenu = (event: any, id: any) => {
@@ -194,9 +196,7 @@ export default function DataGrid({
   };
 
   const emptyRows =
-    page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - (processedData || [])?.length)
-      : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowsCount) : 0;
 
   const filteredData = applySortFilter(
     processedData || [],
@@ -253,7 +253,7 @@ export default function DataGrid({
                 onSelectAllClick={handleSelectAllClick}
                 order={order}
                 orderBy={orderBy}
-                rowCount={(processedData || [])?.length}
+                rowCount={rowsCount}
                 setFiltersList={setFiltersList}
               />
               <TableBody>
@@ -394,11 +394,7 @@ export default function DataGrid({
                 <TableBody>
                   <TableRow>
                     <TableCell align='center' colSpan={12} sx={{ py: 3 }}>
-                      <Paper
-                        sx={{
-                          textAlign: 'center',
-                        }}
-                      >
+                      <Paper sx={{ textAlign: 'center' }}>
                         <Typography variant='h6' paragraph>
                           {t('notFound')}
                         </Typography>
@@ -407,6 +403,20 @@ export default function DataGrid({
                           <strong>&quot;{filterName}&quot;</strong>
                           <br />
                           <br /> {t('checkSpelling')}
+                        </Typography>
+                      </Paper>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              )}
+
+              {rowsCount === 0 && !isFetching && !isNotFound && (
+                <TableBody>
+                  <TableRow>
+                    <TableCell align='center' colSpan={12} sx={{ py: 3 }}>
+                      <Paper sx={{ textAlign: 'center' }}>
+                        <Typography variant='h6' paragraph>
+                          {t('noRecords')}
                         </Typography>
                       </Paper>
                     </TableCell>
