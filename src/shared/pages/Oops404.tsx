@@ -1,23 +1,50 @@
-import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { Link as RouterLink } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import { Button, Typography, Box } from '@mui/material';
+
+const StyledContent = styled('div')(({ theme }) => ({
+  margin: 'auto',
+  minHeight: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  textAlign: 'center',
+  alignItems: 'center',
+  padding: theme.spacing(12, 0),
+  backgroundColor: theme.palette.background.default,
+}));
 
 export default function Oops404() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <img
-        src='/assets/illustrations/404.svg'
-        alt='404'
-        style={{
-          height: 260,
-        }}
-      />
+    <>
+      <Helmet>
+        <title>Oops!</title>
+      </Helmet>
 
-      <Link to='/'>Home Page</Link>
-    </div>
+      <StyledContent>
+        <Typography variant='h3' paragraph>
+          Sorry, page not found!
+        </Typography>
+
+        <Typography sx={{ color: 'text.secondary' }}>
+          Sorry, we couldn’t find the page you’re looking for.
+        </Typography>
+
+        <Typography sx={{ color: 'text.secondary' }}>
+          Perhaps you’ve mistyped the URL? Be sure to check your spelling.
+        </Typography>
+
+        <Box
+          component='img'
+          src='/assets/illustrations/404.svg'
+          sx={{ height: 260, mx: 'auto', my: { xs: 5, sm: 10 } }}
+        />
+
+        <Button to='/' size='large' variant='contained' component={RouterLink}>
+          Go to Home
+        </Button>
+      </StyledContent>
+    </>
   );
 }
