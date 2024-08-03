@@ -21,9 +21,9 @@ export default function PharmacyList() {
 
   const tableHeads = [
     { id: 'name', label: t('name') },
-    { id: 'visitCount', label: t('visitCount') },
-    { id: 'notes', label: t('notes') },
-    { id: 'isActive', label: t('isActive') },
+    { id: 'owner', label: t('owner') },
+    { id: 'phone', label: t('phone') },
+    { id: 'address', label: t('address') },
     { id: 'isDeleted', label: t('isDeleted') },
     { id: 'actions' },
   ];
@@ -42,7 +42,25 @@ export default function PharmacyList() {
           value: row.name,
           type: 'string',
           link: true,
-          linkTo: `/doctorClass/${row.id}`,
+          linkTo: `/pharmacies/${row.id}`,
+        },
+        owner: {
+          value: row.owner,
+          type: 'string',
+          link: false,
+          linkTo: '',
+        },
+        phone: {
+          value: row.phone,
+          type: 'string',
+          link: false,
+          linkTo: '',
+        },
+        address: {
+          value: row.address,
+          type: 'string',
+          link: false,
+          linkTo: '',
         },
         isDeleted: {
           value: row.isDeleted,
@@ -82,7 +100,7 @@ export default function PharmacyList() {
           endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
           startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
         >
-          {t('newDoctorClass')}
+          {t('addPharmacy')}
         </Button>
       </Stack>
 

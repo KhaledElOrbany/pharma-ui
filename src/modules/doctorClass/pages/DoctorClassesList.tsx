@@ -94,7 +94,7 @@ export default function DoctorClassesList() {
           endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
           startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
         >
-          {t('newDoctorClass')}
+          {t('addDoctorClass')}
         </Button>
       </Stack>
 

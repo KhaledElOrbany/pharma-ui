@@ -1,9 +1,9 @@
 type pharmacyDetails = {
   id: number;
   name: string;
-  visitCount: number;
-  notes: string;
-  isActive: boolean;
+  owner: number;
+  address: string;
+  phone: string;
   isDeleted: boolean;
 };
 

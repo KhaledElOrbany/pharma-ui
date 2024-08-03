@@ -107,7 +107,7 @@ export default function DoctorsList() {
           endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
           startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
         >
-          {t('newDoctor')}
+          {t('addDoctor')}
         </Button>
       </Stack>
 

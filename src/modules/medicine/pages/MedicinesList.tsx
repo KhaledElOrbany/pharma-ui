@@ -42,7 +42,7 @@ export default function MedicinesList() {
           value: row.name,
           type: 'string',
           link: true,
-          linkTo: `/doctorClass/${row.id}`,
+          linkTo: `/medicines/${row.id}`,
         },
         isDeleted: {
           value: row.isDeleted,
@@ -75,14 +75,14 @@ export default function MedicinesList() {
         mb={5}
       >
         <Typography variant='h4' gutterBottom>
-          {t('doctorClassesList')}
+          {t('medicinesList')}
         </Typography>
         <Button
           variant='contained'
           endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
           startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
         >
-          {t('newDoctorClass')}
+          {t('addMedicine')}
         </Button>
       </Stack>
 
