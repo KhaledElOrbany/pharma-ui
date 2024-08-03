@@ -1,33 +1,33 @@
+/* eslint-disable prettier/prettier */
 import { lazy, Suspense } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
+import Loader from './shared/components/loader';
 
-import Dashboard from './modules/dashboard/Dashboard';
+const Dashboard = lazy(() => import('./modules/dashboard/Dashboard'));
 
-import User from './modules/user/User';
-import UsersList from './modules/user/pages/UsersList';
-import UserProfile from './modules/user/pages/UserProfile';
+const User = lazy(() => import('./modules/user/User'));
+const UsersList = lazy(() => import('./modules/user/pages/UsersList'));
+const UserProfile = lazy(() => import('./modules/user/pages/UserProfile'));
 
-import Doctor from './modules/doctor/Doctor';
-import DoctorsList from './modules/doctor/pages/DoctorsList';
-import DoctorProfile from './modules/doctor/pages/DoctorProfile';
+const Doctor = lazy(() => import('./modules/doctor/Doctor'));
+const DoctorsList = lazy(() => import('./modules/doctor/pages/DoctorsList'));
+const DoctorProfile = lazy(() => import('./modules/doctor/pages/DoctorProfile'));
 
-import DoctorClass from './modules/doctorClass/DoctorClass';
-import DoctorClassesList from './modules/doctorClass/pages/DoctorClassesList';
-import DoctorClassProfile from './modules/doctorClass/pages/DoctorClassProfile';
+const DoctorClass = lazy(() => import('./modules/doctorClass/DoctorClass'));
+const DoctorClassesList = lazy(() => import('./modules/doctorClass/pages/DoctorClassesList'));
+const DoctorClassProfile = lazy(() => import('./modules/doctorClass/pages/DoctorClassProfile'));
 
-import Pharmacy from './modules/pharmacy/Pharmacy';
-import PharmaciesList from './modules/pharmacy/pages/PharmaciesList';
-import PharmacyProfile from './modules/pharmacy/pages/PharmacyProfile';
+const Pharmacy = lazy(() => import('./modules/pharmacy/Pharmacy'));
+const PharmaciesList = lazy(() => import('./modules/pharmacy/pages/PharmaciesList'));
+const PharmacyProfile = lazy(() => import('./modules/pharmacy/pages/PharmacyProfile'));
 
-import Medicine from './modules/medicine/Medicine';
-import MedicinesList from './modules/medicine/pages/MedicinesList';
-import MedicineProfile from './modules/medicine/pages/MedicineProfile';
-
-import { Loader } from './shared/components/loader';
+const Medicine = lazy(() => import('./modules/medicine/Medicine'));
+const MedicinesList = lazy(() => import('./modules/medicine/pages/MedicinesList'));
+const MedicineProfile = lazy(() => import('./modules/medicine/pages/MedicineProfile'));
 
 const Layout = lazy(() => import('./shared/layouts/general/GeneralLayout'));
 const SimpleLayout = lazy(() => import('./shared/layouts/simple/SimpleLayout'));
