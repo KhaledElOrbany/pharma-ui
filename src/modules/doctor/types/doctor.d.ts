@@ -17,7 +17,7 @@ type doctorDetails = {
   phone: string;
   clinicPhone: string;
   doctorClass: string;
-  isDelete: boolean;
+  isDeleted: boolean;
 };
 
 export { doctorDetails, doctorCreationDetails };

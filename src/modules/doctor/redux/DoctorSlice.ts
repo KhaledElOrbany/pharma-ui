@@ -15,7 +15,7 @@ const DoctorSlice = createSlice({
     setDoctorsList: (state, { payload }) => {
       state.doctorsList = payload;
     },
-    updateDoctorList: (state, { payload }) => {
+    updateDoctorsList: (state, { payload }) => {
       state.doctorsList = state.doctorsList.map((doctor: doctorDetails) => {
         if (doctor.id === payload.id) {
           return payload;
@@ -34,7 +34,7 @@ const DoctorSlice = createSlice({
 export const {
   setDoctorDetails,
   setDoctorsList,
-  updateDoctorList,
+  updateDoctorsList,
   removeDoctorFromList,
 } = DoctorSlice.actions;
 export const doctorSelector = (state: RootState) => state.doctor;

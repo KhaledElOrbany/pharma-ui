@@ -26,7 +26,7 @@ export default function UsersList() {
     { id: 'city', label: t('city') },
     { id: 'email', label: t('email') },
     { id: 'role', label: t('role') },
-    { id: 'isDelete', label: t('isDelete') },
+    { id: 'isDeleted', label: t('isDeleted') },
     { id: 'actions' },
   ];
 
@@ -76,8 +76,8 @@ export default function UsersList() {
           link: false,
           linkTo: '',
         },
-        isDelete: {
-          value: row.isDelete,
+        isDeleted: {
+          value: row.isDeleted,
           type: 'boolean',
           link: false,
           linkTo: '',

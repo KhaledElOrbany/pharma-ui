@@ -17,7 +17,7 @@ const en = {
   hi: 'Hi,',
   home: 'Home',
   isActive: 'Active?',
-  isDelete: 'Deleted?',
+  isDeleted: 'Deleted?',
   logout: 'Logout',
   medicine: 'Medicine',
   medicines: 'Medicines',

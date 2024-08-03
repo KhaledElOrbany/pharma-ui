@@ -12,7 +12,7 @@ type userDetails = {
   address: string;
   phone: string;
   email: string;
-  isDelete: boolean;
+  isDeleted: boolean;
   city: {
     id: number;
     nameAr: string;

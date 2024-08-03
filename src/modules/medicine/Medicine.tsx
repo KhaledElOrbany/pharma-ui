@@ -1,3 +1,14 @@
-export default function index() {
-  return <div>medicine index</div>;
+import { Helmet } from 'react-helmet-async';
+import { Outlet } from 'react-router-dom';
+
+export default function Medicine() {
+  return (
+    <>
+      <Helmet>
+        <title>Medicine</title>
+      </Helmet>
+
+      <Outlet />
+    </>
+  );
 }

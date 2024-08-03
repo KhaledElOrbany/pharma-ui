@@ -17,7 +17,7 @@ const ar = {
   hi: 'مرحبا',
   home: 'الرئيسية',
   isActive: 'مفعل؟',
-  isDelete: 'محذوف؟',
+  isDeleted: 'محذوف؟',
   logout: 'تسجيل خروج',
   medicine: 'الدواء',
   medicines: 'الأدوية',

@@ -5,26 +5,28 @@ import { RootState } from '@/redux/Store';
 const DoctorClassSlice = createSlice({
   name: 'doctorClass',
   initialState: {
-    doctorDetails: {} as doctorClassDetails,
-    doctorsList: [] as doctorClassDetails[],
+    doctorClassDetails: {} as doctorClassDetails,
+    doctorClassesList: [] as doctorClassDetails[],
   },
   reducers: {
     setDoctorClassDetails: (state, { payload }) => {
-      state.doctorDetails = payload;
+      state.doctorClassDetails = payload;
     },
     setDoctorClassesList: (state, { payload }) => {
-      state.doctorsList = payload;
+      state.doctorClassesList = payload;
     },
-    updateDoctorClassList: (state, { payload }) => {
-      state.doctorsList = state.doctorsList.map((dc: doctorClassDetails) => {
-        if (dc.id === payload.id) {
-          return payload;
+    updateDoctorClassesList: (state, { payload }) => {
+      state.doctorClassesList = state.doctorClassesList.map(
+        (dc: doctorClassDetails) => {
+          if (dc.id === payload.id) {
+            return payload;
+          }
+          return dc;
         }
-        return dc;
-      });
+      );
     },
     removeDoctorClassFromList: (state, { payload }) => {
-      state.doctorsList = state.doctorsList.filter(
+      state.doctorClassesList = state.doctorClassesList.filter(
         (doctor) => doctor.id !== payload.id
       );
     },
@@ -34,7 +36,7 @@ const DoctorClassSlice = createSlice({
 export const {
   setDoctorClassDetails,
   setDoctorClassesList,
-  updateDoctorClassList,
+  updateDoctorClassesList,
   removeDoctorClassFromList,
 } = DoctorClassSlice.actions;
 export const doctorClassSelector = (state: RootState) => state.doctorClass;

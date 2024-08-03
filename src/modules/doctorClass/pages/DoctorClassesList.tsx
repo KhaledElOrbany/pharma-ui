@@ -1,37 +1,36 @@
-import { useFetchDoctorsQuery } from '../redux/DoctorAPI';
+import { useFetchDoctorClasssQuery } from '../redux/DoctorClassAPI';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import Iconify from '@/shared/components/iconify';
 import DataGrid from '@/shared/components/data-grid/DataGrid';
 
-export default function DoctorsList() {
+export default function DoctorClassesList() {
   const { t } = useTranslation();
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const [filtersList, setFiltersList] = useState([{ id: 'size', value: 5 }]);
 
   const {
-    data: doctorsList,
+    data: DoctorClassesList,
     isFetching,
     refetch,
-  } = useFetchDoctorsQuery({
+  } = useFetchDoctorClasssQuery({
     filters: filtersList,
   });
 
   const tableHeads = [
     { id: 'name', label: t('name') },
-    { id: 'phone', label: t('phone') },
-    { id: 'clinicPhone', label: t('clinicPhone') },
-    { id: 'address', label: t('address') },
-    { id: 'doctorClass', label: t('doctorClass') },
+    { id: 'visitCount', label: t('visitCount') },
+    { id: 'notes', label: t('notes') },
+    { id: 'isActive', label: t('isActive') },
     { id: 'isDeleted', label: t('isDeleted') },
     { id: 'actions' },
   ];
 
   const processedData: Object[] = [];
   if (!isFetching) {
-    (doctorsList?.data || []).forEach((row) => {
+    (DoctorClassesList?.data || []).forEach((row) => {
       processedData.push({
         id: {
           value: row.id,
@@ -40,32 +39,20 @@ export default function DoctorsList() {
           linkTo: '',
         },
         name: {
-          value: `${row.firstName} ${row.lastName}`,
+          value: row.name,
           type: 'string',
           link: true,
-          linkTo: `/users/${row.id}`,
+          linkTo: `/doctorClass/${row.id}`,
         },
-        phone: {
-          value: row.phone,
-          type: 'string',
+        visitCount: {
+          value: row.visitCount,
+          type: 'number',
           link: false,
           linkTo: '',
         },
-        clinicPhone: {
-          value: row.clinicPhone,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        address: {
-          value: row.address,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        doctorClass: {
-          value: row.doctorClass,
-          type: 'string',
+        isActive: {
+          value: row.isActive,
+          type: 'boolean',
           link: false,
           linkTo: '',
         },
@@ -100,14 +87,14 @@ export default function DoctorsList() {
         mb={5}
       >
         <Typography variant='h4' gutterBottom>
-          {t('doctorsList')}
+          {t('doctorClassesList')}
         </Typography>
         <Button
           variant='contained'
           endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
           startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
         >
-          {t('newDoctor')}
+          {t('newDoctorClass')}
         </Button>
       </Stack>
 
@@ -116,7 +103,7 @@ export default function DoctorsList() {
         filtersList={filtersList}
         isFetching={isFetching}
         module='users-list'
-        pagination={doctorsList?.meta ?? {}}
+        pagination={DoctorClassesList?.meta ?? {}}
         processedData={processedData}
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}

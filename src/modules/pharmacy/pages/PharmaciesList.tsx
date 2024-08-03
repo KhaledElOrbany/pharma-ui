@@ -1,21 +1,21 @@
-import { useFetchDoctorClasssQuery } from '../redux/DoctorClassAPI';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import Iconify from '@/shared/components/iconify';
 import DataGrid from '@/shared/components/data-grid/DataGrid';
+import { useFetchPharmacysQuery } from '../redux/PharmacyAPI';
 
-export default function DoctorsList() {
+export default function PharmacyList() {
   const { t } = useTranslation();
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const [filtersList, setFiltersList] = useState([{ id: 'size', value: 5 }]);
 
   const {
-    data: doctorClassList,
+    data: pharmaciesList,
     isFetching,
     refetch,
-  } = useFetchDoctorClasssQuery({
+  } = useFetchPharmacysQuery({
     filters: filtersList,
   });
 
@@ -24,13 +24,13 @@ export default function DoctorsList() {
     { id: 'visitCount', label: t('visitCount') },
     { id: 'notes', label: t('notes') },
     { id: 'isActive', label: t('isActive') },
-    { id: 'isDelete', label: t('isDelete') },
+    { id: 'isDeleted', label: t('isDeleted') },
     { id: 'actions' },
   ];
 
   const processedData: Object[] = [];
   if (!isFetching) {
-    (doctorClassList?.data || []).forEach((row) => {
+    (pharmaciesList?.data || []).forEach((row) => {
       processedData.push({
         id: {
           value: row.id,
@@ -44,20 +44,8 @@ export default function DoctorsList() {
           link: true,
           linkTo: `/doctorClass/${row.id}`,
         },
-        visitCount: {
-          value: row.visitCount,
-          type: 'number',
-          link: false,
-          linkTo: '',
-        },
-        isActive: {
-          value: row.isActive,
-          type: 'boolean',
-          link: false,
-          linkTo: '',
-        },
-        isDelete: {
-          value: row.isDelete,
+        isDeleted: {
+          value: row.isDeleted,
           type: 'boolean',
           link: false,
           linkTo: '',
@@ -103,7 +91,7 @@ export default function DoctorsList() {
         filtersList={filtersList}
         isFetching={isFetching}
         module='users-list'
-        pagination={doctorClassList?.meta ?? {}}
+        pagination={pharmaciesList?.meta ?? {}}
         processedData={processedData}
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}

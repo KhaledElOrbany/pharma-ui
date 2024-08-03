@@ -3,7 +3,7 @@ type doctorClassCreationDetails = {
   visitCount: number;
   notes: string;
   isActive: boolean;
-  isDelete: boolean;
+  isDeleted: boolean;
 };
 
 type doctorClassDetails = {
@@ -12,7 +12,7 @@ type doctorClassDetails = {
   visitCount: number;
   notes: string;
   isActive: boolean;
-  isDelete: boolean;
+  isDeleted: boolean;
 };
 
 export { doctorClassDetails, doctorClassCreationDetails };

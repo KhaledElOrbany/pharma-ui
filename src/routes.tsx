@@ -16,11 +16,16 @@ import DoctorsList from './modules/doctor/pages/DoctorsList';
 import DoctorProfile from './modules/doctor/pages/DoctorProfile';
 
 import DoctorClass from './modules/doctorClass/DoctorClass';
-import DoctorsClassList from './modules/doctorClass/pages/DoctorClassList';
+import DoctorClassesList from './modules/doctorClass/pages/DoctorClassesList';
+import DoctorClassProfile from './modules/doctorClass/pages/DoctorClassProfile';
 
 import Pharmacy from './modules/pharmacy/Pharmacy';
+import PharmaciesList from './modules/pharmacy/pages/PharmaciesList';
+import PharmacyProfile from './modules/pharmacy/pages/PharmacyProfile';
 
 import Medicine from './modules/medicine/Medicine';
+import MedicinesList from './modules/medicine/pages/MedicinesList';
+import MedicineProfile from './modules/medicine/pages/MedicineProfile';
 
 import { Loader } from './shared/components/loader';
 
@@ -59,13 +64,19 @@ const Router = createBrowserRouter(
           </Route>
 
           <Route path='doctorClasses' element={<DoctorClass />}>
-            <Route index element={<DoctorsClassList />} />
-            {/* <Route path=':id' element={<DoctorClassProfile />} /> */}
+            <Route index element={<DoctorClassesList />} />
+            <Route path=':id' element={<DoctorClassProfile />} />
           </Route>
 
-          <Route path='pharmacies' element={<Pharmacy />} />
+          <Route path='pharmacies' element={<Pharmacy />}>
+            <Route index element={<PharmaciesList />} />
+            <Route path=':id' element={<PharmacyProfile />} />
+          </Route>
 
-          <Route path='medicines' element={<Medicine />} />
+          <Route path='medicines' element={<Medicine />}>
+            <Route index element={<MedicinesList />} />
+            <Route path=':id' element={<MedicineProfile />} />
+          </Route>
         </Route>
       </Route>
 
