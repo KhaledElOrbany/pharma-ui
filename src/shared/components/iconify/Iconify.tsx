@@ -29,5 +29,4 @@ const Iconify = forwardRef<HTMLDivElement, IconifyProps>(
 );
 
 Iconify.displayName = 'Iconify';
-
 export default Iconify;
