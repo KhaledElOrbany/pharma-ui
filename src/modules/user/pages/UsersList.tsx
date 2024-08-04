@@ -114,7 +114,7 @@ export default function UsersList() {
           endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
           startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
         >
-          {t('newUser')}
+          {t('addUser')}
         </Button>
       </Stack>
 
