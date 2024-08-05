@@ -31,11 +31,12 @@ export default function Head({
   rowCount,
   setFiltersList,
 }: HeadProps) {
-  const theme = useTheme();
+  const { palette } = useTheme();
   const { t } = useTranslation();
-  const iconName =
-    theme.palette.mode === 'dark' ? 'tabler:filter' : 'tabler:filter-filled';
+
+  headLabel = [...headLabel, { id: 'actions' }];
   const isRTL = localStorage.getItem('language') === 'ar';
+
   const [open, setOpen] = useState(null);
   const [cellId, setCellId] = useState('');
   const [cellLabel, setCellLabel] = useState(null);
@@ -160,7 +161,11 @@ export default function Head({
                 {headCell.isSearchable && (
                   <Iconify
                     width={16}
-                    icon={iconName}
+                    icon={
+                      palette.mode === 'dark'
+                        ? 'tabler:filter'
+                        : 'tabler:filter-filled'
+                    }
                     sx={{ mx: '0.3rem' }}
                     onClick={(event) => handleOpenMenu(event, headCell)}
                   />

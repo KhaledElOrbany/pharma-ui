@@ -26,7 +26,6 @@ export default function DoctorsList() {
     { id: 'address', label: t('address') },
     { id: 'doctorClass', label: t('doctorClass') },
     { id: 'isDeleted', label: t('isDeleted') },
-    { id: 'actions' },
   ];
 
   const processedData: Object[] = [];

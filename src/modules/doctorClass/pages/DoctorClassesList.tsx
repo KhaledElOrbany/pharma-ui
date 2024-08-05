@@ -25,7 +25,6 @@ export default function DoctorClassesList() {
     { id: 'notes', label: t('notes') },
     { id: 'isActive', label: t('isActive') },
     { id: 'isDeleted', label: t('isDeleted') },
-    { id: 'actions' },
   ];
 
   const processedData: Object[] = [];

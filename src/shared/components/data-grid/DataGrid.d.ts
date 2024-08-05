@@ -42,7 +42,7 @@ type DataGridProps = {
   refetch: () => void;
   rowsPerPage: number;
   setFiltersList: (filters: any) => void;
-  tableHeads: any[];
+  tableHeads: { id: string; label?: string }[];
 };
 
 export { DataGridProps, FooterProps, HeadProps, ToolbarProps };

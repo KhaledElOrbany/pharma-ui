@@ -27,7 +27,6 @@ export default function UsersList() {
     { id: 'email', label: t('email') },
     { id: 'role', label: t('role') },
     { id: 'isDeleted', label: t('isDeleted') },
-    { id: 'actions' },
   ];
 
   const processedData: Object[] = [];

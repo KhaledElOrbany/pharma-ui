@@ -25,7 +25,6 @@ export default function PharmacyList() {
     { id: 'phone', label: t('phone') },
     { id: 'address', label: t('address') },
     { id: 'isDeleted', label: t('isDeleted') },
-    { id: 'actions' },
   ];
 
   const processedData: Object[] = [];
