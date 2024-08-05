@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
 } from 'react-router-dom';
 import Loader from './shared/components/loader';
@@ -50,7 +51,7 @@ const Router = createBrowserRouter(
         errorElement={<CustomErrors />}
       >
         <Route element={<PrivateRoute />}>
-          <Route path='/' element={<Dashboard />} />
+          <Route path='/' element={<Navigate to='/dashboard' replace />} />
           <Route path='/dashboard' element={<Dashboard />} />
 
           <Route path='users' element={<User />}>
