@@ -7,7 +7,7 @@ export default function Footer({
   page,
   pagination,
   rowsPerPage,
-  processedData,
+  rowsCount,
   handleChangePage,
   handleChangeRowsPerPage,
 }: FooterProps) {
@@ -16,7 +16,7 @@ export default function Footer({
   return (
     <TablePagination
       component='div'
-      count={pagination.total ?? (processedData || [])?.length}
+      count={pagination.total ?? rowsCount}
       dir={'ltr'}
       labelRowsPerPage={t('rowsPerPage')}
       onPageChange={handleChangePage}

@@ -27,7 +27,7 @@ type FooterProps = {
   page: number;
   pagination: any;
   rowsPerPage: number;
-  processedData: any;
+  rowsCount: number;
   handleChangePage: (event: unknown, newPage: number) => void;
   handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };

@@ -432,7 +432,7 @@ export default function DataGrid({
           page={page}
           pagination={pagination}
           rowsPerPage={rowsPerPage}
-          processedData={processedData}
+          rowsCount={rowsCount}
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
         />
