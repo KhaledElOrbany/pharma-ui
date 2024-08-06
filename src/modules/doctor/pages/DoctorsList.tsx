@@ -19,65 +19,6 @@ export default function DoctorsList() {
     filters: filtersList,
   });
 
-  const tableHeaders = [
-    { id: 'name', label: t('name') },
-    { id: 'phone', label: t('phone') },
-    { id: 'clinicPhone', label: t('clinicPhone') },
-    { id: 'address', label: t('address') },
-    { id: 'doctorClass', label: t('doctorClass') },
-    { id: 'isDeleted', label: t('isDeleted') },
-  ];
-
-  const processedData: Object[] = [];
-  if (!isFetching) {
-    (doctorsList?.data || []).forEach((row) => {
-      processedData.push({
-        id: {
-          value: row.id,
-          type: 'number',
-          link: false,
-          linkTo: '',
-        },
-        name: {
-          value: `${row.firstName} ${row.lastName}`,
-          type: 'string',
-          link: true,
-          linkTo: `/users/${row.id}`,
-        },
-        phone: {
-          value: row.phone,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        clinicPhone: {
-          value: row.clinicPhone,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        address: {
-          value: row.address,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        doctorClass: {
-          value: row.doctorClass,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        isDeleted: {
-          value: row.isDeleted,
-          type: 'boolean',
-          link: false,
-          linkTo: '',
-        },
-      });
-    });
-  }
-
   const actions = [
     {
       name: t('delete'),
@@ -119,7 +60,8 @@ export default function DoctorsList() {
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeaders={tableHeaders}
+        data={doctorsList?.data}
+        tableMetaData={doctorsList?.meta?.tableMetaData}
       />
     </Container>
   );

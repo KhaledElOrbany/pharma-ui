@@ -15,4 +15,20 @@ type doctorClassDetails = {
   isDeleted: boolean;
 };
 
-export { doctorClassDetails, doctorClassCreationDetails };
+type metaData = {
+  page: number;
+  size: number;
+  total: number;
+  tableMetaData: {
+    tableName: string;
+    columnName: string;
+    columnType: string;
+    hasLink: boolean;
+    isSearchable: boolean;
+    isSortable: boolean;
+    isVisible: boolean;
+    link: string;
+  }[];
+};
+
+export { doctorClassDetails, doctorClassCreationDetails, metaData };

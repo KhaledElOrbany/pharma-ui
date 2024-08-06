@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '@/redux/baseQuery';
-import { doctorClassDetails } from '../types/DoctorClass';
+import { doctorClassDetails, metaData } from '../types/DoctorClass';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 import {
   setDoctorClassDetails,
@@ -47,7 +47,7 @@ const doctorClassAPI = createApi({
       }),
       transformResponse: (response: {
         data: doctorClassDetails[];
-        meta?: {};
+        meta?: metaData;
       }) => {
         return response;
       },

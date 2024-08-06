@@ -19,16 +19,6 @@ export default function UsersList() {
     filters: filtersList,
   });
 
-  const tableHeaders = [
-    { id: 'fullName', label: t('name') },
-    { id: 'phone', label: t('phone') },
-    { id: 'address', label: t('address') },
-    // { id: 'city', label: t('city') },
-    { id: 'email', label: t('email') },
-    // { id: 'role', label: t('role') },
-    { id: 'isDeleted', label: t('isDeleted') },
-  ];
-
   const actions = [
     {
       name: t('delete'),
@@ -70,7 +60,6 @@ export default function UsersList() {
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeaders={tableHeaders}
         data={usersList?.data}
         tableMetaData={usersList?.meta?.tableMetaData}
       />

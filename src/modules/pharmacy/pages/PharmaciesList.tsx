@@ -19,58 +19,6 @@ export default function PharmacyList() {
     filters: filtersList,
   });
 
-  const tableHeaders = [
-    { id: 'name', label: t('name') },
-    { id: 'owner', label: t('owner') },
-    { id: 'phone', label: t('phone') },
-    { id: 'address', label: t('address') },
-    { id: 'isDeleted', label: t('isDeleted') },
-  ];
-
-  const processedData: Object[] = [];
-  if (!isFetching) {
-    (pharmaciesList?.data || []).forEach((row) => {
-      processedData.push({
-        id: {
-          value: row.id,
-          type: 'number',
-          link: false,
-          linkTo: '',
-        },
-        name: {
-          value: row.name,
-          type: 'string',
-          link: true,
-          linkTo: `/pharmacies/${row.id}`,
-        },
-        owner: {
-          value: row.owner,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        phone: {
-          value: row.phone,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        address: {
-          value: row.address,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        isDeleted: {
-          value: row.isDeleted,
-          type: 'boolean',
-          link: false,
-          linkTo: '',
-        },
-      });
-    });
-  }
-
   const actions = [
     {
       name: t('delete'),
@@ -112,7 +60,8 @@ export default function PharmacyList() {
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeaders={tableHeaders}
+        data={pharmaciesList?.data}
+        tableMetaData={pharmaciesList?.meta?.tableMetaData}
       />
     </Container>
   );

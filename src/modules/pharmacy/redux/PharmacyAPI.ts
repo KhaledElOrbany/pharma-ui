@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 import { setPharmacyDetails, setPharmacyesList } from './PharmacySlice';
-import { pharmacyDetails } from '../types/Pharmacy';
+import { metaData, pharmacyDetails } from '../types/Pharmacy';
 import { errorHandler } from '@/helpers/components/ErrorHandler';
 
 const pharmacyAPI = createApi({
@@ -39,7 +39,10 @@ const pharmacyAPI = createApi({
         }`,
         method: 'GET',
       }),
-      transformResponse: (response: { data: pharmacyDetails[]; meta?: {} }) => {
+      transformResponse: (response: {
+        data: pharmacyDetails[];
+        meta?: metaData;
+      }) => {
         return response;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
