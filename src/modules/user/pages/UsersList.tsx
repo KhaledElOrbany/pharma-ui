@@ -19,7 +19,7 @@ export default function UsersList() {
     filters: filtersList,
   });
 
-  const tableHeads = [
+  const tableHeaders = [
     { id: 'fullName', label: t('name') },
     { id: 'phone', label: t('phone') },
     { id: 'address', label: t('address') },
@@ -70,7 +70,7 @@ export default function UsersList() {
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeads={tableHeads}
+        tableHeaders={tableHeaders}
         data={usersList?.data}
         tableMetaData={usersList?.meta?.tableMetaData}
       />

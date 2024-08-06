@@ -7,7 +7,7 @@ type ToolbarProps = {
   numSelected: number;
   onFilterName: (event: React.ChangeEvent<HTMLInputElement>) => void;
   refresh: () => void;
-  tableHeads: any[];
+  tableHeaders: any[];
 };
 
 type HeadProps = {
@@ -33,6 +33,8 @@ type FooterProps = {
 };
 
 type DataGridProps = {
+  data?: any;
+  tableMetaData?: any;
   actions: any[];
   filtersList?: any[];
   isFetching: boolean;
@@ -41,9 +43,7 @@ type DataGridProps = {
   refetch: () => void;
   rowsPerPage: number;
   setFiltersList: (filters: any) => void;
-  tableHeads: { id: string; label?: string }[];
-  data?: any;
-  tableMetaData?: any;
+  tableHeaders: { id: string; label?: string }[];
 };
 
 export { DataGridProps, FooterProps, HeadProps, ToolbarProps };

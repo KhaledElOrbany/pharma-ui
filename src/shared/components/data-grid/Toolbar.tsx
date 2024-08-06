@@ -50,7 +50,7 @@ export default function Toolbar({
   numSelected,
   onFilterName,
   refresh,
-  tableHeads,
+  tableHeaders,
 }: ToolbarProps) {
   const { t } = useTranslation();
   const { palette } = useTheme();
@@ -58,10 +58,10 @@ export default function Toolbar({
   const handleExportExcel = () => {
     const workbook = XLSX.utils.book_new();
 
-    const columns = tableHeads.map((headCell) => headCell.id);
+    const columns = tableHeaders.map((headCell) => headCell.id);
     const rows = data.map((row) => columns.map((column) => row[column]?.value));
 
-    const headers = tableHeads.map((headCell) => headCell.label);
+    const headers = tableHeaders.map((headCell) => headCell.label);
     const body = rows.map((row) =>
       row.map((cell) => (cell === true ? 'Yes' : cell === false ? 'No' : cell))
     );

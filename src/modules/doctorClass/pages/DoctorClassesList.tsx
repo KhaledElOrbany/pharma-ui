@@ -19,7 +19,7 @@ export default function DoctorClassesList() {
     filters: filtersList,
   });
 
-  const tableHeads = [
+  const tableHeaders = [
     { id: 'name', label: t('name') },
     { id: 'visitCount', label: t('visitCount') },
     { id: 'notes', label: t('notes') },
@@ -106,7 +106,7 @@ export default function DoctorClassesList() {
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeads={tableHeads}
+        tableHeaders={tableHeaders}
       />
     </Container>
   );

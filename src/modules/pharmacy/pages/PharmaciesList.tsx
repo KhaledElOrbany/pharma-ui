@@ -19,7 +19,7 @@ export default function PharmacyList() {
     filters: filtersList,
   });
 
-  const tableHeads = [
+  const tableHeaders = [
     { id: 'name', label: t('name') },
     { id: 'owner', label: t('owner') },
     { id: 'phone', label: t('phone') },
@@ -112,7 +112,7 @@ export default function PharmacyList() {
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeads={tableHeads}
+        tableHeaders={tableHeaders}
       />
     </Container>
   );

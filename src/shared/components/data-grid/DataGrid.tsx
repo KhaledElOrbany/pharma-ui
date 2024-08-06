@@ -81,6 +81,8 @@ function applySortFilter(
 }
 
 export default function DataGrid({
+  data,
+  tableMetaData,
   actions,
   filtersList = [],
   isFetching,
@@ -89,9 +91,7 @@ export default function DataGrid({
   refetch,
   rowsPerPage,
   setFiltersList,
-  tableHeads,
-  data,
-  tableMetaData,
+  tableHeaders,
 }: DataGridProps) {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -103,7 +103,7 @@ export default function DataGrid({
   const [filterName, setFilterName] = useState('');
   const [selectedRow, setSelectedRow] = useState(0);
 
-  let rowsData: any[] = [];
+  let tableData: any[] = [];
   data?.forEach((dataRow: any) => {
     let row: any = {
       id: {
@@ -113,7 +113,7 @@ export default function DataGrid({
         linkTo: '',
       },
     };
-    (tableHeads || []).forEach((header: any) => {
+    (tableHeaders || []).forEach((header: any) => {
       const key = header.id;
       const rowData = dataRow[key];
       const rowMeta = tableMetaData?.find(
@@ -127,9 +127,9 @@ export default function DataGrid({
         };
       }
     });
-    rowsData.push(row);
+    tableData.push(row);
   });
-  const rowsCount = (rowsData || [])?.length;
+  const rowsCount = (tableData || [])?.length;
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const handleOpenMenu = (event: any, id: any) => {
@@ -142,7 +142,7 @@ export default function DataGrid({
   };
 
   const checkIsDisabled = (id: any, disablingElement: any) => {
-    const selectedRecord = rowsData.find(
+    const selectedRecord = tableData.find(
       (record: any) => record.id.value === id
     );
     return selectedRecord ? selectedRecord[disablingElement]?.value : false;
@@ -156,7 +156,7 @@ export default function DataGrid({
 
   const handleSelectAllClick = (event: any) => {
     if (event.target.checked) {
-      const newSelecteds = (rowsData || [])?.map((n: any) => n.id.value);
+      const newSelecteds = (tableData || [])?.map((n: any) => n.id.value);
       setSelected(newSelecteds);
       return;
     }
@@ -226,8 +226,8 @@ export default function DataGrid({
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowsCount) : 0;
 
   const filteredData = applySortFilter(
-    rowsData || [],
-    tableHeads,
+    tableData || [],
+    tableHeaders,
     orderBy,
     getComparator(order, orderBy),
     filterName
@@ -245,7 +245,7 @@ export default function DataGrid({
           numSelected={selected.length}
           onFilterName={handleFilterByName}
           refresh={() => refetch()}
-          tableHeads={tableHeads}
+          tableHeaders={tableHeaders}
         />
 
         {filtersList && (
@@ -274,7 +274,7 @@ export default function DataGrid({
             <Table>
               <Head
                 filtersList={filtersList}
-                headLabel={tableHeads}
+                headLabel={tableHeaders}
                 numSelected={selected.length}
                 onRequestSort={handleRequestSort}
                 onSelectAllClick={handleSelectAllClick}
@@ -289,7 +289,7 @@ export default function DataGrid({
                     <TableCell padding='checkbox'>
                       <Checkbox disabled />
                     </TableCell>
-                    {tableHeads.map((head) => (
+                    {tableHeaders.map((head) => (
                       <TableCell key={head.id}>
                         <Skeleton
                           variant='rounded'
