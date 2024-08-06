@@ -1,16 +1,16 @@
-import doctorClassAPI from '@/modules/doctorClass/redux/DoctorClassAPI';
-import AuthAPI from '../modules/auth/redux/AuthAPI';
-import DoctorAPI from '../modules/doctor/redux/DoctorAPI';
-import UserAPI from '../modules/user/redux/UserAPI';
-import pharmacyAPI from '@/modules/pharmacy/redux/PharmacyAPI';
-import medicineAPI from '@/modules/medicine/redux/MedicineAPI';
+import AuthAPI from '@/modules/auth/redux/AuthAPI';
+import DoctorAPI from '@/modules/doctor/redux/DoctorAPI';
+import DoctorClassAPI from '@/modules/doctorClass/redux/DoctorClassAPI';
+import MedicineAPI from '@/modules/medicine/redux/MedicineAPI';
+import PharmacyAPI from '@/modules/pharmacy/redux/PharmacyAPI';
+import UserAPI from '@/modules/user/redux/UserAPI';
 
 const APIs = [
   AuthAPI,
   DoctorAPI,
-  doctorClassAPI,
-  pharmacyAPI,
-  medicineAPI,
+  DoctorClassAPI,
+  PharmacyAPI,
+  MedicineAPI,
   UserAPI,
 ];
 
