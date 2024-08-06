@@ -38,11 +38,12 @@ type DataGridProps = {
   isFetching: boolean;
   module?: string;
   pagination?: any;
-  processedData: any;
   refetch: () => void;
   rowsPerPage: number;
   setFiltersList: (filters: any) => void;
   tableHeads: { id: string; label?: string }[];
+  data?: any;
+  tableMetaData?: any;
 };
 
 export { DataGridProps, FooterProps, HeadProps, ToolbarProps };

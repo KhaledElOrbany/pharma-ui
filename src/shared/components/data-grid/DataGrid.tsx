@@ -86,11 +86,12 @@ export default function DataGrid({
   isFetching,
   module = '',
   pagination = {},
-  processedData,
   refetch,
   rowsPerPage,
   setFiltersList,
   tableHeads,
+  data,
+  tableMetaData,
 }: DataGridProps) {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -102,7 +103,33 @@ export default function DataGrid({
   const [filterName, setFilterName] = useState('');
   const [selectedRow, setSelectedRow] = useState(0);
 
-  const rowsCount = (processedData || [])?.length;
+  let rowsData: any[] = [];
+  data?.forEach((dataRow: any) => {
+    let row: any = {
+      id: {
+        value: dataRow.id,
+        type: 'number',
+        link: false,
+        linkTo: '',
+      },
+    };
+    (tableHeads || []).forEach((header: any) => {
+      const key = header.id;
+      const rowData = dataRow[key];
+      const rowMeta = tableMetaData?.find(
+        (item: any) => item.columnName === key
+      );
+
+      if (rowData && rowMeta) {
+        row[key] = {
+          value: rowData,
+          ...rowMeta,
+        };
+      }
+    });
+    rowsData.push(row);
+  });
+  const rowsCount = (rowsData || [])?.length;
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const handleOpenMenu = (event: any, id: any) => {
@@ -115,7 +142,7 @@ export default function DataGrid({
   };
 
   const checkIsDisabled = (id: any, disablingElement: any) => {
-    const selectedRecord = processedData.find(
+    const selectedRecord = rowsData.find(
       (record: any) => record.id.value === id
     );
     return selectedRecord ? selectedRecord[disablingElement]?.value : false;
@@ -129,7 +156,7 @@ export default function DataGrid({
 
   const handleSelectAllClick = (event: any) => {
     if (event.target.checked) {
-      const newSelecteds = (processedData || [])?.map((n: any) => n.id.value);
+      const newSelecteds = (rowsData || [])?.map((n: any) => n.id.value);
       setSelected(newSelecteds);
       return;
     }
@@ -199,7 +226,7 @@ export default function DataGrid({
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowsCount) : 0;
 
   const filteredData = applySortFilter(
-    processedData || [],
+    rowsData || [],
     tableHeads,
     orderBy,
     getComparator(order, orderBy),
