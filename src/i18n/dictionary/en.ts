@@ -19,6 +19,7 @@ const en = {
   doctorsList: 'Doctors list',
   email: 'Email',
   english: 'English',
+  fullName: 'Full name',
   hi: 'Hi,',
   home: 'Home',
   isActive: 'Active?',
