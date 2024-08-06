@@ -1,25 +1,45 @@
-import { Link, useRouteError } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { Link as RouterLink, useRouteError } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import { Button, Typography, Box } from '@mui/material';
+
+const StyledContent = styled('div')(({ theme }) => ({
+  margin: 'auto',
+  minHeight: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  textAlign: 'center',
+  alignItems: 'center',
+  padding: theme.spacing(12, 0),
+  backgroundColor: theme.palette.background.default,
+}));
 
 export default function CustomErrors() {
   const error = useRouteError();
 
   return (
-    <div
-      id='error-page'
-      className='flex flex-col gap-8 justify-center items-center h-screen'
-    >
-      <h1 className='text-4xl font-bold'>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p className='text-slate-400'>
-        <i>
+    <>
+      <Helmet>
+        <title>Oops!</title>
+      </Helmet>
+
+      <StyledContent>
+        <Typography variant='h3' paragraph>
           {(error as Error)?.message ||
             (error as { statusText?: string })?.statusText}
-        </i>
-      </p>
+        </Typography>
 
-      <button>
-        <Link to='/'>Home Page</Link>
-      </button>
-    </div>
+        <Box
+          component='img'
+          src='/assets/illustrations/error.svg'
+          sx={{ height: 400, mx: 'auto', my: { xs: 5, sm: 10 } }}
+        />
+
+        <Button to='/' size='large' variant='contained' component={RouterLink}>
+          Go to Home
+        </Button>
+      </StyledContent>
+    </>
   );
 }
