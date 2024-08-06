@@ -22,6 +22,7 @@ const ar = {
   fullName: 'الاسم بالكامل',
   hi: 'مرحبا',
   home: 'الرئيسية',
+  info: 'معلومات',
   isActive: 'مفعل؟',
   isDeleted: 'محذوف؟',
   logout: 'تسجيل خروج',
@@ -56,12 +57,18 @@ const ar = {
   search: 'بحث',
   signIn: 'تسجيل الدخول',
   username: 'اسم المستخدم',
+  userProfile: 'الملف الشخصي',
   users: 'المستخدمين',
   usersList: 'قائمة المستخدمين',
   visitCount: 'عدد الزيارات',
   welcome: 'أهلا بك',
   welcomeBack: '..أهلًا، مرحبا من جديد',
   year: 'السنة',
+
+  user: {
+    name: 'اسم المستخدم',
+    profile: 'الملف الشخصي',
+  },
 };
 
 export default ar;

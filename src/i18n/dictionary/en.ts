@@ -22,6 +22,7 @@ const en = {
   fullName: 'Full name',
   hi: 'Hi,',
   home: 'Home',
+  info: 'Info',
   isActive: 'Active?',
   isDeleted: 'Deleted?',
   logout: 'Logout',
@@ -58,6 +59,11 @@ const en = {
   welcome: 'Welcome',
   welcomeBack: 'Welcome Back',
   year: 'Year',
+
+  user: {
+    name: 'User Name',
+    profile: 'User Profile',
+  },
 };
 
 export default en;
