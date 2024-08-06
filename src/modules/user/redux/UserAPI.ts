@@ -37,8 +37,9 @@ const UserAPI = createApi({
         url: `/user/${id}`,
         method: 'GET',
       }),
-      transformResponse: (response: { data: userDetails; meta?: {} }) =>
-        response.data,
+      transformResponse: (response: { data: userDetails; meta?: {} }) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data, meta }) => {
