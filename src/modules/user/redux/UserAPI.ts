@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { setCurrentUser, setUserDetails, setUsersList } from './UserSlice';
-import { userDetails } from '../types/User';
+import { metaData, userDetails } from '../types/User';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 import { errorHandler } from '@/helpers/components/ErrorHandler';
 
@@ -60,7 +60,10 @@ const UserAPI = createApi({
         }`,
         method: 'GET',
       }),
-      transformResponse: (response: { data: userDetails[]; meta?: {} }) => {
+      transformResponse: (response: {
+        data: userDetails[];
+        meta?: metaData;
+      }) => {
         return response;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {

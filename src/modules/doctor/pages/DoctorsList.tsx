@@ -116,7 +116,6 @@ export default function DoctorsList() {
         isFetching={isFetching}
         module='users-list'
         pagination={doctorsList?.meta ?? {}}
-        processedData={processedData}
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
