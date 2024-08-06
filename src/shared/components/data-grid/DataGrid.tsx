@@ -91,7 +91,6 @@ export default function DataGrid({
   refetch,
   rowsPerPage,
   setFiltersList,
-  tableHeaders,
 }: DataGridProps) {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -102,6 +101,11 @@ export default function DataGrid({
   const [orderBy, setOrderBy] = useState('');
   const [filterName, setFilterName] = useState('');
   const [selectedRow, setSelectedRow] = useState(0);
+
+  const tableHeaders = (tableMetaData || [])?.map((item: any) => ({
+    id: item.columnName,
+    label: t(item.columnName),
+  })) as { id: string; label?: string }[];
 
   let tableData: any[] = [];
   data?.forEach((dataRow: any) => {
@@ -120,12 +124,10 @@ export default function DataGrid({
         (item: any) => item.columnName === key
       );
 
-      if (rowData && rowMeta) {
-        row[key] = {
-          value: rowData,
-          ...rowMeta,
-        };
-      }
+      row[key] = {
+        value: rowData,
+        ...rowMeta,
+      };
     });
     tableData.push(row);
   });
@@ -332,7 +334,7 @@ export default function DataGrid({
                               padding='normal'
                               align={isRTL ? 'right' : 'left'}
                             >
-                              {row[key].type === 'boolean' ? (
+                              {row[key].columnType === 'boolean' ? (
                                 <Label
                                   color={
                                     (row[key].value === false && 'error') ||
@@ -345,11 +347,11 @@ export default function DataGrid({
                                     <span className='cross-icon'>&#x2718;</span>
                                   )}
                                 </Label>
-                              ) : row[key].type === 'money' ? (
+                              ) : row[key].columnType === 'money' ? (
                                 `${row[key].value} ${isRTL ? 'ج.م.' : 'EGP'}`
-                              ) : row[key].type === 'date' ? (
+                              ) : row[key].columnType === 'date' ? (
                                 fDateTime(row[key].value)
-                              ) : row[key].type === 'img' ? (
+                              ) : row[key].columnType === 'img' ? (
                                 <div
                                   style={{
                                     display: 'flex',
@@ -363,14 +365,14 @@ export default function DataGrid({
                                     src={row[key].value}
                                   />
                                 </div>
-                              ) : row[key].link ? (
+                              ) : row[key].hasLink ? (
                                 <Tooltip title={row[key].value}>
                                   <Typography variant='subtitle2' noWrap>
                                     <Link
                                       style={{
                                         color: theme.palette.primary.main,
                                       }}
-                                      to={row[key].linkTo}
+                                      to={row[key].link}
                                     >
                                       {typeof row[key].value === 'string'
                                         ? row[key].value.length <= 22

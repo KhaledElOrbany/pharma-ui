@@ -139,59 +139,61 @@ export default function Head({
               onChange={onSelectAllClick}
             />
           </TableCell>
-          {headLabel.map((headCell) => (
-            <TableCell
-              key={headCell.id}
-              sx={{
-                bgcolor: 'rgba(145, 158, 171, 0.16)',
-                //TODO (theme) => theme.palette.datagridHeaderColor,
-              }}
-              align={isRTL ? 'right' : 'left'}
-              sortDirection={orderBy === headCell.id ? order : false}
-            >
-              <TableSortLabel
-                dir={'ltr'}
-                active={orderBy === headCell.id}
-                direction={orderBy === headCell.id ? order : 'asc'}
-                IconComponent={() =>
-                  arrowIcon(headCell.id, order, orderBy === headCell.id)
-                }
+          {headLabel
+            .filter((cell) => cell.label !== 'id')
+            .map((headCell) => (
+              <TableCell
+                key={headCell.id}
+                sx={{
+                  bgcolor: 'rgba(145, 158, 171, 0.16)',
+                  //TODO (theme) => theme.palette.datagridHeaderColor,
+                }}
+                align={isRTL ? 'right' : 'left'}
+                sortDirection={orderBy === headCell.id ? order : false}
               >
-                {headCell.label}
-                {headCell.isSearchable && (
-                  <Iconify
-                    width={16}
-                    icon={
-                      palette.mode === 'dark'
-                        ? 'tabler:filter'
-                        : 'tabler:filter-filled'
-                    }
-                    sx={{ mx: '0.3rem' }}
-                    onClick={(event) => handleOpenMenu(event, headCell)}
-                  />
-                )}
-                {orderBy === headCell.id ? (
-                  <Box
-                    sx={{
-                      border: 0,
-                      margin: -1,
-                      padding: 0,
-                      width: '1px',
-                      height: '1px',
-                      overflow: 'hidden',
-                      position: 'absolute',
-                      whiteSpace: 'nowrap',
-                      clip: 'rect(0 0 0 0)',
-                    }}
-                  >
-                    {order === 'desc'
-                      ? 'sorted descending'
-                      : 'sorted ascending'}
-                  </Box>
-                ) : null}
-              </TableSortLabel>
-            </TableCell>
-          ))}
+                <TableSortLabel
+                  dir={'ltr'}
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  IconComponent={() =>
+                    arrowIcon(headCell.id, order, orderBy === headCell.id)
+                  }
+                >
+                  {headCell.label}
+                  {headCell.isSearchable && (
+                    <Iconify
+                      width={16}
+                      icon={
+                        palette.mode === 'dark'
+                          ? 'tabler:filter'
+                          : 'tabler:filter-filled'
+                      }
+                      sx={{ mx: '0.3rem' }}
+                      onClick={(event) => handleOpenMenu(event, headCell)}
+                    />
+                  )}
+                  {orderBy === headCell.id ? (
+                    <Box
+                      sx={{
+                        border: 0,
+                        margin: -1,
+                        padding: 0,
+                        width: '1px',
+                        height: '1px',
+                        overflow: 'hidden',
+                        position: 'absolute',
+                        whiteSpace: 'nowrap',
+                        clip: 'rect(0 0 0 0)',
+                      }}
+                    >
+                      {order === 'desc'
+                        ? 'sorted descending'
+                        : 'sorted ascending'}
+                    </Box>
+                  ) : null}
+                </TableSortLabel>
+              </TableCell>
+            ))}
         </TableRow>
       </TableHead>
 
