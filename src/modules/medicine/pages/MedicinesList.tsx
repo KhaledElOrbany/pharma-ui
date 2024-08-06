@@ -19,40 +19,6 @@ export default function MedicinesList() {
     filters: filtersList,
   });
 
-  const tableHeads = [
-    { id: 'name', label: t('name') },
-    { id: 'visitCount', label: t('visitCount') },
-    { id: 'notes', label: t('notes') },
-    { id: 'isActive', label: t('isActive') },
-    { id: 'isDeleted', label: t('isDeleted') },
-  ];
-
-  const processedData: Object[] = [];
-  if (!isFetching) {
-    (medicinesList?.data || []).forEach((row) => {
-      processedData.push({
-        id: {
-          value: row.id,
-          type: 'number',
-          link: false,
-          linkTo: '',
-        },
-        name: {
-          value: row.name,
-          type: 'string',
-          link: true,
-          linkTo: `/medicines/${row.id}`,
-        },
-        isDeleted: {
-          value: row.isDeleted,
-          type: 'boolean',
-          link: false,
-          linkTo: '',
-        },
-      });
-    });
-  }
-
   const actions = [
     {
       name: t('delete'),
@@ -91,11 +57,11 @@ export default function MedicinesList() {
         isFetching={isFetching}
         module='users-list'
         pagination={medicinesList?.meta ?? {}}
-        processedData={processedData}
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeads={tableHeads}
+        data={medicinesList?.data}
+        tableMetaData={medicinesList?.meta?.tableMetaData}
       />
     </Container>
   );

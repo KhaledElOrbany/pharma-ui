@@ -81,16 +81,16 @@ function applySortFilter(
 }
 
 export default function DataGrid({
+  data,
+  tableMetaData,
   actions,
   filtersList = [],
   isFetching,
   module = '',
   pagination = {},
-  processedData,
   refetch,
   rowsPerPage,
   setFiltersList,
-  tableHeads,
 }: DataGridProps) {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -102,7 +102,48 @@ export default function DataGrid({
   const [filterName, setFilterName] = useState('');
   const [selectedRow, setSelectedRow] = useState(0);
 
-  const rowsCount = (processedData || [])?.length;
+  const tableHeaders = (tableMetaData || [])?.map((item: any) => ({
+    id: item.columnName,
+    label: t(item.columnName),
+    order: item.columnOrder,
+  })) as { id: string; label?: string }[];
+
+  let tableData: any[] = [];
+  data?.forEach((dataRow: any) => {
+    let row: any = {
+      id: {
+        value: dataRow.id,
+        type: 'number',
+        link: false,
+        linkTo: '',
+      },
+    };
+    (tableHeaders || []).forEach((header: any) => {
+      const key = header.id;
+      const rowData = dataRow[key];
+      const rowMeta = tableMetaData?.find(
+        (item: any) => item.columnName === key
+      );
+
+      let link = '';
+      if (rowMeta.hasLink) {
+        const linkTo = dataRow[rowMeta.linkTo];
+        link = `${rowMeta.baseLink}${linkTo}`;
+        row[key] = {
+          value: rowData,
+          link,
+          ...rowMeta,
+        };
+      } else {
+        row[key] = {
+          value: rowData,
+          ...rowMeta,
+        };
+      }
+    });
+    tableData.push(row);
+  });
+  const rowsCount = (tableData || [])?.length;
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const handleOpenMenu = (event: any, id: any) => {
@@ -115,7 +156,7 @@ export default function DataGrid({
   };
 
   const checkIsDisabled = (id: any, disablingElement: any) => {
-    const selectedRecord = processedData.find(
+    const selectedRecord = tableData.find(
       (record: any) => record.id.value === id
     );
     return selectedRecord ? selectedRecord[disablingElement]?.value : false;
@@ -129,7 +170,7 @@ export default function DataGrid({
 
   const handleSelectAllClick = (event: any) => {
     if (event.target.checked) {
-      const newSelecteds = (processedData || [])?.map((n: any) => n.id.value);
+      const newSelecteds = (tableData || [])?.map((n: any) => n.id.value);
       setSelected(newSelecteds);
       return;
     }
@@ -199,8 +240,8 @@ export default function DataGrid({
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowsCount) : 0;
 
   const filteredData = applySortFilter(
-    processedData || [],
-    tableHeads,
+    tableData || [],
+    tableHeaders,
     orderBy,
     getComparator(order, orderBy),
     filterName
@@ -218,7 +259,7 @@ export default function DataGrid({
           numSelected={selected.length}
           onFilterName={handleFilterByName}
           refresh={() => refetch()}
-          tableHeads={tableHeads}
+          tableHeaders={tableHeaders}
         />
 
         {filtersList && (
@@ -247,7 +288,7 @@ export default function DataGrid({
             <Table>
               <Head
                 filtersList={filtersList}
-                headLabel={tableHeads}
+                headers={tableHeaders}
                 numSelected={selected.length}
                 onRequestSort={handleRequestSort}
                 onSelectAllClick={handleSelectAllClick}
@@ -262,7 +303,7 @@ export default function DataGrid({
                     <TableCell padding='checkbox'>
                       <Checkbox disabled />
                     </TableCell>
-                    {tableHeads.map((head) => (
+                    {tableHeaders.map((head) => (
                       <TableCell key={head.id}>
                         <Skeleton
                           variant='rounded'
@@ -305,7 +346,7 @@ export default function DataGrid({
                               padding='normal'
                               align={isRTL ? 'right' : 'left'}
                             >
-                              {row[key].type === 'boolean' ? (
+                              {row[key].columnType === 'boolean' ? (
                                 <Label
                                   color={
                                     (row[key].value === false && 'error') ||
@@ -318,11 +359,11 @@ export default function DataGrid({
                                     <span className='cross-icon'>&#x2718;</span>
                                   )}
                                 </Label>
-                              ) : row[key].type === 'money' ? (
+                              ) : row[key].columnType === 'money' ? (
                                 `${row[key].value} ${isRTL ? 'ج.م.' : 'EGP'}`
-                              ) : row[key].type === 'date' ? (
+                              ) : row[key].columnType === 'date' ? (
                                 fDateTime(row[key].value)
-                              ) : row[key].type === 'img' ? (
+                              ) : row[key].columnType === 'img' ? (
                                 <div
                                   style={{
                                     display: 'flex',
@@ -336,14 +377,14 @@ export default function DataGrid({
                                     src={row[key].value}
                                   />
                                 </div>
-                              ) : row[key].link ? (
+                              ) : row[key].hasLink ? (
                                 <Tooltip title={row[key].value}>
                                   <Typography variant='subtitle2' noWrap>
                                     <Link
                                       style={{
                                         color: theme.palette.primary.main,
                                       }}
-                                      to={row[key].linkTo}
+                                      to={row[key].link}
                                     >
                                       {typeof row[key].value === 'string'
                                         ? row[key].value.length <= 22

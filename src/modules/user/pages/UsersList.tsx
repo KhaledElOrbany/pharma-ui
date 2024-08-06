@@ -19,72 +19,6 @@ export default function UsersList() {
     filters: filtersList,
   });
 
-  const tableHeads = [
-    { id: 'name', label: t('name') },
-    { id: 'phone', label: t('phone') },
-    { id: 'address', label: t('address') },
-    { id: 'city', label: t('city') },
-    { id: 'email', label: t('email') },
-    { id: 'role', label: t('role') },
-    { id: 'isDeleted', label: t('isDeleted') },
-  ];
-
-  const processedData: Object[] = [];
-  if (!isFetching) {
-    (usersList?.data || []).forEach((row) => {
-      processedData.push({
-        id: {
-          value: row.id,
-          type: 'number',
-          link: false,
-          linkTo: '',
-        },
-        name: {
-          value: `${row.firstName} ${row.lastName}`,
-          type: 'string',
-          link: true,
-          linkTo: `/users/${row.id}`,
-        },
-        phone: {
-          value: row.phone,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        address: {
-          value: row.address,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        city: {
-          value: isRTL ? row.city.nameAr : row.city.nameEn,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        email: {
-          value: row.email,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        role: {
-          value: row.role.name,
-          type: 'string',
-          link: false,
-          linkTo: '',
-        },
-        isDeleted: {
-          value: row.isDeleted,
-          type: 'boolean',
-          link: false,
-          linkTo: '',
-        },
-      });
-    });
-  }
-
   const actions = [
     {
       name: t('delete'),
@@ -123,11 +57,11 @@ export default function UsersList() {
         isFetching={isFetching}
         module='users-list'
         pagination={usersList?.meta ?? {}}
-        processedData={processedData}
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeads={tableHeads}
+        data={usersList?.data}
+        tableMetaData={usersList?.meta?.tableMetaData}
       />
     </Container>
   );

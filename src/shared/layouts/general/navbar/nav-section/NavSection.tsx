@@ -29,8 +29,7 @@ export default function NavSection({ items = [], ...other }: NavSectionProps) {
         {items
           .filter(
             (item) =>
-              item.isActive &&
-              item.allowedRoles.includes(currentUser.role?.name)
+              item.isActive && item.allowedRoles.includes(currentUser.role)
           )
           .map((item) => (
             <NavItem key={item.title} item={item} />

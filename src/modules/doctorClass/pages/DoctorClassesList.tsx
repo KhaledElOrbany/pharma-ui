@@ -12,58 +12,12 @@ export default function DoctorClassesList() {
   const [filtersList, setFiltersList] = useState([{ id: 'size', value: 5 }]);
 
   const {
-    data: DoctorClassesList,
+    data: doctorClassesList,
     isFetching,
     refetch,
   } = useFetchDoctorClasssQuery({
     filters: filtersList,
   });
-
-  const tableHeads = [
-    { id: 'name', label: t('name') },
-    { id: 'visitCount', label: t('visitCount') },
-    { id: 'notes', label: t('notes') },
-    { id: 'isActive', label: t('isActive') },
-    { id: 'isDeleted', label: t('isDeleted') },
-  ];
-
-  const processedData: Object[] = [];
-  if (!isFetching) {
-    (DoctorClassesList?.data || []).forEach((row) => {
-      processedData.push({
-        id: {
-          value: row.id,
-          type: 'number',
-          link: false,
-          linkTo: '',
-        },
-        name: {
-          value: row.name,
-          type: 'string',
-          link: true,
-          linkTo: `/doctorClass/${row.id}`,
-        },
-        visitCount: {
-          value: row.visitCount,
-          type: 'number',
-          link: false,
-          linkTo: '',
-        },
-        isActive: {
-          value: row.isActive,
-          type: 'boolean',
-          link: false,
-          linkTo: '',
-        },
-        isDeleted: {
-          value: row.isDeleted,
-          type: 'boolean',
-          link: false,
-          linkTo: '',
-        },
-      });
-    });
-  }
 
   const actions = [
     {
@@ -102,12 +56,12 @@ export default function DoctorClassesList() {
         filtersList={filtersList}
         isFetching={isFetching}
         module='users-list'
-        pagination={DoctorClassesList?.meta ?? {}}
-        processedData={processedData}
+        pagination={doctorClassesList?.meta ?? {}}
         refetch={refetch}
         rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
         setFiltersList={setFiltersList}
-        tableHeads={tableHeads}
+        data={doctorClassesList?.data}
+        tableMetaData={doctorClassesList?.meta?.tableMetaData}
       />
     </Container>
   );
