@@ -12,7 +12,7 @@ type ToolbarProps = {
 
 type HeadProps = {
   filtersList: any[];
-  headLabel: any[];
+  headers: any[];
   numSelected: number;
   onRequestSort: (property: string) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;

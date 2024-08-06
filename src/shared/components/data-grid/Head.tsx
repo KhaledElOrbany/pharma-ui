@@ -22,7 +22,7 @@ import { HeadProps } from './DataGrid.d';
 
 export default function Head({
   filtersList,
-  headLabel,
+  headers,
   numSelected,
   onRequestSort,
   onSelectAllClick,
@@ -34,7 +34,7 @@ export default function Head({
   const { palette } = useTheme();
   const { t } = useTranslation();
 
-  headLabel = [...headLabel, { id: 'actions' }];
+  headers = [...headers, { id: 'actions', columnOrder: 999 }];
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const [open, setOpen] = useState(null);
@@ -139,7 +139,7 @@ export default function Head({
               onChange={onSelectAllClick}
             />
           </TableCell>
-          {headLabel
+          {headers
             .filter((cell) => cell.label !== 'id')
             .map((headCell) => (
               <TableCell
@@ -257,7 +257,7 @@ export default function Head({
               />
             </LocalizationProvider>
           ) : cellType === 'custom' ? (
-            headLabel
+            headers
               .filter((headCell) => headCell.id === cellId)
               .map((headCell) => headCell.searchComponent)
           ) : (

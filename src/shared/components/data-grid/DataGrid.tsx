@@ -105,6 +105,7 @@ export default function DataGrid({
   const tableHeaders = (tableMetaData || [])?.map((item: any) => ({
     id: item.columnName,
     label: t(item.columnName),
+    order: item.columnOrder,
   })) as { id: string; label?: string }[];
 
   let tableData: any[] = [];
@@ -124,10 +125,21 @@ export default function DataGrid({
         (item: any) => item.columnName === key
       );
 
-      row[key] = {
-        value: rowData,
-        ...rowMeta,
-      };
+      let link = '';
+      if (rowMeta.hasLink) {
+        const linkTo = dataRow[rowMeta.linkTo];
+        link = `${rowMeta.baseLink}${linkTo}`;
+        row[key] = {
+          value: rowData,
+          link,
+          ...rowMeta,
+        };
+      } else {
+        row[key] = {
+          value: rowData,
+          ...rowMeta,
+        };
+      }
     });
     tableData.push(row);
   });
@@ -276,7 +288,7 @@ export default function DataGrid({
             <Table>
               <Head
                 filtersList={filtersList}
-                headLabel={tableHeaders}
+                headers={tableHeaders}
                 numSelected={selected.length}
                 onRequestSort={handleRequestSort}
                 onSelectAllClick={handleSelectAllClick}
