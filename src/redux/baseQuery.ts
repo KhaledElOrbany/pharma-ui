@@ -25,7 +25,7 @@ const prepareHeaders = (): Headers => {
   const headers = new Headers({
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    lang: localStorage?.getItem('language') ?? 'ar',
+    language: localStorage?.getItem('language') ?? 'ar',
   });
   return headers;
 };
