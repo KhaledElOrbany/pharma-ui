@@ -7,6 +7,7 @@ type userCreationDetails = {
 
 type userDetails = {
   id: number;
+  fullName: string;
   firstName: string;
   lastName: string;
   address: string;
