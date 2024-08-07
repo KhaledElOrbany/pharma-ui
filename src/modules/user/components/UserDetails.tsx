@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import {
   Box,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
   Divider,
@@ -11,6 +13,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import Iconify from '@/shared/components/iconify';
 import { userDetails } from '../types/User';
+import { LoadingButton } from '@mui/lab';
 
 export default function UserDetails({
   data,
@@ -18,6 +21,7 @@ export default function UserDetails({
   data: userDetails | undefined;
 }) {
   const { t } = useTranslation();
+  const [isEdit, setIsEdit] = useState(true);
 
   return (
     <Card>
@@ -43,6 +47,7 @@ export default function UserDetails({
             <Grid item xs={12} md={12}>
               <TextField
                 fullWidth
+                disabled={isEdit}
                 label={t('name')}
                 value={data?.fullName}
                 type='phone'
@@ -51,6 +56,7 @@ export default function UserDetails({
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
+                disabled={isEdit}
                 label={t('email')}
                 value={data?.email}
                 type='email'
@@ -59,6 +65,7 @@ export default function UserDetails({
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
+                disabled={isEdit}
                 label={t('phone')}
                 name='phone'
                 type='number'
@@ -77,9 +84,24 @@ export default function UserDetails({
                 }}
               />
             </Grid>
+            {/* -------------------------------------------------------- */}
           </Grid>
         </Box>
       </CardContent>
+      <CardActions>
+        <LoadingButton
+          variant='contained'
+          color='primary'
+          size='medium'
+          onClick={() => setIsEdit(!isEdit)}
+          sx={{
+            m: '.4rem auto',
+            px: '4rem',
+          }}
+        >
+          {t(isEdit ? 'edit' : 'update')}
+        </LoadingButton>
+      </CardActions>
     </Card>
   );
 }
