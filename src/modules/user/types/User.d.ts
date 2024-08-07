@@ -14,16 +14,8 @@ type userDetails = {
   phone: string;
   email: string;
   isDeleted: boolean;
-  city: {
-    id: number;
-    nameAr: string;
-    nameEn: string;
-  };
-  role: {
-    id: number;
-    name: string;
-    description: string;
-  };
+  city: string;
+  role: string;
 };
 
 type metaData = {

@@ -32,7 +32,7 @@ export default function UserSummary({
             {data?.fullName}
           </Typography>
           <Typography color='text.secondary' variant='body2'>
-            {data?.address}
+            {data?.role}
           </Typography>
         </Box>
       </CardContent>
