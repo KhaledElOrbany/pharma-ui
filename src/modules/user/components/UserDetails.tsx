@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  Box,
   Card,
   CardActions,
   CardContent,
@@ -42,51 +41,65 @@ export default function UserDetails({
       />
 
       <CardContent sx={{ pt: 2 }}>
-        <Box sx={{ m: -1.5 }}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={12}>
-              <TextField
-                fullWidth
-                disabled={isEdit}
-                label={t('name')}
-                value={data?.fullName}
-                type='phone'
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                disabled={isEdit}
-                label={t('email')}
-                value={data?.email}
-                type='email'
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                disabled={isEdit}
-                label={t('phone')}
-                name='phone'
-                type='number'
-                value={data?.phone}
-              />
-            </Grid>
-
-            {/* -------------------------------------------------------- */}
-            <Grid item xs={12} md={12}>
-              <Divider
-                sx={{
-                  width: '95%',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  borderStyle: 'dashed',
-                }}
-              />
-            </Grid>
-            {/* -------------------------------------------------------- */}
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              disabled={isEdit}
+              label={t('firstname')}
+              value={data?.firstName}
+              type='text'
+            />
           </Grid>
-        </Box>
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              disabled={isEdit}
+              label={t('lastname')}
+              value={data?.lastName}
+              type='text'
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              disabled={isEdit}
+              label={t('email')}
+              value={data?.email}
+              type='email'
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              disabled={isEdit}
+              label={t('phone')}
+              name='phone'
+              type='number'
+              value={data?.phone}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              disabled={isEdit}
+              label={t('address')}
+              name='address'
+              type='text'
+              value={data?.address}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              disabled={isEdit}
+              label={t('city')}
+              name='city'
+              type='text'
+              value={data?.city}
+            />
+          </Grid>
+        </Grid>
       </CardContent>
       <CardActions>
         <LoadingButton
