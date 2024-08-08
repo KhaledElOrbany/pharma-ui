@@ -46,6 +46,7 @@ export default function UsersList() {
           variant='contained'
           endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
           startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
+          // onClick={() => setOpen(true)}
         >
           {t('addUser')}
         </Button>
