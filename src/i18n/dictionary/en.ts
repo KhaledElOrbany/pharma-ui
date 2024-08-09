@@ -1,4 +1,5 @@
 const en = {
+  add: 'Add',
   addDoctor: 'Add Doctor',
   addDoctorClass: 'Add Doctor Class',
   addPharmacy: 'Add Pharmacy',

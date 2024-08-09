@@ -1,4 +1,5 @@
 const ar = {
+  add: 'اضف',
   addDoctor: 'اضافة طبيب',
   addDoctorClass: 'اضافة درجة طبيب',
   addPharmacy: 'إضافة صيدلية',
