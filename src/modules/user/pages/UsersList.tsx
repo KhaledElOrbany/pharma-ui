@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import { useFetchUsersQuery } from '../redux/UserAPI';
 import { useTranslation } from 'react-i18next';
-import { Button, Container, Stack, Typography } from '@mui/material';
-import Iconify from '@/shared/components/iconify';
+import { Container, Stack, Typography } from '@mui/material';
 import DataGrid from '@/shared/components/data-grid';
 import NewUserDialog from '../components/NewUserDialog';
 
 export default function UsersList() {
   const { t } = useTranslation();
-  const isRTL = localStorage.getItem('language') === 'ar';
 
-  const [open, setOpen] = useState(false);
   const [filtersList, setFiltersList] = useState([{ id: 'size', value: 5 }]);
 
   const {
@@ -44,14 +41,8 @@ export default function UsersList() {
         <Typography variant='h4' gutterBottom>
           {t('usersList')}
         </Typography>
-        <Button
-          variant='contained'
-          endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
-          startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
-          onClick={() => setOpen(true)}
-        >
-          {t('addUser')}
-        </Button>
+
+        <NewUserDialog />
       </Stack>
 
       <DataGrid
@@ -66,8 +57,6 @@ export default function UsersList() {
         data={usersList?.data}
         tableMetaData={usersList?.meta?.tableMetaData}
       />
-
-      <NewUserDialog open={open} setOpen={setOpen} />
     </Container>
   );
 }

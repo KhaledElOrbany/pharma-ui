@@ -1,29 +1,46 @@
+import { useState } from 'react';
 import PromptDialog from '@/shared/components/dialogs/prompt/PromptDialog';
-import { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import Iconify from '@/shared/components/iconify';
 
-type NewUserDialogProps = {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-};
+export default function NewUserDialog() {
+  const { t } = useTranslation();
+  const isRTL = localStorage.getItem('language') === 'ar';
 
-export default function NewUserDialog({ open, setOpen }: NewUserDialogProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const [dialogData, setDialogData] = useState({
-    isOpen: false,
-    title: 'Add New User',
-    onSave: () => setOpen(false),
+    isOpen,
+    title: '',
+    onSave: () => {
+      setIsOpen(false);
+    },
   });
 
-  useEffect(() => {
-    setDialogData({ ...dialogData, isOpen: open });
-  }, [open]);
-
   return (
-    <PromptDialog
-      confirmBtnText='add'
-      dialogData={dialogData}
-      setDialogData={setDialogData}
-    >
-      <div>Form</div>
-    </PromptDialog>
+    <>
+      <Button
+        variant='contained'
+        endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
+        startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
+        onClick={() =>
+          setDialogData({
+            ...dialogData,
+            isOpen: true,
+            title: t('addUser'),
+          })
+        }
+      >
+        {t('addUser')}
+      </Button>
+
+      <PromptDialog
+        confirmBtnText='add'
+        dialogData={dialogData}
+        setDialogData={setDialogData}
+      >
+        <div>Form</div>
+      </PromptDialog>
+    </>
   );
 }
