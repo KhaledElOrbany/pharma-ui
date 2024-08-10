@@ -48,12 +48,7 @@ export default function PromptDialog({
         <Button
           variant='contained'
           color='error'
-          onClick={() =>
-            setDialogData({
-              ...dialogData,
-              isOpen: false,
-            })
-          }
+          onClick={() => setDialogData({ ...dialogData, isOpen: false })}
           sx={{ mx: 1 }}
         >
           {t('cancel')}
