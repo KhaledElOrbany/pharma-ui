@@ -11,14 +11,10 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import Iconify from '@/shared/components/iconify';
-import { userDetails } from '../types/User';
+import { UserProps } from '../types/User';
 import { LoadingButton } from '@mui/lab';
 
-export default function UserDetails({
-  data,
-}: {
-  data: userDetails | undefined;
-}) {
+export default function UserDetails({ data }: { data: UserProps | undefined }) {
   const { t } = useTranslation();
   const [isEdit, setIsEdit] = useState(true);
 

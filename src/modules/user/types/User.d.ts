@@ -1,11 +1,14 @@
-type userCreationDetails = {
+type UserCreationDetails = {
+  username: string;
   firstName: string;
   lastName: string;
   address: string;
   phone: string;
+  email?: string;
+  city: string;
 };
 
-type userDetails = {
+type UserProps = {
   id: number;
   fullName: string;
   firstName: string;
@@ -18,7 +21,7 @@ type userDetails = {
   role: string;
 };
 
-type metaData = {
+type UserMetaData = {
   page: number;
   size: number;
   total: number;
@@ -34,4 +37,4 @@ type metaData = {
   }[];
 };
 
-export { userDetails, userCreationDetails, metaData };
+export { UserProps, UserCreationDetails, UserMetaData };

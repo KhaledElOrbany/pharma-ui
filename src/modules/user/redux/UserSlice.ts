@@ -1,13 +1,13 @@
 import { RootState } from '@/redux/Store';
 import { createSlice } from '@reduxjs/toolkit';
-import { userDetails } from '../types/User';
+import { UserProps } from '../types/User';
 
 const UserSlice = createSlice({
   name: 'user',
   initialState: {
-    currentUser: {} as userDetails,
-    userDetails: {} as userDetails,
-    usersList: [] as userDetails[],
+    currentUser: {} as UserProps,
+    userDetails: {} as UserProps,
+    usersList: [] as UserProps[],
   },
   reducers: {
     setCurrentUser: (state, { payload }) => {

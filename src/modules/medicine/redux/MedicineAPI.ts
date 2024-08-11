@@ -15,15 +15,12 @@ const medicineAPI = createApi({
       query: (id: Number) => ({
         url: `/medicine/${id}`,
       }),
-      transformResponse: (response: { data: medicineDetails; meta?: {} }) => {
+      transformResponse: (response: { data: medicineDetails }) => {
         return response;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(({ data, meta }) => {
-            if (meta?.response?.headers) {
-              // handle resetting token
-            }
+          .then(({ data }) => {
             dispatch(setMedicineDetails(data));
           })
           .catch(() => {

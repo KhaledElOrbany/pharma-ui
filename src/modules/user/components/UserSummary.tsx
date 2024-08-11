@@ -1,11 +1,7 @@
 import { Avatar, Box, Card, CardContent, Typography } from '@mui/material';
-import { userDetails } from '../types/User';
+import { UserProps } from '../types/User';
 
-export default function UserSummary({
-  data,
-}: {
-  data: userDetails | undefined;
-}) {
+export default function UserSummary({ data }: { data: UserProps | undefined }) {
   return (
     <Card>
       <CardContent>

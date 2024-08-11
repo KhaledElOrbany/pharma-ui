@@ -26,10 +26,7 @@ const doctorClassAPI = createApi({
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(({ data, meta }) => {
-            if (meta?.response?.headers) {
-              // handle resetting token
-            }
+          .then(({ data }) => {
             dispatch(setDoctorClassDetails(data));
           })
           .catch(() => {

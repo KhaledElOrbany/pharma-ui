@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { setCurrentUser, setUserDetails, setUsersList } from './UserSlice';
-import { metaData, userDetails } from '../types/User';
+import { UserMetaData, UserProps } from '../types/User';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 import { errorHandler } from '@/helpers/components/ErrorHandler';
 import { login } from '@/modules/auth/redux/AuthSlice';
@@ -12,12 +12,12 @@ const UserAPI = createApi({
   tagTypes: ['user'],
   baseQuery: customBaseQueryWithAuth,
   endpoints: (build) => ({
-    fetchCurrentUser: build.query<userDetails, void>({
+    fetchCurrentUser: build.query<UserProps, void>({
       query: () => ({
         url: `/user/current`,
         method: 'GET',
       }),
-      transformResponse: (response: { data: userDetails; meta?: {} }) => {
+      transformResponse: (response: { data: UserProps }) => {
         return response.data;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
@@ -40,15 +40,12 @@ const UserAPI = createApi({
         url: `/user/${id}`,
         method: 'GET',
       }),
-      transformResponse: (response: { data: userDetails; meta?: {} }) => {
+      transformResponse: (response: { data: UserProps }) => {
         return response.data;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(({ data, meta }) => {
-            if (meta?.response?.headers) {
-              // handle resetting token
-            }
+          .then(({ data }) => {
             dispatch(setUserDetails(data));
           })
           .catch(() => {
@@ -65,17 +62,14 @@ const UserAPI = createApi({
         method: 'GET',
       }),
       transformResponse: (response: {
-        data: userDetails[];
-        meta?: metaData;
+        data: UserProps[];
+        meta?: UserMetaData;
       }) => {
         return response;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(({ data, meta }) => {
-            if (meta?.response?.headers) {
-              // handle resetting token
-            }
+          .then(({ data }) => {
             dispatch(setUsersList(data));
           })
           .catch(() => {
