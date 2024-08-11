@@ -80,7 +80,7 @@ const UserAPI = createApi({
     }),
     createUser: build.mutation({
       query: (body) => ({
-        url: '/user',
+        url: '/user/create',
         method: 'POST',
         body,
       }),
@@ -97,7 +97,7 @@ const UserAPI = createApi({
     }),
     updateUser: build.mutation({
       query: (body) => ({
-        url: '/user',
+        url: `/user/update/${body.id}`,
         method: 'PUT',
         body,
       }),
