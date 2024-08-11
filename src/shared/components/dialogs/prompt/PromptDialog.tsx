@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 type PromptDialogProps = {
   children: React.ReactNode;
-  confirmBtnText?: string;
+  confirmBtnText: string;
   dialogData: {
     isOpen: boolean;
     title: string;
@@ -40,7 +40,7 @@ export default function PromptDialog({
   return (
     <Dialog open={dialogData.isOpen} sx={sx}>
       <DialogTitle>{dialogData.title}</DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent sx={{ pt: '.5rem !important' }}>{children}</DialogContent>
 
       <Divider sx={{ marginLeft: 'auto', marginRight: 'auto', width: '92%' }} />
 
@@ -53,13 +53,14 @@ export default function PromptDialog({
         >
           {t('cancel')}
         </Button>
+
         <LoadingButton
           color='primary'
           variant='contained'
           loading={isLoading}
           onClick={dialogData.onSave}
         >
-          {confirmBtnText ? t(confirmBtnText) : t('save')}
+          {t(confirmBtnText)}
         </LoadingButton>
       </DialogActions>
     </Dialog>
