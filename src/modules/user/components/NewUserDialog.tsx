@@ -124,27 +124,6 @@ export default function NewUserDialog() {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              label={t('address')}
-              name='address'
-              type='text'
-              onChange={(e) =>
-                setNewUser({ ...newUser, address: e.target.value })
-              }
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              label={t('city')}
-              name='city'
-              type='text'
-              onChange={(e) => setNewUser({ ...newUser, city: e.target.value })}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={4} lg={4}>
             <Autocomplete
               id='govs'
               options={govOptions}
@@ -152,9 +131,9 @@ export default function NewUserDialog() {
               sx={{ width: '100%' }}
               renderInput={(params) =>
                 isFetchingGovernorate ? (
-                  <TextField {...params} label={t('governorate')} />
-                ) : (
                   <TextField {...params} label={t('loading')} />
+                ) : (
+                  <TextField {...params} label={t('governorate')} />
                 )
               }
               isOptionEqualToValue={(option, value) => option.id === value.id}
@@ -163,7 +142,7 @@ export default function NewUserDialog() {
               disabled
             />
           </Grid>
-          <Grid item xs={12} md={4} lg={4}>
+          <Grid item xs={12} md={6}>
             <Autocomplete
               id='cities'
               options={cityOptions}
@@ -171,15 +150,26 @@ export default function NewUserDialog() {
               sx={{ width: '100%' }}
               renderInput={(params) =>
                 isFetchingCities ? (
-                  <TextField {...params} label={t('city')} />
-                ) : (
                   <TextField {...params} label={t('loading')} />
+                ) : (
+                  <TextField {...params} label={t('city')} />
                 )
               }
               isOptionEqualToValue={(option, value) => option.id === value.id}
               // value={selectedCity}
               // onChange={(e, val) => setSelectedCity(val)}
               disabled
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label={t('address')}
+              name='address'
+              type='text'
+              onChange={(e) =>
+                setNewUser({ ...newUser, address: e.target.value })
+              }
             />
           </Grid>
         </Grid>

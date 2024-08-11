@@ -23,6 +23,7 @@ const en = {
   english: 'English',
   firstname: 'First name',
   fullName: 'Full name',
+  governorate: 'Governorate',
   hi: 'Hi,',
   home: 'Home',
   info: 'Info',

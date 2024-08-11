@@ -23,6 +23,7 @@ const ar = {
   english: 'الإنجليزية',
   firstname: 'الاسم الأول',
   fullName: 'الاسم بالكامل',
+  governorate: 'المحافظة',
   hi: 'مرحبا',
   home: 'الرئيسية',
   info: 'معلومات',
