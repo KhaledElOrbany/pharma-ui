@@ -1,7 +1,7 @@
-function generateUrlParams(filters: any[]) {
+function generateUrlParams(parameters: { key: string; value: any }[]) {
   const params = new URLSearchParams();
-  filters.forEach(({ id, value }) => {
-    params.append(id, value);
+  parameters.forEach(({ key, value }) => {
+    params.append(key, value);
   });
   return params.toString();
 }

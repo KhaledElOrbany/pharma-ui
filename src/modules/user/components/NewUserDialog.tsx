@@ -15,8 +15,8 @@ export default function NewUserDialog() {
   const { t } = useTranslation();
   const isRTL = localStorage.getItem('language') === 'ar';
 
-  const [selectedGov, setSelectedGov] = useState<GovernorateProps>();
-  const [selectedCity, setSelectedCity] = useState<CityProps>();
+  const [selectedGov, setSelectedGov] = useState<GovernorateProps | null>();
+  const [selectedCity, setSelectedCity] = useState<CityProps | null>();
   const [dialogData, setDialogData] = useState({
     isOpen: false,
     title: '',
@@ -37,7 +37,10 @@ export default function NewUserDialog() {
       fetchGovernorates();
     }
     if (selectedGov) {
-      fetchCities({ governorateId: selectedGov.id });
+      fetchCities({
+        //TODO: Fix this nonsense!!
+        filters: [{ key: 'governorateId', value: selectedGov.id }],
+      });
     }
   }, [dialogData.isOpen, selectedGov, selectedCity]);
 
@@ -47,10 +50,9 @@ export default function NewUserDialog() {
     useLazyFetchCitiesQuery();
   const [createNewUser, { isLoading }] = useCreateUserMutation();
 
-  const govOptions =
-    govs?.map((gov) => ({ id: gov.id, name: gov.nameAr })) || [];
+  const govOptions = govs?.map((gov) => ({ id: gov.id, name: gov.name })) || [];
   const cityOptions =
-    cities?.map((city) => ({ id: city.id, name: city.nameAr })) || [];
+    cities?.map((city) => ({ id: city.id, name: city.name })) || [];
 
   return (
     <>
@@ -137,9 +139,7 @@ export default function NewUserDialog() {
                 )
               }
               isOptionEqualToValue={(option, value) => option.id === value.id}
-              // value={selectedGov}
-              // onChange={(e, val) => setSelectedGov(val)}
-              disabled
+              onChange={(_e, val) => setSelectedGov(val)}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -156,9 +156,7 @@ export default function NewUserDialog() {
                 )
               }
               isOptionEqualToValue={(option, value) => option.id === value.id}
-              // value={selectedCity}
-              // onChange={(e, val) => setSelectedCity(val)}
-              disabled
+              onChange={(_, val) => setSelectedCity(val)}
             />
           </Grid>
           <Grid item xs={12}>

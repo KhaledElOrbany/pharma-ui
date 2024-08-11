@@ -1,13 +1,11 @@
 type CityProps = {
   id: number;
-  nameAr: string;
-  nameEn: string;
+  name: string;
 };
 
 type GovernorateProps = {
   id: number;
-  nameAr: string;
-  nameEn: string;
+  name: string;
 };
 
 export { CityProps, GovernorateProps };

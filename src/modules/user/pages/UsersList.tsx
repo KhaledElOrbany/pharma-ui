@@ -8,7 +8,7 @@ import NewUserDialog from '../components/NewUserDialog';
 export default function UsersList() {
   const { t } = useTranslation();
 
-  const [filtersList, setFiltersList] = useState([{ id: 'size', value: 5 }]);
+  const [filtersList, setFiltersList] = useState([{ key: 'size', value: 5 }]);
 
   const {
     data: usersList,
@@ -52,7 +52,9 @@ export default function UsersList() {
         module='users-list'
         pagination={usersList?.meta ?? {}}
         refetch={refetch}
-        rowsPerPage={filtersList.find((item) => item.id === 'size')?.value || 5}
+        rowsPerPage={
+          filtersList.find((item) => item.key === 'size')?.value || 5
+        }
         setFiltersList={setFiltersList}
         data={usersList?.data}
         tableMetaData={usersList?.meta?.tableMetaData}
