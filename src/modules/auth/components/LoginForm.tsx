@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../redux/AuthAPI';
 import { toggleSnackbar } from '../../home/redux/AppSlice';
+import { LoginData } from '../types/Auth';
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export default function LoginForm() {
         })
       );
     } else {
-      let data = { username, password };
+      let data: LoginData = { username, password };
 
       try {
         await login(data);
