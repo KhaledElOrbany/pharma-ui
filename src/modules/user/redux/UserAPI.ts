@@ -4,6 +4,7 @@ import { setCurrentUser, setUserDetails, setUsersList } from './UserSlice';
 import { metaData, userDetails } from '../types/User';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 import { errorHandler } from '@/helpers/components/ErrorHandler';
+import { login } from '@/modules/auth/redux/AuthSlice';
 
 const UserAPI = createApi({
   reducerPath: 'userAPI',
@@ -16,13 +17,15 @@ const UserAPI = createApi({
         url: `/user/current`,
         method: 'GET',
       }),
-      transformResponse: (response: { data: userDetails; meta?: {} }) =>
-        response.data,
+      transformResponse: (response: { data: userDetails; meta?: {} }) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data, meta }) => {
-            if (meta?.response?.headers) {
-              // handle resetting token
+            const token = meta?.response?.headers.get('authorization');
+            if (token) {
+              dispatch(login({ token }));
             }
             dispatch(setCurrentUser(data));
           })
