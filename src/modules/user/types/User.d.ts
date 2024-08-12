@@ -5,7 +5,15 @@ type UserCreationDetails = {
   address: string;
   phone: string;
   email?: string;
-  city: string;
+  gender: 'MALE' | 'FEMALE';
+  role: {
+    id: number;
+    name: string;
+  };
+  city: {
+    id: number;
+    name: string;
+  };
 };
 
 type UserProps = {

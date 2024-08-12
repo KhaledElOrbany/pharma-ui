@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react';
 import PromptDialog from '@/shared/components/dialogs/prompt/PromptDialog';
-import { Autocomplete, Button, Grid, TextField } from '@mui/material';
+import {
+  Autocomplete,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  TextField,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import Iconify from '@/shared/components/iconify';
 import { UserCreationDetails } from '../types/User';
@@ -29,7 +39,15 @@ export default function NewUserDialog() {
     address: '',
     phone: '',
     email: '',
-    city: '',
+    gender: 'MALE',
+    role: {
+      id: 0,
+      name: '',
+    },
+    city: {
+      id: 0,
+      name: '',
+    },
   });
 
   useEffect(() => {
@@ -157,6 +175,7 @@ export default function NewUserDialog() {
               }
               isOptionEqualToValue={(option, value) => option.id === value.id}
               onChange={(_, val) => setSelectedCity(val)}
+              disabled={!selectedGov}
             />
           </Grid>
           <Grid item xs={12}>
@@ -169,6 +188,58 @@ export default function NewUserDialog() {
                 setNewUser({ ...newUser, address: e.target.value })
               }
             />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormControl>
+              <FormLabel id='gender-radio-buttons-label'>
+                {t('gender')}
+              </FormLabel>
+              <RadioGroup
+                row
+                name='gender-radio-buttons'
+                aria-labelledby='gender-radio-buttons-label'
+              >
+                <FormControlLabel
+                  value='FEMALE'
+                  control={<Radio />}
+                  label={t('female')}
+                />
+                <FormControlLabel
+                  value='MALE'
+                  control={<Radio />}
+                  label={t('male')}
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <FormControl>
+              <FormLabel id='gender-radio-buttons-label'>{t('role')}</FormLabel>
+              <RadioGroup
+                row
+                defaultChecked
+                defaultValue={'USER'}
+                name='gender-radio-buttons'
+                aria-labelledby='gender-radio-buttons-label'
+                onChange={(e) => {
+                  setNewUser({
+                    ...newUser,
+                    role: { id: 0, name: e.target.value },
+                  });
+                }}
+              >
+                <FormControlLabel
+                  value='ADMIN'
+                  control={<Radio />}
+                  label={'ADMIN'}
+                />
+                <FormControlLabel
+                  value='USER'
+                  control={<Radio />}
+                  label={'USER'}
+                />
+              </RadioGroup>
+            </FormControl>
           </Grid>
         </Grid>
       </PromptDialog>
