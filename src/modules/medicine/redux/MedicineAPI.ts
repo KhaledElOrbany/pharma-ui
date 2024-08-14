@@ -3,7 +3,7 @@ import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 import { medicineDetails, metaData } from '../types/Medicine';
 import { setMedicineDetails, setMedicineesList } from './MedicineSlice';
-import { errorHandler } from '@/helpers/components/ErrorHandler';
+import { Snackbar } from '@/helpers/components/Snackbar';
 
 const MedicineAPI = createApi({
   reducerPath: 'MedicineAPI',
@@ -27,7 +27,7 @@ const MedicineAPI = createApi({
             dispatch(setMedicineDetails(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['medicine'],
@@ -54,7 +54,7 @@ const MedicineAPI = createApi({
             dispatch(setMedicineesList(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['medicine'],
@@ -67,9 +67,11 @@ const MedicineAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'Medicine created successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['medicine'],
@@ -82,9 +84,11 @@ const MedicineAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'Medicine updated successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['medicine'],
@@ -96,9 +100,11 @@ const MedicineAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'Medicine deleted successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['medicine'],

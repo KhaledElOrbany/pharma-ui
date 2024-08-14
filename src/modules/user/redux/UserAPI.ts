@@ -3,7 +3,7 @@ import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { setCurrentUser, setUserDetails, setUsersList } from './UserSlice';
 import { UserMetaData, UserProps } from '../types/User';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
-import { errorHandler } from '@/helpers/components/ErrorHandler';
+import { Snackbar } from '@/helpers/components/Snackbar';
 import { login } from '@/modules/auth/redux/AuthSlice';
 
 const UserAPI = createApi({
@@ -33,7 +33,7 @@ const UserAPI = createApi({
             dispatch(setCurrentUser(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['user'],
@@ -55,7 +55,7 @@ const UserAPI = createApi({
             dispatch(setUserDetails(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['user'],
@@ -82,7 +82,7 @@ const UserAPI = createApi({
             dispatch(setUsersList(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['user'],
@@ -101,9 +101,11 @@ const UserAPI = createApi({
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'User created successfully!', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error: any) => error ?? ['user'],
@@ -116,9 +118,11 @@ const UserAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'User updated successfully!', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['user'],
@@ -130,9 +134,11 @@ const UserAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'User deleted successfully!', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['user'],

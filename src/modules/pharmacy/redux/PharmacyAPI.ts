@@ -3,7 +3,7 @@ import { customBaseQueryWithAuth } from '@/redux/baseQuery';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 import { setPharmacyDetails, setPharmacyesList } from './PharmacySlice';
 import { metaData, pharmacyDetails } from '../types/Pharmacy';
-import { errorHandler } from '@/helpers/components/ErrorHandler';
+import { Snackbar } from '@/helpers/components/Snackbar';
 
 const PharmacyAPI = createApi({
   reducerPath: 'PharmacyAPI',
@@ -27,7 +27,7 @@ const PharmacyAPI = createApi({
             dispatch(setPharmacyDetails(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['pharmacy'],
@@ -54,7 +54,7 @@ const PharmacyAPI = createApi({
             dispatch(setPharmacyesList(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['pharmacy'],
@@ -67,9 +67,11 @@ const PharmacyAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'Pharmacy created successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['pharmacy'],
@@ -82,9 +84,11 @@ const PharmacyAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'Pharmacy updated successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['pharmacy'],
@@ -96,9 +100,11 @@ const PharmacyAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'Pharmacy deleted successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['pharmacy'],

@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithoutAuth } from '@/redux/baseQuery';
 import { login } from './AuthSlice';
-import { errorHandler } from '@/helpers/components/ErrorHandler';
+import { Snackbar } from '@/helpers/components/Snackbar';
 import { LoginResponse } from '../types/Auth';
 
 export const AuthAPI = createApi({
@@ -28,7 +28,7 @@ export const AuthAPI = createApi({
             dispatch(login({ token: data.token }));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => (error ? [] : ['auth']),

@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { customBaseQueryWithAuth } from '@/redux/baseQuery';
-import { errorHandler } from '@/helpers/components/ErrorHandler';
+import { Snackbar } from '@/helpers/components/Snackbar';
 import { generateUrlParams } from '@/helpers/utils/ParamsUtil';
 import { CityProps, GovernorateProps } from '../types/Address';
 
@@ -27,7 +27,7 @@ export const AddressAPI = createApi({
         queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['cities'],
@@ -47,7 +47,7 @@ export const AddressAPI = createApi({
         queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['governorates'],

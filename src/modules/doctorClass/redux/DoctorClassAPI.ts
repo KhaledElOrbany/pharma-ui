@@ -6,7 +6,7 @@ import {
   setDoctorClassDetails,
   setDoctorClassesList,
 } from './DoctorClassSlice';
-import { errorHandler } from '@/helpers/components/ErrorHandler';
+import { Snackbar } from '@/helpers/components/Snackbar';
 
 const DoctorClassAPI = createApi({
   reducerPath: 'DoctorClassAPI',
@@ -33,7 +33,7 @@ const DoctorClassAPI = createApi({
             dispatch(setDoctorClassDetails(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['doctorClass'],
@@ -60,7 +60,7 @@ const DoctorClassAPI = createApi({
             dispatch(setDoctorClassesList(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       providesTags: ['doctorClass'],
@@ -73,9 +73,11 @@ const DoctorClassAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'DoctorClass created successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['doctorClass'],
@@ -88,9 +90,11 @@ const DoctorClassAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'DoctorClass updated successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['doctorClass'],
@@ -102,9 +106,11 @@ const DoctorClassAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {})
+          .then(() => {
+            Snackbar(dispatch, 'DoctorClass deleted successfully', 'success');
+          })
           .catch(({ error }) => {
-            errorHandler(dispatch, error.data.error);
+            Snackbar(dispatch, error.data.error, 'error');
           });
       },
       invalidatesTags: (error) => error ?? ['doctorClass'],
