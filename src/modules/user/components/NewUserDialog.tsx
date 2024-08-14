@@ -39,7 +39,33 @@ export default function NewUserDialog() {
     city: { id: 0, name: '' },
   });
 
+  const [
+    fetchGovernorates,
+    { data: govs, isFetching: isFetchingGovernorates },
+  ] = useLazyFetchGovernoratesQuery();
+  const [fetchCities, { data: cities, isFetching: isFetchingCities }] =
+    useLazyFetchCitiesQuery();
+  const [createNewUser, { isLoading, isSuccess }] = useCreateUserMutation();
+
   useEffect(() => {
+    if (isSuccess) {
+      setIsOpen(false);
+      setSelectedGov(null);
+      setNewUser({
+        username: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        phone: '',
+        email: '',
+        gender: 'MALE',
+        role: { id: 0, name: '' },
+        city: { id: 0, name: '' },
+      });
+
+      return;
+    }
+
     if (isOpen) {
       fetchGovernorates();
     }
@@ -49,15 +75,7 @@ export default function NewUserDialog() {
         filters: [{ key: 'governorateId', value: selectedGov.id }],
       });
     }
-  }, [isOpen, selectedGov]);
-
-  const [
-    fetchGovernorates,
-    { data: govs, isFetching: isFetchingGovernorates },
-  ] = useLazyFetchGovernoratesQuery();
-  const [fetchCities, { data: cities, isFetching: isFetchingCities }] =
-    useLazyFetchCitiesQuery();
-  const [createNewUser, { isLoading, isSuccess }] = useCreateUserMutation();
+  }, [isOpen, selectedGov, isSuccess]);
 
   return (
     <>
@@ -92,21 +110,6 @@ export default function NewUserDialog() {
         onSave={async () => {
           newUser.username = newUser.firstName + '_' + newUser.lastName;
           await createNewUser(newUser);
-          if (isSuccess) {
-            setIsOpen(false);
-            setSelectedGov(null);
-            setNewUser({
-              username: '',
-              firstName: '',
-              lastName: '',
-              address: '',
-              phone: '',
-              email: '',
-              gender: 'MALE',
-              role: { id: 0, name: '' },
-              city: { id: 0, name: '' },
-            });
-          }
         }}
         title={t('addUser')}
       >
