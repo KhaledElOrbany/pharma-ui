@@ -34,7 +34,7 @@ export default function Head({
   const { palette } = useTheme();
   const { t } = useTranslation();
 
-  headers = [...headers, { id: 'actions', columnOrder: 999 }];
+  headers = [...headers, { id: 'actions', order: 999 }];
   const isRTL = localStorage.getItem('language') === 'ar';
 
   const [open, setOpen] = useState(null);
