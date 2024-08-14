@@ -264,9 +264,15 @@ export default function NewUserDialog() {
                 name='role-radio-buttons'
                 aria-labelledby='role-radio-buttons-label'
                 onChange={(e) => {
+                  let role = {} as UserCreationDetails['role'];
+                  if (e.target.value === 'ADMIN') {
+                    role = { id: 2, name: 'ADMIN' };
+                  } else {
+                    role = { id: 3, name: 'USER' };
+                  }
                   setNewUser({
                     ...newUser,
-                    role: { id: 0, name: e.target.value },
+                    role,
                   });
                 }}
               >
