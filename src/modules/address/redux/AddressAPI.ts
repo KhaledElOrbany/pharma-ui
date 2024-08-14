@@ -25,9 +25,7 @@ export const AddressAPI = createApi({
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled
-          .then(() => {
-            //
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
@@ -47,9 +45,7 @@ export const AddressAPI = createApi({
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled
-          .then(() => {
-            //
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
