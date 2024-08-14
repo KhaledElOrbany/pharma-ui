@@ -7,7 +7,7 @@ import { errorHandler } from '@/helpers/components/ErrorHandler';
 import { login } from '@/modules/auth/redux/AuthSlice';
 
 const UserAPI = createApi({
-  reducerPath: 'userAPI',
+  reducerPath: 'UserAPI',
   refetchOnReconnect: true,
   tagTypes: ['user'],
   baseQuery: customBaseQueryWithAuth,
@@ -86,14 +86,12 @@ const UserAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['user'],
+      invalidatesTags: (error) => error ?? ['user'],
     }),
     updateUser: build.mutation({
       query: (body) => ({
@@ -103,14 +101,12 @@ const UserAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['user'],
+      invalidatesTags: (error) => error ?? ['user'],
     }),
     deleteUser: build.mutation({
       query: (id) => ({
@@ -119,14 +115,12 @@ const UserAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['user'],
+      invalidatesTags: (error) => error ?? ['user'],
     }),
   }),
 });

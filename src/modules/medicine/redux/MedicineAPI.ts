@@ -5,8 +5,8 @@ import { medicineDetails, metaData } from '../types/Medicine';
 import { setMedicineDetails, setMedicineesList } from './MedicineSlice';
 import { errorHandler } from '@/helpers/components/ErrorHandler';
 
-const medicineAPI = createApi({
-  reducerPath: 'medicineAPI',
+const MedicineAPI = createApi({
+  reducerPath: 'MedicineAPI',
   refetchOnReconnect: true,
   tagTypes: ['medicine'],
   baseQuery: customBaseQueryWithAuth,
@@ -61,14 +61,12 @@ const medicineAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['medicine'],
+      invalidatesTags: (error) => error ?? ['medicine'],
     }),
     updateMedicine: build.mutation({
       query: (body) => ({
@@ -78,14 +76,12 @@ const medicineAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['medicine'],
+      invalidatesTags: (error) => error ?? ['medicine'],
     }),
     deleteMedicine: build.mutation({
       query: (id) => ({
@@ -94,14 +90,12 @@ const medicineAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['medicine'],
+      invalidatesTags: (error) => error ?? ['medicine'],
     }),
   }),
 });
@@ -112,5 +106,5 @@ export const {
   useCreateMedicineMutation,
   useUpdateMedicineMutation,
   useDeleteMedicineMutation,
-} = medicineAPI;
-export default medicineAPI;
+} = MedicineAPI;
+export default MedicineAPI;

@@ -5,8 +5,8 @@ import { setPharmacyDetails, setPharmacyesList } from './PharmacySlice';
 import { metaData, pharmacyDetails } from '../types/Pharmacy';
 import { errorHandler } from '@/helpers/components/ErrorHandler';
 
-const pharmacyAPI = createApi({
-  reducerPath: 'pharmacyAPI',
+const PharmacyAPI = createApi({
+  reducerPath: 'PharmacyAPI',
   refetchOnReconnect: true,
   tagTypes: ['pharmacy'],
   baseQuery: customBaseQueryWithAuth,
@@ -61,14 +61,12 @@ const pharmacyAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['pharmacy'],
+      invalidatesTags: (error) => error ?? ['pharmacy'],
     }),
     updatePharmacy: build.mutation({
       query: (body) => ({
@@ -78,14 +76,12 @@ const pharmacyAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['pharmacy'],
+      invalidatesTags: (error) => error ?? ['pharmacy'],
     }),
     deletePharmacy: build.mutation({
       query: (id) => ({
@@ -94,14 +90,12 @@ const pharmacyAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['pharmacy'],
+      invalidatesTags: (error) => error ?? ['pharmacy'],
     }),
   }),
 });
@@ -112,5 +106,5 @@ export const {
   useCreatePharmacyMutation,
   useUpdatePharmacyMutation,
   useDeletePharmacyMutation,
-} = pharmacyAPI;
-export default pharmacyAPI;
+} = PharmacyAPI;
+export default PharmacyAPI;

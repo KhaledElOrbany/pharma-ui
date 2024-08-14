@@ -8,8 +8,8 @@ import {
 } from './DoctorClassSlice';
 import { errorHandler } from '@/helpers/components/ErrorHandler';
 
-const doctorClassAPI = createApi({
-  reducerPath: 'doctorClassAPI',
+const DoctorClassAPI = createApi({
+  reducerPath: 'DoctorClassAPI',
   refetchOnReconnect: true,
   tagTypes: ['doctorClass'],
   baseQuery: customBaseQueryWithAuth,
@@ -67,14 +67,12 @@ const doctorClassAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['doctorClass'],
+      invalidatesTags: (error) => error ?? ['doctorClass'],
     }),
     updateDoctorClass: build.mutation({
       query: (body) => ({
@@ -84,14 +82,12 @@ const doctorClassAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['doctorClass'],
+      invalidatesTags: (error) => error ?? ['doctorClass'],
     }),
     deleteDoctorClass: build.mutation({
       query: (id) => ({
@@ -100,14 +96,12 @@ const doctorClassAPI = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(() => {
-            //TODO: Add success notification
-          })
+          .then(() => {})
           .catch(({ error }) => {
             errorHandler(dispatch, error);
           });
       },
-      invalidatesTags: ['doctorClass'],
+      invalidatesTags: (error) => error ?? ['doctorClass'],
     }),
   }),
 });
@@ -118,5 +112,5 @@ export const {
   useCreateDoctorClassMutation,
   useUpdateDoctorClassMutation,
   useDeleteDoctorClassMutation,
-} = doctorClassAPI;
-export default doctorClassAPI;
+} = DoctorClassAPI;
+export default DoctorClassAPI;

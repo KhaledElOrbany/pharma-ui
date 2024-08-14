@@ -57,7 +57,7 @@ export default function NewUserDialog() {
   ] = useLazyFetchGovernoratesQuery();
   const [fetchCities, { data: cities, isFetching: isFetchingCities }] =
     useLazyFetchCitiesQuery();
-  const [createNewUser, { isLoading }] = useCreateUserMutation();
+  const [createNewUser, { isLoading, isSuccess }] = useCreateUserMutation();
 
   return (
     <>
@@ -71,7 +71,7 @@ export default function NewUserDialog() {
       </Button>
 
       <PromptDialog
-        confirmBtnText='add'
+        confirmBtnText={t('add')}
         isLoading={isLoading}
         isOpen={isOpen}
         onCancel={() => {
@@ -89,22 +89,24 @@ export default function NewUserDialog() {
             city: { id: 0, name: '' },
           });
         }}
-        onSave={() => {
+        onSave={async () => {
           newUser.username = newUser.firstName + '_' + newUser.lastName;
-          createNewUser(newUser);
-          setIsOpen(false);
-          setSelectedGov(null);
-          setNewUser({
-            username: '',
-            firstName: '',
-            lastName: '',
-            address: '',
-            phone: '',
-            email: '',
-            gender: 'MALE',
-            role: { id: 0, name: '' },
-            city: { id: 0, name: '' },
-          });
+          await createNewUser(newUser);
+          if (isSuccess) {
+            setIsOpen(false);
+            setSelectedGov(null);
+            setNewUser({
+              username: '',
+              firstName: '',
+              lastName: '',
+              address: '',
+              phone: '',
+              email: '',
+              gender: 'MALE',
+              role: { id: 0, name: '' },
+              city: { id: 0, name: '' },
+            });
+          }
         }}
         title={t('addUser')}
       >
@@ -224,7 +226,7 @@ export default function NewUserDialog() {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <FormControl>
+            <FormControl required>
               <FormLabel id='gender-radio-buttons-label'>
                 {t('gender')}
               </FormLabel>
@@ -253,7 +255,7 @@ export default function NewUserDialog() {
             </FormControl>
           </Grid>
           <Grid item xs={12} md={6}>
-            <FormControl>
+            <FormControl required>
               <FormLabel id='role-radio-buttons-label'>{t('role')}</FormLabel>
               <RadioGroup
                 row
