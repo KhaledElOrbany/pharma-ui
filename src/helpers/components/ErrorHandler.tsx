@@ -1,14 +1,7 @@
 import { toggleSnackbar } from '@/modules/home/redux/AppSlice';
 
-export const errorHandler = (dispatch: any, response: any) => {
-  if (response?.status === 401) {
-    localStorage.removeItem('token');
-  }
-
-  let message = 'An error has occurred!';
-  if (response.error) {
-    message = response.error;
-  }
+export const errorHandler = (dispatch: any, response: string) => {
+  const message = response ?? 'An error has occurred!';
 
   return dispatch(
     toggleSnackbar({
