@@ -27,7 +27,7 @@ export const AddressAPI = createApi({
         queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['cities'],
@@ -47,7 +47,7 @@ export const AddressAPI = createApi({
         queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['governorates'],

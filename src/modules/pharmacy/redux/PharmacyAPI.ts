@@ -54,7 +54,7 @@ const PharmacyAPI = createApi({
             dispatch(setPharmacyesList(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['pharmacy'],
@@ -69,7 +69,7 @@ const PharmacyAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['pharmacy'],
@@ -84,7 +84,7 @@ const PharmacyAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['pharmacy'],
@@ -98,7 +98,7 @@ const PharmacyAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['pharmacy'],

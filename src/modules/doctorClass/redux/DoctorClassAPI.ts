@@ -60,7 +60,7 @@ const DoctorClassAPI = createApi({
             dispatch(setDoctorClassesList(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['doctorClass'],
@@ -75,7 +75,7 @@ const DoctorClassAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['doctorClass'],
@@ -90,7 +90,7 @@ const DoctorClassAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['doctorClass'],
@@ -104,7 +104,7 @@ const DoctorClassAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['doctorClass'],

@@ -54,7 +54,7 @@ const MedicineAPI = createApi({
             dispatch(setMedicineesList(data));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['medicine'],
@@ -69,7 +69,7 @@ const MedicineAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['medicine'],
@@ -84,7 +84,7 @@ const MedicineAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['medicine'],
@@ -98,7 +98,7 @@ const MedicineAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['medicine'],

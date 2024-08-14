@@ -89,7 +89,7 @@ const UserAPI = createApi({
     }),
     createUser: build.mutation({
       query: (body) => ({
-        url: '/user/create',
+        url: '/user',
         method: 'POST',
         body,
       }),
@@ -110,7 +110,7 @@ const UserAPI = createApi({
     }),
     updateUser: build.mutation({
       query: (body) => ({
-        url: `/user/update/${body.id}`,
+        url: `/user/${body.id}`,
         method: 'PUT',
         body,
       }),
@@ -118,13 +118,13 @@ const UserAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['user'],
     }),
     deleteUser: build.mutation({
-      query: (id) => ({
+      query: ({ id }) => ({
         url: `/user/${id}`,
         method: 'DELETE',
       }),
@@ -132,7 +132,7 @@ const UserAPI = createApi({
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => error ?? ['user'],

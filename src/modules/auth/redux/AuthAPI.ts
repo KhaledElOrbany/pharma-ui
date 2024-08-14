@@ -28,7 +28,7 @@ export const AuthAPI = createApi({
             dispatch(login({ token: data.token }));
           })
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
       invalidatesTags: (error) => (error ? [] : ['auth']),
