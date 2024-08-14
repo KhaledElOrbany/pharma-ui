@@ -35,7 +35,7 @@ type FooterProps = {
 type DataGridProps = {
   data?: any;
   tableMetaData?: any;
-  actions: any[];
+  actions: OptionProps[];
   filtersList?: any[];
   isFetching: boolean;
   module?: string;
@@ -43,6 +43,16 @@ type DataGridProps = {
   refetch: () => void;
   rowsPerPage: number;
   setFiltersList: (filters: any) => void;
+};
+
+type OptionProps = {
+  name: string;
+  color: string;
+  sx?: React.CSSProperties;
+  icon: string;
+  foo: (id: number) => void;
+  isDisabled?: boolean;
+  disablingElement?: string;
 };
 
 export { DataGridProps, FooterProps, HeadProps, ToolbarProps };
