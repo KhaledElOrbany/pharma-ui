@@ -18,13 +18,16 @@ const PharmacyAPI = createApi({
       transformResponse: (response: { data: pharmacyDetails }) => {
         return response;
       },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
             dispatch(setPharmacyDetails(data));
           })
-          .catch(() => {
-            // Handle error
+          .catch(({ error }) => {
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['pharmacy'],
@@ -41,6 +44,9 @@ const PharmacyAPI = createApi({
         meta?: metaData;
       }) => {
         return response;
+      },
+      transformErrorResponse: (response) => {
+        return response.data;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled

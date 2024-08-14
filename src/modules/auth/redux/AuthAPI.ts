@@ -19,6 +19,9 @@ export const AuthAPI = createApi({
       transformResponse: (result: { data: LoginResponse }) => {
         return result.data;
       },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled
           .then(({ data }) => {

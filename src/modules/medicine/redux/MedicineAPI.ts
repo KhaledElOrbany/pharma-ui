@@ -18,13 +18,16 @@ const MedicineAPI = createApi({
       transformResponse: (response: { data: medicineDetails }) => {
         return response;
       },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
             dispatch(setMedicineDetails(data));
           })
-          .catch(() => {
-            // Handle error
+          .catch(({ error }) => {
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['medicine'],
@@ -41,6 +44,9 @@ const MedicineAPI = createApi({
         meta?: metaData;
       }) => {
         return response;
+      },
+      transformErrorResponse: (response) => {
+        return response.data;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled

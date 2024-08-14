@@ -20,6 +20,9 @@ export const AddressAPI = createApi({
       transformResponse: (result: { data: CityProps[] }) => {
         return result.data;
       },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled
           .then(() => {
@@ -38,6 +41,9 @@ export const AddressAPI = createApi({
       }),
       transformResponse: (result: { data: GovernorateProps[] }) => {
         return result.data;
+      },
+      transformErrorResponse: (response) => {
+        return response.data;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled

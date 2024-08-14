@@ -20,6 +20,9 @@ const UserAPI = createApi({
       transformResponse: (response: { data: UserProps }) => {
         return response.data;
       },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data, meta }) => {
@@ -29,8 +32,8 @@ const UserAPI = createApi({
             }
             dispatch(setCurrentUser(data));
           })
-          .catch(() => {
-            // Handle error
+          .catch(({ error }) => {
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['user'],
@@ -43,13 +46,16 @@ const UserAPI = createApi({
       transformResponse: (response: { data: UserProps }) => {
         return response.data;
       },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
             dispatch(setUserDetails(data));
           })
-          .catch(() => {
-            // Handle error
+          .catch(({ error }) => {
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['user'],
@@ -67,13 +73,16 @@ const UserAPI = createApi({
       }) => {
         return response;
       },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
             dispatch(setUsersList(data));
           })
-          .catch(() => {
-            // Handle error
+          .catch(({ error }) => {
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['user'],
@@ -84,14 +93,20 @@ const UserAPI = createApi({
         method: 'POST',
         body,
       }),
+      transformResponse: (response: { data: UserProps }) => {
+        return response.data;
+      },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(() => {})
           .catch(({ error }) => {
-            errorHandler(dispatch, error);
+            errorHandler(dispatch, error.data.error);
           });
       },
-      invalidatesTags: (error) => error ?? ['user'],
+      invalidatesTags: (error: any) => error ?? ['user'],
     }),
     updateUser: build.mutation({
       query: (body) => ({

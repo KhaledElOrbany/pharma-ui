@@ -24,13 +24,16 @@ const DoctorClassAPI = createApi({
       }) => {
         return response;
       },
+      transformErrorResponse: (response) => {
+        return response.data;
+      },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
           .then(({ data }) => {
             dispatch(setDoctorClassDetails(data));
           })
-          .catch(() => {
-            // Handle error
+          .catch(({ error }) => {
+            errorHandler(dispatch, error.data.error);
           });
       },
       providesTags: ['doctorClass'],
@@ -47,6 +50,9 @@ const DoctorClassAPI = createApi({
         meta?: metaData;
       }) => {
         return response;
+      },
+      transformErrorResponse: (response) => {
+        return response.data;
       },
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled
