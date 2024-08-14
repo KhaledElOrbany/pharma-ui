@@ -19,19 +19,14 @@ import {
   useLazyFetchCitiesQuery,
   useLazyFetchGovernoratesQuery,
 } from '@/modules/address/redux/AddressAPI';
-import { CityProps, GovernorateProps } from '@/modules/address/types/Address';
+import { GovernorateProps } from '@/modules/address/types/Address';
 
 export default function NewUserDialog() {
   const { t } = useTranslation();
   const isRTL = localStorage.getItem('language') === 'ar';
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedGov, setSelectedGov] = useState<GovernorateProps | null>();
-  const [selectedCity, setSelectedCity] = useState<CityProps | null>();
-  const [dialogData, setDialogData] = useState({
-    isOpen: false,
-    title: '',
-    onSave: () => {},
-  });
   const [newUser, setNewUser] = useState<UserCreationDetails>({
     username: '',
     firstName: '',
@@ -40,18 +35,12 @@ export default function NewUserDialog() {
     phone: '',
     email: '',
     gender: 'MALE',
-    role: {
-      id: 0,
-      name: '',
-    },
-    city: {
-      id: 0,
-      name: '',
-    },
+    role: { id: 3, name: 'USER' },
+    city: { id: 0, name: '' },
   });
 
   useEffect(() => {
-    if (dialogData.isOpen) {
+    if (isOpen) {
       fetchGovernorates();
     }
     if (selectedGov) {
@@ -60,17 +49,15 @@ export default function NewUserDialog() {
         filters: [{ key: 'governorateId', value: selectedGov.id }],
       });
     }
-  }, [dialogData.isOpen, selectedGov, selectedCity]);
+  }, [isOpen, selectedGov]);
 
-  const [fetchGovernorates, { data: govs, isFetching: isFetchingGovernorate }] =
-    useLazyFetchGovernoratesQuery();
+  const [
+    fetchGovernorates,
+    { data: govs, isFetching: isFetchingGovernorates },
+  ] = useLazyFetchGovernoratesQuery();
   const [fetchCities, { data: cities, isFetching: isFetchingCities }] =
     useLazyFetchCitiesQuery();
   const [createNewUser, { isLoading }] = useCreateUserMutation();
-
-  const govOptions = govs?.map((gov) => ({ id: gov.id, name: gov.name })) || [];
-  const cityOptions =
-    cities?.map((city) => ({ id: city.id, name: city.name })) || [];
 
   return (
     <>
@@ -78,29 +65,53 @@ export default function NewUserDialog() {
         variant='contained'
         endIcon={isRTL ? <Iconify icon='eva:plus-fill' /> : ''}
         startIcon={isRTL ? '' : <Iconify icon='eva:plus-fill' />}
-        onClick={() =>
-          setDialogData({
-            isOpen: true,
-            title: t('addUser'),
-            onSave: () => {
-              createNewUser(newUser);
-              setDialogData({ ...dialogData, isOpen: false });
-            },
-          })
-        }
+        onClick={() => setIsOpen(true)}
       >
         {t('addUser')}
       </Button>
 
       <PromptDialog
-        isLoading={isLoading}
         confirmBtnText='add'
-        dialogData={dialogData}
-        setDialogData={setDialogData}
+        isLoading={isLoading}
+        isOpen={isOpen}
+        onCancel={() => {
+          setIsOpen(false);
+          setSelectedGov(null);
+          setNewUser({
+            username: '',
+            firstName: '',
+            lastName: '',
+            address: '',
+            phone: '',
+            email: '',
+            gender: 'MALE',
+            role: { id: 0, name: '' },
+            city: { id: 0, name: '' },
+          });
+        }}
+        onSave={() => {
+          newUser.username = newUser.firstName + '_' + newUser.lastName;
+          createNewUser(newUser);
+          setIsOpen(false);
+          setSelectedGov(null);
+          setNewUser({
+            username: '',
+            firstName: '',
+            lastName: '',
+            address: '',
+            phone: '',
+            email: '',
+            gender: 'MALE',
+            role: { id: 0, name: '' },
+            city: { id: 0, name: '' },
+          });
+        }}
+        title={t('addUser')}
       >
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <TextField
+              required
               fullWidth
               label={t('firstname')}
               type='text'
@@ -112,6 +123,7 @@ export default function NewUserDialog() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
+              required
               fullWidth
               label={t('lastname')}
               name='lastname'
@@ -119,6 +131,17 @@ export default function NewUserDialog() {
               onChange={(e) =>
                 setNewUser({ ...newUser, lastName: e.target.value })
               }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              disabled
+              required
+              fullWidth
+              label={t('username')}
+              name='username'
+              type='text'
+              value={newUser.firstName + '_' + newUser.lastName}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -134,6 +157,7 @@ export default function NewUserDialog() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
+              required
               fullWidth
               label={t('phone')}
               name='phone'
@@ -146,11 +170,13 @@ export default function NewUserDialog() {
           <Grid item xs={12} md={6}>
             <Autocomplete
               id='govs'
-              options={govOptions}
+              options={
+                govs?.map((gov) => ({ id: gov.id, name: gov.name })) || []
+              }
               getOptionLabel={(option) => option.name}
               sx={{ width: '100%' }}
               renderInput={(params) =>
-                isFetchingGovernorate ? (
+                isFetchingGovernorates ? (
                   <TextField {...params} label={t('loading')} />
                 ) : (
                   <TextField {...params} label={t('governorate')} />
@@ -163,7 +189,9 @@ export default function NewUserDialog() {
           <Grid item xs={12} md={6}>
             <Autocomplete
               id='cities'
-              options={cityOptions}
+              options={
+                cities?.map((city) => ({ id: city.id, name: city.name })) || []
+              }
               getOptionLabel={(option) => option.name}
               sx={{ width: '100%' }}
               renderInput={(params) =>
@@ -174,12 +202,18 @@ export default function NewUserDialog() {
                 )
               }
               isOptionEqualToValue={(option, value) => option.id === value.id}
-              onChange={(_, val) => setSelectedCity(val)}
+              onChange={(_, val) => {
+                setNewUser({
+                  ...newUser,
+                  city: val as UserCreationDetails['city'],
+                });
+              }}
               disabled={!selectedGov}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
+              required
               fullWidth
               label={t('address')}
               name='address'
@@ -198,6 +232,12 @@ export default function NewUserDialog() {
                 row
                 name='gender-radio-buttons'
                 aria-labelledby='gender-radio-buttons-label'
+                onChange={(e) => {
+                  setNewUser({
+                    ...newUser,
+                    gender: e.target.value as 'MALE' | 'FEMALE',
+                  });
+                }}
               >
                 <FormControlLabel
                   value='FEMALE'
@@ -214,13 +254,13 @@ export default function NewUserDialog() {
           </Grid>
           <Grid item xs={12} md={6}>
             <FormControl>
-              <FormLabel id='gender-radio-buttons-label'>{t('role')}</FormLabel>
+              <FormLabel id='role-radio-buttons-label'>{t('role')}</FormLabel>
               <RadioGroup
                 row
                 defaultChecked
                 defaultValue={'USER'}
-                name='gender-radio-buttons'
-                aria-labelledby='gender-radio-buttons-label'
+                name='role-radio-buttons'
+                aria-labelledby='role-radio-buttons-label'
                 onChange={(e) => {
                   setNewUser({
                     ...newUser,
