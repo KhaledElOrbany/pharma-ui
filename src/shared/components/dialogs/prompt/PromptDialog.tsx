@@ -7,39 +7,24 @@ import {
   DialogTitle,
   Divider,
 } from '@mui/material';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-type PromptDialogProps = {
-  children: React.ReactNode;
-  confirmBtnText: string;
-  dialogData: {
-    isOpen: boolean;
-    title: string;
-    onSave: () => void;
-  };
-  isLoading?: boolean;
-  setDialogData: (data: {
-    isOpen: boolean;
-    title: string;
-    onSave: () => void;
-  }) => void;
-  sx?: object;
-};
+import { PromptDialogProps } from './PromptDialog.d';
 
 export default function PromptDialog({
   children,
   confirmBtnText,
-  dialogData,
   isLoading = false,
-  setDialogData,
+  isOpen,
+  onCancel,
+  onSave,
   sx = {},
+  title = '',
 }: PromptDialogProps) {
   const { t } = useTranslation();
 
   return (
-    <Dialog open={dialogData.isOpen} sx={sx}>
-      <DialogTitle>{dialogData.title}</DialogTitle>
+    <Dialog open={isOpen} sx={sx}>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent sx={{ pt: '.5rem !important' }}>{children}</DialogContent>
 
       <Divider sx={{ marginLeft: 'auto', marginRight: 'auto', width: '92%' }} />
@@ -48,8 +33,8 @@ export default function PromptDialog({
         <Button
           variant='contained'
           color='error'
-          onClick={() => setDialogData({ ...dialogData, isOpen: false })}
           sx={{ mx: 1 }}
+          onClick={onCancel}
         >
           {t('cancel')}
         </Button>
@@ -58,9 +43,9 @@ export default function PromptDialog({
           color='primary'
           variant='contained'
           loading={isLoading}
-          onClick={dialogData.onSave}
+          onClick={onSave}
         >
-          {t(confirmBtnText)}
+          {confirmBtnText}
         </LoadingButton>
       </DialogActions>
     </Dialog>
