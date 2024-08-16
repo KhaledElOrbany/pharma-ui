@@ -23,11 +23,8 @@ export default function PharmacyList() {
     {
       name: t('delete'),
       color: 'error.main',
-      sx: {},
       icon: 'solar:trash-bin-minimalistic-bold',
       foo: () => {},
-      isDisabled: null,
-      disablingElement: '',
     },
   ];
 
