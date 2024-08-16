@@ -106,7 +106,6 @@ export default function DataGrid({
     id: item.columnName,
     label: t(item.columnName),
     order: item.columnOrder,
-    searchType: item.type,
     ...item,
   })) as { id: string; label?: string }[];
 

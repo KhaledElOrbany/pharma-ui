@@ -98,7 +98,7 @@ export default function Head({
     setOpen(event.currentTarget);
     setCellId(headCell.id);
     setCellLabel(headCell.label);
-    setCellType(headCell.searchType);
+    setCellType(headCell.columnType);
   };
 
   const handleCloseMenu = () => {
