@@ -48,6 +48,21 @@ export default function NewUserDialog() {
   const [createNewUser, { isLoading, isSuccess }] = useCreateUserMutation();
 
   useEffect(() => {
+    if (isOpen) {
+      fetchGovernorates();
+    }
+    if (selectedGov) {
+      fetchCities({
+        //TODO: Fix this nonsense!!
+        filters: [{ key: 'governorateId', value: selectedGov.id }],
+      });
+    }
+  }, [isOpen, selectedGov]);
+
+  const onUserCreate = async () => {
+    newUser.username = newUser.firstName + '_' + newUser.lastName;
+    await createNewUser(newUser);
+
     if (isSuccess) {
       setIsOpen(false);
       setSelectedGov(null);
@@ -62,20 +77,8 @@ export default function NewUserDialog() {
         role: { id: 0, name: '' },
         city: { id: 0, name: '' },
       });
-
-      return;
     }
-
-    if (isOpen) {
-      fetchGovernorates();
-    }
-    if (selectedGov) {
-      fetchCities({
-        //TODO: Fix this nonsense!!
-        filters: [{ key: 'governorateId', value: selectedGov.id }],
-      });
-    }
-  }, [isOpen, selectedGov, isSuccess]);
+  };
 
   return (
     <>
@@ -107,10 +110,7 @@ export default function NewUserDialog() {
             city: { id: 0, name: '' },
           });
         }}
-        onSave={async () => {
-          newUser.username = newUser.firstName + '_' + newUser.lastName;
-          await createNewUser(newUser);
-        }}
+        onSave={onUserCreate}
         title={t('addUser')}
       >
         <Grid container spacing={3}>
