@@ -37,7 +37,7 @@ function a11yProps(index: string) {
 export default function UsersList() {
   const { t } = useTranslation();
 
-  const [value, setValue] = useState(0);
+  const [tabValue, setTabValue] = useState(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [filtersList, setFiltersList] = useState([
     { key: 'page', value: 0 },
@@ -45,6 +45,7 @@ export default function UsersList() {
     { key: 'isDeleted', value: false },
   ]);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  const [dialogType, setDialogType] = useState<'Delete' | 'Restore'>('Delete');
 
   const {
     data: usersList,
@@ -62,10 +63,24 @@ export default function UsersList() {
       color: 'error.main',
       icon: 'solar:trash-bin-minimalistic-bold',
       foo: (id: number) => {
+        setDialogType('Delete');
         setSelectedUserId(id);
         setIsOpen(true);
       },
       disablingElement: 'isDeleted',
+    },
+  ];
+
+  const actionsForDeletedList = [
+    {
+      name: t('resotre'),
+      color: 'success.main',
+      icon: 'solar:refresh-outline',
+      foo: (id: number) => {
+        setDialogType('Restore');
+        setSelectedUserId(id);
+        setIsOpen(true);
+      },
     },
   ];
 
@@ -78,7 +93,7 @@ export default function UsersList() {
   };
 
   const handleTabChange = (newValue: number) => {
-    setValue(newValue);
+    setTabValue(newValue);
     if (newValue === 0) {
       setFiltersList(
         filtersList.map((item) =>
@@ -111,7 +126,7 @@ export default function UsersList() {
         </Stack>
 
         <Tabs
-          value={value}
+          value={tabValue}
           onChange={(_, v) => handleTabChange(v)}
           aria-label='icon tabs example'
           centered
@@ -130,7 +145,7 @@ export default function UsersList() {
           />
         </Tabs>
 
-        <TabPanel value={value} key={'all'} index={0}>
+        <TabPanel value={tabValue} key={'all'} index={0}>
           <DataGrid
             actions={actions}
             filtersList={filtersList}
@@ -148,9 +163,9 @@ export default function UsersList() {
           />
         </TabPanel>
 
-        <TabPanel value={value} key={'deleted'} index={1}>
+        <TabPanel value={tabValue} key={'deleted'} index={1}>
           <DataGrid
-            actions={actions}
+            actions={actionsForDeletedList}
             filtersList={filtersList}
             isFetching={isFetching}
             module='users-list'
@@ -171,8 +186,12 @@ export default function UsersList() {
         isOpen={isOpen}
         onCancel={() => setIsOpen(false)}
         onConfirm={handleConfirmDelete}
-        title={t('deleteUser')}
-        subTitle={t('deleteUserConfirmation')}
+        title={dialogType === 'Delete' ? t('deleteUser') : t('restoreUser')}
+        subTitle={
+          dialogType === 'Delete'
+            ? t('deleteUserConfirmation')
+            : t('restoreUserConfirmation')
+        }
       />
     </>
   );

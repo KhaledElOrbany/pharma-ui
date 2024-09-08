@@ -143,6 +143,22 @@ const UserAPI = createApi({
       },
       invalidatesTags: (error) => error ?? ['user'],
     }),
+    restoreUser: build.mutation({
+      query: ({ id }) => ({
+        url: `/user/restore/${id}`,
+        method: 'PUT',
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled
+          .then(() => {
+            Snackbar(dispatch, 'User restores successfully!', 'success');
+          })
+          .catch(({ error }) => {
+            Snackbar(dispatch, error.data.error, 'error');
+          });
+      },
+      invalidatesTags: (error) => error ?? ['user'],
+    }),
   }),
 });
 
@@ -153,5 +169,6 @@ export const {
   useCreateUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useRestoreUserMutation,
 } = UserAPI;
 export default UserAPI;
